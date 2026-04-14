@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Squared Studio — Semiconductor Service Provider specializing in Frontend RTL Design and Verification." />
+  <title>Squared Studio | Semiconductor Services</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">&#9632;<sup>2</sup></span>
+        <span class="logo-text">Squared Studio</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <canvas id="circuitCanvas"></canvas>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-tag">Semiconductor Services</div>
+      <h1 class="hero-title">Precision Silicon.<br /><span class="gradient-text">From Concept to RTL.</span></h1>
+      <p class="hero-subtitle">
+        Squared Studio delivers expert Frontend RTL Design and Verification services
+        — helping chip teams accelerate development with clean, verified, production-ready logic.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+        <button class="btn btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work With Us</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">RTL</span>
+          <span class="stat-label">Design</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">UVM</span>
+          <span class="stat-label">Verification</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">ASIC</span>
+          <span class="stat-label">Focus</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-label">Who We Are</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title">Engineering the<br /><span class="gradient-text">Next Generation of Silicon</span></h2>
+          <p>
+            Squared Studio is a specialized semiconductor service company built by engineers, for engineers.
+            We partner with chip design teams to deliver high-quality RTL design and rigorous verification
+            solutions — reducing time-to-tapeout while maintaining the highest standard of correctness.
+          </p>
+          <p>
+            Our team brings deep expertise in digital logic design, functional verification methodology,
+            and industry-standard toolflows. Whether you need a standalone IP block or full-chip frontend
+            sign-off, we integrate seamlessly into your workflow.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">◈</div>
+              <div>
+                <strong>Deep Domain Expertise</strong>
+                <span>Years of hands-on ASIC and FPGA frontend design experience</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">◈</div>
+              <div>
+                <strong>Methodology-Driven</strong>
+                <span>UVM, formal verification, CDC analysis &amp; lint-clean deliverables</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">◈</div>
+              <div>
+                <strong>Scalable Engagement</strong>
+                <span>From focused IP tasks to full frontend subsystem projects</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="chip-diagram">
+            <div class="chip-block top-left">ALU</div>
+            <div class="chip-block top-right">Cache</div>
+            <div class="chip-block bottom-left">Bus IF</div>
+            <div class="chip-block bottom-right">DMA</div>
+            <div class="chip-core">
+              <span class="chip-label">SQ²</span>
+              <span class="chip-sub">RTL Core</span>
+            </div>
+            <div class="chip-trace h-trace t1"></div>
+            <div class="chip-trace h-trace t2"></div>
+            <div class="chip-trace v-trace t3"></div>
+            <div class="chip-trace v-trace t4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SERVICES ====== -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title text-center">Current <span class="gradient-text">Services</span></h2>
+      <p class="section-subtitle">Deep specialization in the frontend design phase, ensuring correct-by-construction RTL.</p>
+
+      <div class="services-grid">
+
+        <!-- RTL Design -->
+        <div class="service-card active-card">
+          <div class="card-badge">Available Now</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M14 20 L20 26 L14 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 32 H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Frontend RTL Design</h3>
+          <p>
+            We design synthesizable RTL in SystemVerilog/VHDL for custom IPs, subsystems, and SoC blocks.
+            Our deliverables are lint-clean, CDC-safe, and synthesis-ready.
+          </p>
+          <ul class="service-features">
+            <li>SystemVerilog &amp; VHDL</li>
+            <li>Micro-architecture definition</li>
+            <li>Lint &amp; CDC analysis</li>
+            <li>Synthesis handoff ready</li>
+          </ul>
+        </div>
+
+        <!-- Verification -->
+        <div class="service-card active-card">
+          <div class="card-badge">Available Now</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 6 L40 12 V26 C40 34 32 41 24 44 C16 41 8 34 8 26 V12 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M16 24 L21 29 L32 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>RTL Verification</h3>
+          <p>
+            Rigorous functional verification using UVM-based testbenches, constrained-random stimulus,
+            coverage closure, and formal property checking.
+          </p>
+          <ul class="service-features">
+            <li>UVM testbench development</li>
+            <li>Constrained-random testing</li>
+            <li>Functional coverage closure</li>
+            <li>Formal / SVA-based checks</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ROADMAP ====== -->
+  <section class="roadmap section" id="roadmap">
+    <div class="container">
+      <div class="section-label">What's Coming</div>
+      <h2 class="section-title text-center">Service <span class="gradient-text">Roadmap</span></h2>
+      <p class="section-subtitle">We are continuously expanding our capabilities across the ASIC design flow.</p>
+
+      <div class="timeline">
+
+        <div class="timeline-item active">
+          <div class="timeline-dot active-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-phase">Phase 1 — Now</div>
+            <h3>Frontend Design &amp; Verification</h3>
+            <p>RTL Design (SystemVerilog/VHDL) and UVM-based functional verification.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item upcoming">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-phase">Phase 2 — Coming Soon</div>
+            <h3>Place &amp; Route</h3>
+            <p>Physical implementation services — floorplanning, placement, clock tree synthesis, and routing for ASIC designs.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item upcoming">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-phase">Phase 3 — Planned</div>
+            <h3>Custom Layout</h3>
+            <p>Full-custom and semi-custom layout for analog blocks, standard cells, and hard macros.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item upcoming">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-phase">Phase 4 — Future</div>
+            <h3>Full-Flow Turnkey Services</h3>
+            <p>End-to-end ASIC development from specification to GDSII — one partner for the entire silicon journey.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== WHY US ====== -->
+  <section class="why section">
+    <div class="container">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title text-center">Built for <span class="gradient-text">Chip Engineers</span></h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h4>Fast Turnaround</h4>
+          <p>Streamlined processes and experienced engineers mean faster iteration and shorter tape-out schedules.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔬</div>
+          <h4>Quality First</h4>
+          <p>Every deliverable goes through rigorous review — lint-clean, documented, and verified against spec.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔒</div>
+          <h4>NDA Protected</h4>
+          <p>We treat your IP with utmost confidentiality. Full NDA coverage as standard on every engagement.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🤝</div>
+          <h4>Collaborative Approach</h4>
+          <p>We embed into your team's workflow — using your tools, processes, and communication channels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title text-center">Start Your <span class="gradient-text">Next Project</span></h2>
+      <p class="section-subtitle">Tell us about your project and we'll get back to you within 24 hours.</p>
+
+      <div class="contact-wrapper">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Your Company Inc." />
+          </div>
+          <div class="form-group">
+            <label for="service">Service Interest</label>
+            <select id="service" name="service">
+              <option value="">Select a service...</option>
+              <option value="rtl-design">Frontend RTL Design</option>
+              <option value="verification">RTL Verification</option>
+              <option value="both">Both Design &amp; Verification</option>
+              <option value="consulting">Technical Consulting</option>
+              <option value="other">Other / Future Services</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" rows="5" placeholder="Briefly describe your project, technology node, timeline, etc." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          <p class="form-note">We respond within 24 hours. All communications are NDA protected.</p>
+        </form>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:hello@squaredstudio.com">hello@squaredstudio.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">◎</div>
+            <div>
+              <strong>Availability</strong>
+              <span>Open to new projects</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">⏱</div>
+            <div>
+              <strong>Response Time</strong>
+              <span>Within 24 hours</span>
+            </div>
+          </div>
+          <div class="contact-tagline">
+            <p>"Great silicon starts with great frontend engineering."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">&#9632;<sup>2</sup></span>
+          <span class="logo-text">Squared Studio</span>
+        </a>
+        <p>Semiconductor Service Provider<br />Frontend RTL Design &amp; Verification</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#about">About</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="#services">RTL Design</a>
+          <a href="#services">Verification</a>
+          <a href="#roadmap">Place &amp; Route</a>
+          <a href="#roadmap">Custom Layout</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
