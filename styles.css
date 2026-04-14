@@ -52,9 +52,9 @@ ul { list-style: none; }
 }
 
 /* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 1px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--highlight-2); }
 
 /* ---------- Container ---------- */
