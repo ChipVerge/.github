@@ -23,6 +23,7 @@
       <nav class="nav-links" id="navLinks">
         <a href="#about">About</a>
         <a href="#services">Services</a>
+        <a href="#work">Work</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -39,11 +40,11 @@
       <canvas id="circuitCanvas"></canvas>
     </div>
     <div class="container hero-content">
-      <div class="hero-tag">Semiconductor Services</div>
-      <h1 class="hero-title">Precision Silicon<br /><span class="gradient-text">From Concept to RTL</span></h1>
+      <div class="hero-tag">RTL &amp; Verification Specialists</div>
+      <h1 class="hero-title">Precision Silicon,<br /><span class="gradient-text">Zero-Defect RTL</span></h1>
       <p class="hero-subtitle">
-        Squared Studio delivers specialized semiconductor engineering services — from Frontend RTL Design
-        and Verification to EDA Automation, Consulting, and Training — helping chip teams build better silicon.
+        ASIC teams choose Squared Studio when correctness is non-negotiable — lint-clean RTL,
+        UVM-closed coverage, and CDC-safe deliverables that survive first-pass review without rework.
       </p>
       <div class="hero-actions">
         <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
@@ -61,8 +62,8 @@
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
-          <span class="stat-num">ASIC</span>
-          <span class="stat-label">Focus</span>
+          <span class="stat-num">SVA</span>
+          <span class="stat-label">Formal Checks</span>
         </div>
       </div>
     </div>
@@ -79,36 +80,50 @@
         <div class="about-text">
           <h2 class="section-title">Engineering the<br /><span class="gradient-text">Next Generation of Silicon</span></h2>
           <p>
-            Squared Studio is a specialized semiconductor service company built by engineers, for engineers.
-            We partner with chip design teams to deliver high-quality RTL design and rigorous verification
-            solutions — reducing time-to-tapeout while maintaining the highest standard of correctness.
+            Squared Studio is a semiconductor engineering partner built for ASIC teams that cannot afford
+            silicon escapes. We specialize in SystemVerilog RTL design and UVM-based functional
+            verification — delivering lint-clean, CDC-safe, coverage-closed results that pass first-time review.
           </p>
           <p>
-            Our team brings deep expertise in digital logic design, functional verification methodology,
-            and industry-standard toolflows. Whether you need a standalone IP block or full-chip frontend
-            sign-off, we integrate seamlessly into your workflow.
+            From standalone IP blocks to full frontend subsystem delivery, our engineers embed directly
+            into your workflow — your EDA tools, your review process, your communication channels.
+            No ramp-up drag. Just verified silicon, on schedule.
           </p>
           <div class="about-highlights">
             <div class="highlight-item">
               <div class="highlight-icon">◈</div>
               <div>
-                <strong>Deep Domain Expertise</strong>
-                <span>Years of hands-on ASIC and FPGA frontend design experience</span>
+                <strong>Senior-Level RTL &amp; Verification</strong>
+                <span>Micro-architecture through synthesis handoff — production-quality deliverables every time</span>
               </div>
             </div>
             <div class="highlight-item">
               <div class="highlight-icon">◈</div>
               <div>
-                <strong>Methodology-Driven</strong>
-                <span>UVM, formal verification, CDC analysis &amp; lint-clean deliverables</span>
+                <strong>Coverage-Closed by Default</strong>
+                <span>UVM environments targeting 95%+ functional coverage, backed by SVA property checks</span>
               </div>
             </div>
             <div class="highlight-item">
               <div class="highlight-icon">◈</div>
               <div>
-                <strong>Scalable Engagement</strong>
-                <span>From focused IP tasks to full frontend subsystem projects</span>
+                <strong>Zero Ramp-Up Overhead</strong>
+                <span>We plug into your EDA toolchain, review flow, and SCM — productive from day one</span>
               </div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <div class="stack-label">Core Technologies</div>
+            <div class="stack-tags">
+              <span class="stack-tag">SystemVerilog</span>
+              <span class="stack-tag">UVM</span>
+              <span class="stack-tag">Verilog</span>
+              <span class="stack-tag">VHDL</span>
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Tcl</span>
+              <span class="stack-tag">SVA / PSL</span>
+              <span class="stack-tag">Formal Verification</span>
+              <span class="stack-tag">CDC Analysis</span>
             </div>
           </div>
         </div>
@@ -401,6 +416,55 @@
     </div>
   </section>
 
+  <!-- ====== CASE STUDIES ====== -->
+  <section class="case-studies section" id="work">
+    <div class="container">
+      <div class="section-label">Proof of Craft</div>
+      <h2 class="section-title text-center">Engineering <span class="gradient-text">in Practice</span></h2>
+      <p class="section-subtitle">Representative examples of the problems we solve — and how we approach them.</p>
+
+      <div class="cases-grid">
+
+        <div class="case-card">
+          <div class="case-num">01</div>
+          <div class="case-tech">
+            <span class="tech-tag">SystemVerilog</span>
+            <span class="tech-tag">UVM</span>
+            <span class="tech-tag">Functional Coverage</span>
+          </div>
+          <h3>AXI4-Lite Protocol IP Verification</h3>
+          <p class="case-challenge"><span class="case-role">Challenge —</span> An existing directed testbench had reached only 40% functional coverage; tapeout was weeks away and silicon risk was unacceptable.</p>
+          <p class="case-outcome"><span class="case-role">Outcome —</span> Built a full UVM environment with constrained-random stimulus, protocol-aware scoreboards, and coverage-driven closure. Functional and toggle coverage exceeded 98% across all corner modes before sign-off.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-num">02</div>
+          <div class="case-tech">
+            <span class="tech-tag">RTL Design</span>
+            <span class="tech-tag">CDC Analysis</span>
+            <span class="tech-tag">Synthesis</span>
+          </div>
+          <h3>Multi-Clock Domain FIFO Controller</h3>
+          <p class="case-challenge"><span class="case-role">Challenge —</span> Client needed a parameterized, CDC-safe asynchronous FIFO for a high-speed memory interface — production-ready with zero lint violations and formal CDC sign-off.</p>
+          <p class="case-outcome"><span class="case-role">Outcome —</span> Delivered lint-clean RTL with formal CDC closure, synthesis-validated at target frequency, and complete documentation within a two-week engagement.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-num">03</div>
+          <div class="case-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">EDA Automation</span>
+            <span class="tech-tag">Regression</span>
+          </div>
+          <h3>Automated Regression &amp; Coverage Framework</h3>
+          <p class="case-challenge"><span class="case-role">Challenge —</span> Manual simulation regressions consumed 4+ hours per engineer daily across a 6-person team — blocking iteration speed and burying coverage reports.</p>
+          <p class="case-outcome"><span class="case-role">Outcome —</span> Designed a Python-based regression orchestrator with parallel dispatch, automatic coverage merging, and HTML dashboards — cutting daily overhead to under 20 minutes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ====== ROADMAP ====== -->
   <section class="roadmap section" id="roadmap">
     <div class="container">
@@ -485,7 +549,7 @@
     <div class="container">
       <div class="section-label">Get in Touch</div>
       <h2 class="section-title text-center">Start Your <span class="gradient-text">Next Project</span></h2>
-      <p class="section-subtitle">Tell us about your project and we'll get back to you within 24 hours.</p>
+      <p class="section-subtitle">Currently accepting new projects. Describe your challenge and we’ll respond with a concrete plan — within 24 hours.</p>
 
       <div class="contact-wrapper">
         <form class="contact-form" id="contactForm" novalidate>
@@ -545,7 +609,7 @@
             </div>
           </div>
           <div class="contact-tagline">
-            <p>"Great silicon starts with great frontend engineering."</p>
+            <p>“The best time to fix a verification gap is before tapeout. The second best time is right now.”</p>
           </div>
         </div>
       </div>
@@ -566,15 +630,22 @@
         <div class="footer-col">
           <h5>Company</h5>
           <a href="#about">About</a>
+          <a href="#work">Our Work</a>
           <a href="#roadmap">Roadmap</a>
           <a href="#contact">Contact</a>
         </div>
         <div class="footer-col">
           <h5>Services</h5>
-          <a href="#services">RTL Design</a>
+          <a href="#services">ASIC Design</a>
           <a href="#services">Verification</a>
-          <a href="#roadmap">Place &amp; Route</a>
-          <a href="#roadmap">Custom Layout</a>
+          <a href="#services">Consulting</a>
+          <a href="#roadmap">FPGA &amp; DFT</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/squaredstudio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/company/squaredstudio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:hello@squaredstudio.com">Email Us</a>
         </div>
       </div>
     </div>
