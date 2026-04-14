@@ -451,3 +451,46 @@
   - Project guidance sessions
   - Skill assessment and roadmap planning
   - Engineering best-practice coaching
+
+## 12. Custom Layout
+- **Cell-Level Custom Layout**
+  - Standard cell layout design
+  - I/O cell and pad layout
+  - Custom logic cell development
+  - Fill and decap cell layout
+  - Layout for timing-critical paths
+
+- **Macro and Block Layout**
+  - Memory macro layout coordination
+  - Analog block layout support
+  - Hard macro boundary definition
+  - Floorplan-aware macro delivery
+  - Macro integration guidelines
+
+- **Full-Custom Design**
+  - Full-custom analog and mixed-signal layouts
+  - High-speed interface layout
+  - ESD protection structure layout
+  - Sensitive circuit routing
+  - Custom driver and receiver layout
+
+- **Physical Verification**
+  - DRC execution and closure
+  - LVS execution and debug
+  - ERC analysis
+  - Antenna rule checking
+  - Density rule compliance
+
+- **Parasitic Extraction Support**
+  - RC extraction coordination
+  - Post-layout simulation setup
+  - Parasitic-aware design review
+  - Extraction view preparation
+  - Timing closure with extracted parasitics
+
+- **Layout-Aware Design Guidance**
+  - Layout-friendly schematic and RTL guidance
+  - Design-for-layout reviews
+  - Manufacturability checks
+  - Layout rule documentation
+  - Team guidance on layout best practices
