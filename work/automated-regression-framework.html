@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case Study — Automated Regression & Coverage Framework. Reduced daily simulation overhead from 4+ hours to under 20 minutes with a Python-based orchestrator." />
+  <title>Automated Regression Framework | Squared Studio</title>
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+        <span class="logo-text">Squared Studio</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#services">Services</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#roadmap">Roadmap</a>
+        <a href="../index.html#people">People</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location='../index.html#contact'">Get in Touch</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="../index.html#work">Work</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Regression Framework</span>
+      </div>
+      <div class="case-hero-num">03</div>
+      <div class="case-meta">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">EDA Automation</span>
+        <span class="tech-tag">Regression</span>
+      </div>
+      <h1 class="page-title">Automated Regression<br /><span class="gradient-text">&amp; Coverage Framework</span></h1>
+      <p class="page-description">
+        A Python-based regression orchestrator with parallel dispatch, automatic coverage merging, and
+        HTML dashboards — reducing a team's daily simulation overhead from 4+ hours to under 20 minutes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== CASE CONTENT ====== -->
+  <section class="case-section section">
+    <div class="container">
+
+      <!-- Key Results -->
+      <div class="case-block">
+        <div class="case-block-label">Key Results</div>
+        <div class="case-highlights">
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">4h+ → 20m</div>
+            <div class="case-highlight-label">Daily simulation overhead per engineer</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">6</div>
+            <div class="case-highlight-label">Engineer team unblocked — iteration speed fully restored</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">Auto</div>
+            <div class="case-highlight-label">Coverage merging &amp; HTML dashboards — zero manual post-processing</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge -->
+      <div class="case-block">
+        <div class="case-block-label">The Challenge</div>
+        <h2>4+ Hours a Day, Every Day, Just Running Tests</h2>
+        <p>
+          A six-person verification team was manually launching simulation regressions, waiting for
+          results, manually merging coverage databases, and hand-building status reports. This consumed
+          more than four engineering-hours per person, per day — on a team of six, that's over 24 hours of
+          engineering time lost every single day to process overhead, not design work.
+        </p>
+        <p>
+          The volume of testcases had grown organically across several projects. There was no centralized
+          orchestration: engineers tracked run status in spreadsheets, coverage was merged by ad-hoc
+          shell scripts, and dashboards were absent. Iteration speed — the core metric for a verification
+          team — had collapsed.
+        </p>
+      </div>
+
+      <!-- Approach -->
+      <div class="case-block">
+        <div class="case-block-label">Our Approach</div>
+        <h2>Orchestration, Parallelism, and Automatic Reporting</h2>
+        <p>
+          We built a Python-based regression framework from the ground up, designed to replace every
+          manual step — job dispatch, status monitoring, coverage merging, and reporting — with a single
+          command invocation.
+        </p>
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-num">01</span>
+            <p><strong>Regression manifest format.</strong> Defined a simple YAML-based manifest for describing test lists, seed groups, simulator arguments, and coverage collection settings. Engineers declare intent; the framework handles execution.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">02</span>
+            <p><strong>Parallel job dispatch.</strong> The orchestrator distributes jobs across available compute using a configurable worker-pool model — local cores or farm slots. Peak throughput scales with infrastructure without changing any test configuration.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">03</span>
+            <p><strong>Live status monitoring.</strong> A real-time terminal dashboard shows run state (queued / running / pass / fail / timeout) per job. Engineers see progress without polling log files or tracking spreadsheets.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">04</span>
+            <p><strong>Automatic coverage merging.</strong> On completion, all per-seed databases are merged automatically using the team's EDA tool API. No manual merge scripts, no version conflicts, no forgotten seeds.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">05</span>
+            <p><strong>HTML dashboard generation.</strong> A self-contained HTML report is generated for every regression run: pass/fail summary, per-test timing, coverage totals per group, trend deltas versus the prior run, and a full log viewer with filtering. Shareable by link, no tool access required.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="case-block">
+        <div class="case-block-label">The Outcome</div>
+        <h2>From 4 Hours to Under 20 Minutes, Every Day</h2>
+        <p>
+          After deployment, the daily regression workflow for each engineer was reduced from 4+ hours to
+          under 20 minutes — a single command to launch, and a dashboard link to review results when the
+          run completes. Coverage is merged and the HTML report is ready with no further action.
+        </p>
+        <p>
+          The team's iteration cadence went from one regression cycle per day (gated by manual overhead)
+          to multiple cycles per day. Coverage closure tracking, previously a weekly snapshot, became a
+          per-run metric. The framework has since been adopted on two subsequent projects within the same
+          organisation with zero modifications to the core orchestrator.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="page-cta">
+    <div class="container">
+      <div class="page-cta-box">
+        <div class="section-label" style="text-align:center">Next Steps</div>
+        <h2>Drowning in <span class="gradient-text">Manual Overhead?</span></h2>
+        <p>If your team is spending hours on process instead of engineering, we can build the automation infrastructure that gives that time back. Let's talk.</p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="../index.html#work" class="btn btn-outline">All Case Studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+          <span class="logo-text">Squared Studio</span>
+        </a>
+        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#work">Our Work</a>
+          <a href="../index.html#roadmap">Roadmap</a>
+          <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="../services/asic-design.html">ASIC Design</a>
+          <a href="../services/verification.html">Verification</a>
+          <a href="../services/engineering-consulting.html">Consulting</a>
+          <a href="../index.html#roadmap">FPGA &amp; DFT</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/squaredstudio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/company/squaredstudio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:hello@squaredstudio.com">Email Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../page-script.js"></script>
+</body>
+</html>

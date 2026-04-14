@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case Study — AXI4-Lite Protocol IP Verification. From 40% coverage to 98%+ with a full UVM environment built under tapeout pressure." />
+  <title>AXI4-Lite Protocol IP Verification | Squared Studio</title>
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+        <span class="logo-text">Squared Studio</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#services">Services</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#roadmap">Roadmap</a>
+        <a href="../index.html#people">People</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location='../index.html#contact'">Get in Touch</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="../index.html#work">Work</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>AXI4-Lite Verification</span>
+      </div>
+      <div class="case-hero-num">01</div>
+      <div class="case-meta">
+        <span class="tech-tag">SystemVerilog</span>
+        <span class="tech-tag">UVM</span>
+        <span class="tech-tag">Functional Coverage</span>
+      </div>
+      <h1 class="page-title">AXI4-Lite Protocol IP<br /><span class="gradient-text">Verification</span></h1>
+      <p class="page-description">
+        A UVM testbench built under tapeout pressure — rescuing a design stuck at 40% functional coverage
+        and closing it beyond 98% before sign-off.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== CASE CONTENT ====== -->
+  <section class="case-section section">
+    <div class="container">
+
+      <!-- Key Results -->
+      <div class="case-block">
+        <div class="case-block-label">Key Results</div>
+        <div class="case-highlights">
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">98%+</div>
+            <div class="case-highlight-label">Functional &amp; toggle coverage achieved before sign-off</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">40% → 98%</div>
+            <div class="case-highlight-label">Coverage improvement from existing testbench baseline</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">0</div>
+            <div class="case-highlight-label">Escapes — all corner modes covered before tapeout</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge -->
+      <div class="case-block">
+        <div class="case-block-label">The Challenge</div>
+        <h2>Tapeout Weeks Away, Coverage at 40%</h2>
+        <p>
+          The client's IP team had an existing directed testbench for their AXI4-Lite peripheral controller.
+          After months of development, functional coverage had stalled at 40% — well below the 95% threshold
+          required for tapeout sign-off. With the tapeout window just weeks away, the risk of silicon escapes
+          was unacceptable.
+        </p>
+        <p>
+          Directed tests had exhausted the obvious scenarios, but the long tail of protocol corner cases —
+          back-to-back transactions, simultaneous read/write interleaving, error response handling, and
+          address-channel stalls — remained unverified. The team needed a systematic, coverage-driven
+          approach delivered fast.
+        </p>
+      </div>
+
+      <!-- Approach -->
+      <div class="case-block">
+        <div class="case-block-label">Our Approach</div>
+        <h2>Full UVM Environment, Coverage-Driven from Day One</h2>
+        <p>
+          We assessed the existing testbench and existing coverage holes within the first day, then built
+          a complete UVM verification environment targeting AXI4-Lite protocol compliance from scratch —
+          without discarding the client's existing directed tests, which were integrated as UVM sequences.
+        </p>
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-num">01</span>
+            <p><strong>Coverage model first.</strong> Defined a detailed functional coverage model mapping every AXI4-Lite protocol feature — channel handshakes, burst types, response codes, and outstanding transaction counts — to measurable coverage bins before writing a single test.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">02</span>
+            <p><strong>UVM agent and scoreboard.</strong> Built a protocol-aware UVM agent with a driver, monitor, and scoreboard. The scoreboard independently modelled expected AXI responses and flagged any mismatch against DUT output — catching functional bugs, not just coverage holes.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">03</span>
+            <p><strong>Constrained-random sequences.</strong> Developed constrained-random virtual sequences targeting uncovered bins: back-to-back transactions with no gaps, interleaved read/write, address-channel stalls, DECERR/SLVERR responses, and maximum outstanding transaction limits.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">04</span>
+            <p><strong>Coverage-closure regression.</strong> Ran nightly regressions with coverage-guided seed selection. Gaps were reviewed each morning and targeted with additional constraints or directed corner-case sequences the same day.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">05</span>
+            <p><strong>SVA property checks.</strong> Added SystemVerilog assertions for protocol invariants — valid/ready handshake ordering, response channel synchronisation, and no-burst-size violations — giving a second independent check layer alongside the scoreboard.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="case-block">
+        <div class="case-block-label">The Outcome</div>
+        <h2>98%+ Coverage, Zero Escapes, On-Time Tapeout</h2>
+        <p>
+          Functional and toggle coverage exceeded 98% across all corner modes and operating conditions
+          prior to sign-off. Three previously undetected functional bugs were found during the constrained-random
+          campaign — all fixed before the tapeout window closed.
+        </p>
+        <p>
+          The UVM environment, sequences, and coverage model were handed back to the client as reusable
+          assets for future IP iterations. The engagement completed within the tapeout schedule with no
+          schedule impact.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="page-cta">
+    <div class="container">
+      <div class="page-cta-box">
+        <div class="section-label" style="text-align:center">Next Steps</div>
+        <h2>Facing a <span class="gradient-text">Similar Challenge?</span></h2>
+        <p>Coverage stalled? Tapeout approaching? We build UVM environments that close coverage and catch functional bugs — fast. Describe your situation and we'll respond within 24 hours.</p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="../index.html#work" class="btn btn-outline">All Case Studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+          <span class="logo-text">Squared Studio</span>
+        </a>
+        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#work">Our Work</a>
+          <a href="../index.html#roadmap">Roadmap</a>
+          <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="../services/asic-design.html">ASIC Design</a>
+          <a href="../services/verification.html">Verification</a>
+          <a href="../services/engineering-consulting.html">Consulting</a>
+          <a href="../index.html#roadmap">FPGA &amp; DFT</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/squaredstudio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/company/squaredstudio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:hello@squaredstudio.com">Email Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../page-script.js"></script>
+</body>
+</html>

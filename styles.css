@@ -1292,7 +1292,7 @@ ul { list-style: none; }
 .footer-links { flex-wrap: wrap; }
 
 /* ============================================================
-   SUB-PAGE SHARED STYLES (services/, people/)
+   SUB-PAGE SHARED STYLES (services/, people/, work/)
    ============================================================ */
 
 /* Breadcrumb */
@@ -1501,4 +1501,162 @@ ul { list-style: none; }
   .profile-grid { grid-template-columns: 1fr; }
   .profile-avatar { width: 140px; height: 140px; }
   .page-hero { padding: 110px 0 56px; }
+}
+
+/* ============================================================
+   WORK / CASE STUDY DETAIL PAGES
+   ============================================================ */
+
+.case-hero-num {
+  font-family: var(--mono);
+  font-size: 5rem;
+  font-weight: 600;
+  color: rgba(0,204,255,0.10);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.case-section {
+  background: var(--bg);
+}
+.case-section + .case-section {
+  background: var(--bg-2);
+}
+
+.case-block {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.case-block + .case-block {
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.case-block-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 14px;
+}
+.case-block-label::before {
+  content: '// ';
+  opacity: 0.5;
+}
+
+.case-block h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.case-block p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.case-block p:last-child { margin-bottom: 0; }
+
+.case-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.case-highlight-item {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  transition: var(--transition);
+}
+
+.case-highlight-item:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 18px rgba(0,204,255,0.12);
+}
+
+.case-highlight-value {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.case-highlight-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.case-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.case-step {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.case-step-num {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(0,204,255,0.08);
+  border: 1px solid rgba(0,204,255,0.25);
+  border-radius: 6px;
+  padding: 3px 9px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.case-step p {
+  margin-bottom: 0;
+}
+
+/* "Read More" link on case cards */
+.case-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  font-family: var(--mono);
+  letter-spacing: 0.03em;
+  transition: var(--transition);
+}
+
+.case-read-more:hover {
+  color: var(--accent);
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .case-hero-num { font-size: 3.5rem; }
+  .case-highlights { grid-template-columns: 1fr 1fr; }
 }
