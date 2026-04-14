@@ -27,7 +27,7 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 // ---------- Scroll-reveal animations ----------
 const fadeEls = document.querySelectorAll(
-  '.service-card, .why-card, .timeline-item, .highlight-item, .about-visual, .contact-item'
+  '.service-card, .why-card, .timeline-item, .highlight-item, .about-visual, .contact-item, .person-card'
 );
 
 fadeEls.forEach(el => el.classList.add('fade-up'));
