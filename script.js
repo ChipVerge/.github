@@ -136,7 +136,7 @@ function showToast(message, success = true) {
 
         if (dist < 120) {
           const alpha = (1 - dist / 120) * 0.35;
-          ctx.strokeStyle = `rgba(196,154,26,${alpha})`;
+          ctx.strokeStyle = `rgba(0,204,255,${alpha})`;
           ctx.lineWidth = 0.8;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -157,7 +157,7 @@ function showToast(message, success = true) {
       const a = 0.3 + 0.5 * Math.abs(Math.sin(n.pulse));
       ctx.beginPath();
       ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(196,154,26,${a})`;
+      ctx.fillStyle = `rgba(0,204,255,${a})`;
       ctx.fill();
     });
 
