@@ -519,6 +519,7 @@ ul { list-style: none; }
   background: linear-gradient(135deg, rgba(0,204,255,0.06), transparent);
   opacity: 0;
   transition: var(--transition);
+  pointer-events: none;
 }
 
 .active-card:hover {
