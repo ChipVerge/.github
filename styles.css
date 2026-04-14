@@ -540,6 +540,23 @@ ul { list-style: none; }
   margin-bottom: 24px;
 }
 
+.card-badge--soon {
+  color: var(--accent-2);
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.25);
+}
+
+.card-badge--planned {
+  color: var(--text-muted);
+  background: rgba(123,130,166,0.1);
+  border-color: rgba(123,130,166,0.2);
+}
+
+.service-card:not(.active-card):hover {
+  border-color: rgba(99,102,241,0.15);
+  transform: translateY(-2px);
+}
+
 .service-icon {
   width: 52px;
   height: 52px;

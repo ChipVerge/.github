@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Squared Studio — Semiconductor Service Provider specializing in Frontend RTL Design and Verification." />
+  <meta name="description" content="Squared Studio — Semiconductor Service Provider offering full-spectrum engineering services: RTL Design, Verification, FPGA, DFT, Physical Design, EDA Automation, Consulting, and Training." />
   <title>Squared Studio | Semiconductor Services</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,10 +39,10 @@
     </div>
     <div class="container hero-content">
       <div class="hero-tag">Semiconductor Services</div>
-      <h1 class="hero-title">Precision Silicon.<br /><span class="gradient-text">From Concept to RTL.</span></h1>
+      <h1 class="hero-title">Precision Silicon<br /><span class="gradient-text">From Concept to RTL</span></h1>
       <p class="hero-subtitle">
-        Squared Studio delivers expert Frontend RTL Design and Verification services
-        — helping chip teams accelerate development with clean, verified, production-ready logic.
+        Squared Studio delivers specialized semiconductor engineering services — from Frontend RTL Design
+        and Verification to EDA Automation, Consulting, and Training — helping chip teams build better silicon.
       </p>
       <div class="hero-actions">
         <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
@@ -118,7 +118,7 @@
             <div class="chip-block bottom-left">Bus IF</div>
             <div class="chip-block bottom-right">DMA</div>
             <div class="chip-core">
-              <span class="chip-label">SQ²</span>
+              <span class="chip-label">SS</span>
               <span class="chip-sub">RTL Core</span>
             </div>
             <div class="chip-trace h-trace t1"></div>
@@ -135,12 +135,12 @@
   <section class="services section" id="services">
     <div class="container">
       <div class="section-label">What We Offer</div>
-      <h2 class="section-title text-center">Current <span class="gradient-text">Services</span></h2>
-      <p class="section-subtitle">Deep specialization in the frontend design phase, ensuring correct-by-construction RTL.</p>
+      <h2 class="section-title text-center">Full-Spectrum <span class="gradient-text">Services</span></h2>
+      <p class="section-subtitle">Comprehensive semiconductor engineering from RTL to GDSII — specialized expertise at every stage of the design flow.</p>
 
       <div class="services-grid">
 
-        <!-- RTL Design -->
+        <!-- ASIC Design -->
         <div class="service-card active-card">
           <div class="card-badge">Available Now</div>
           <div class="service-icon">
@@ -150,16 +150,16 @@
               <path d="M22 32 H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
-          <h3>Frontend RTL Design</h3>
+          <h3>ASIC Design</h3>
           <p>
-            We design synthesizable RTL in SystemVerilog/VHDL for custom IPs, subsystems, and SoC blocks.
-            Our deliverables are lint-clean, CDC-safe, and synthesis-ready.
+            Specification-to-RTL implementation covering micro-arch definition, RTL coding, integration,
+            optimization, and synthesis handoff. Lint-clean, CDC/RDC-safe deliverables as standard.
           </p>
           <ul class="service-features">
-            <li>SystemVerilog &amp; VHDL</li>
+            <li>RTL in SystemVerilog, Verilog &amp; VHDL</li>
             <li>Micro-architecture definition</li>
-            <li>Lint &amp; CDC analysis</li>
-            <li>Synthesis handoff ready</li>
+            <li>Lint, CDC &amp; RDC analysis</li>
+            <li>Integration &amp; synthesis handoff</li>
           </ul>
         </div>
 
@@ -172,16 +172,228 @@
               <path d="M16 24 L21 29 L32 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <h3>RTL Verification</h3>
+          <h3>Verification</h3>
           <p>
             Rigorous functional verification using UVM-based testbenches, constrained-random stimulus,
-            coverage closure, and formal property checking.
+            coverage closure, formal property checking, and automated regression.
           </p>
           <ul class="service-features">
             <li>UVM testbench development</li>
-            <li>Constrained-random testing</li>
-            <li>Functional coverage closure</li>
+            <li>Constrained-random &amp; directed tests</li>
             <li>Formal / SVA-based checks</li>
+            <li>Coverage closure &amp; regression</li>
+          </ul>
+        </div>
+
+        <!-- Engineering Consulting -->
+        <div class="service-card active-card">
+          <div class="card-badge">Available Now</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="16" r="7" stroke="currentColor" stroke-width="2"/>
+              <path d="M10 42 C10 33.2 16.3 26 24 26 C31.7 26 38 33.2 38 42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Engineering Consulting</h3>
+          <p>
+            Expert semiconductor consulting, team augmentation, process improvement,
+            and project recovery — seasoned ASIC experience applied to your toughest challenges.
+          </p>
+          <ul class="service-features">
+            <li>Technical &amp; architecture review</li>
+            <li>Team augmentation</li>
+            <li>Process optimization</li>
+            <li>Project recovery &amp; planning</li>
+          </ul>
+        </div>
+
+        <!-- Documentation & Methodology -->
+        <div class="service-card active-card">
+          <div class="card-badge">Available Now</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8 H28 L36 16 V40 H12 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M28 8 V16 H36" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M18 24 H30 M18 30 H30 M18 36 H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Documentation &amp; Methodology</h3>
+          <p>
+            Functional specs, micro-architecture documents, verification plans, RTL coding guidelines,
+            review checklists, and knowledge-transfer packages for disciplined engineering.
+          </p>
+          <ul class="service-features">
+            <li>Design &amp; verification docs</li>
+            <li>RTL coding guidelines</li>
+            <li>Review &amp; audit checklists</li>
+            <li>Knowledge transfer materials</li>
+          </ul>
+        </div>
+
+        <!-- FPGA Design -->
+        <div class="service-card">
+          <div class="card-badge card-badge--soon">Coming Soon</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="28" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
+              <rect x="16" y="16" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="26" y="16" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="16" y="26" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="26" y="26" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M6 18 H10 M6 24 H10 M6 30 H10 M38 18 H42 M38 24 H42 M38 30 H42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>FPGA Design</h3>
+          <p>
+            FPGA-targeted RTL development, ASIC-to-FPGA prototyping, implementation support,
+            and board bring-up on AMD/Xilinx and Intel/Altera platforms.
+          </p>
+          <ul class="service-features">
+            <li>FPGA RTL development</li>
+            <li>ASIC-to-FPGA prototyping</li>
+            <li>Synthesis &amp; PnR support</li>
+            <li>Board bring-up &amp; debug</li>
+          </ul>
+        </div>
+
+        <!-- DFT -->
+        <div class="service-card">
+          <div class="card-badge card-badge--soon">Coming Soon</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="20" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="19" y="20" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="32" y="20" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 25 H19 M29 25 H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M11 20 V14 M37 20 V14 M11 30 V36 M37 30 V36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M11 14 H37 M11 36 H37" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>DFT</h3>
+          <p>
+            Design for Testability services — scan insertion, ATPG, MBIST, boundary scan,
+            and DFT rule analysis for thorough manufacturing test coverage.
+          </p>
+          <ul class="service-features">
+            <li>Scan design &amp; ATPG</li>
+            <li>MBIST integration</li>
+            <li>Boundary scan / JTAG</li>
+            <li>DFT rule analysis &amp; closure</li>
+          </ul>
+        </div>
+
+        <!-- Custom IP & VIP -->
+        <div class="service-card">
+          <div class="card-badge card-badge--soon">Coming Soon</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 6 L42 15 V33 L24 42 L6 33 V15 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M24 6 V42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M6 15 L42 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Custom IP &amp; VIP</h3>
+          <p>
+            Design and delivery of reusable custom IP blocks and Verification IPs —
+            from peripheral controllers to full UVM-compliant verification agents and BFMs.
+          </p>
+          <ul class="service-features">
+            <li>Peripheral &amp; controller IP</li>
+            <li>Parameterized reusable IP</li>
+            <li>UVM VIP &amp; BFM development</li>
+            <li>IP documentation &amp; delivery</li>
+          </ul>
+        </div>
+
+        <!-- EDA Automation -->
+        <div class="service-card">
+          <div class="card-badge card-badge--soon">Coming Soon</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 6 V10 M24 38 V42 M6 24 H10 M38 24 H42 M10.3 10.3 L13.1 13.1 M34.9 34.9 L37.7 37.7 M37.7 10.3 L34.9 13.1 M13.1 34.9 L10.3 37.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>EDA Automation</h3>
+          <p>
+            Custom flow automation, Python/Tcl/Shell scripting, regression dashboards,
+            and multi-tool orchestration to accelerate engineering productivity.
+          </p>
+          <ul class="service-features">
+            <li>Simulation &amp; regression automation</li>
+            <li>Python / Tcl / Shell scripting</li>
+            <li>Coverage &amp; KPI dashboards</li>
+            <li>Tool integration &amp; scheduling</li>
+          </ul>
+        </div>
+
+        <!-- Physical Design Support -->
+        <div class="service-card">
+          <div class="card-badge card-badge--planned">Planned</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 8 L40 16 L24 24 L8 16 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M8 24 L24 32 L40 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M8 32 L24 40 L40 32" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Physical Design Support</h3>
+          <p>
+            Frontend-to-backend handoff, timing constraint definition, low-power coordination,
+            STA collaboration, and LEC/ECO support for smooth physical implementation.
+          </p>
+          <ul class="service-features">
+            <li>SDC &amp; timing constraint support</li>
+            <li>Low-power (UPF/CPF) coordination</li>
+            <li>LEC &amp; ECO support</li>
+            <li>STA collaboration</li>
+          </ul>
+        </div>
+
+        <!-- Embedded & System-Level -->
+        <div class="service-card">
+          <div class="card-badge card-badge--planned">Planned</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="12" width="32" height="22" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 34 L16 40 M32 34 L32 40 M12 40 H36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="14" y="18" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M26 20 H34 M26 24 H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Embedded &amp; System-Level</h3>
+          <p>
+            Hardware-software co-verification, bare-metal testing, system integration validation,
+            and emulation/prototype support for full-stack silicon confidence.
+          </p>
+          <ul class="service-features">
+            <li>FW-HW co-verification</li>
+            <li>System integration support</li>
+            <li>Bare-metal &amp; driver testing</li>
+            <li>Emulation &amp; prototype support</li>
+          </ul>
+        </div>
+
+        <!-- Training -->
+        <div class="service-card">
+          <div class="card-badge card-badge--planned">Planned</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12 L44 22 L24 32 L4 22 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M34 27 V36 C34 36 30 40 24 40 C18 40 14 36 14 36 V27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M44 22 V32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Training</h3>
+          <p>
+            Practical RTL design, SystemVerilog/UVM verification, and advanced ASIC workshop programs
+            — from fundamentals to expert-level team upskilling and one-on-one mentoring.
+          </p>
+          <ul class="service-features">
+            <li>RTL &amp; SystemVerilog / UVM courses</li>
+            <li>Advanced workshops (CDC, Formal)</li>
+            <li>Team bootcamps &amp; onboarding</li>
+            <li>One-on-one mentoring</li>
           </ul>
         </div>
 
@@ -194,7 +406,7 @@
     <div class="container">
       <div class="section-label">What's Coming</div>
       <h2 class="section-title text-center">Service <span class="gradient-text">Roadmap</span></h2>
-      <p class="section-subtitle">We are continuously expanding our capabilities across the ASIC design flow.</p>
+      <p class="section-subtitle">Expanding across the full semiconductor design flow — from RTL and Verification today to Physical Design, Training, and Turnkey services ahead.</p>
 
       <div class="timeline">
 
@@ -202,8 +414,8 @@
           <div class="timeline-dot active-dot"></div>
           <div class="timeline-content">
             <div class="timeline-phase">Phase 1 — Now</div>
-            <h3>Frontend Design &amp; Verification</h3>
-            <p>RTL Design (SystemVerilog/VHDL) and UVM-based functional verification.</p>
+            <h3>ASIC Design, Verification, Consulting &amp; Documentation</h3>
+            <p>RTL Design (SystemVerilog/Verilog/VHDL), UVM-based functional verification, engineering consulting, and documentation &amp; methodology services.</p>
           </div>
         </div>
 
@@ -211,8 +423,8 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-phase">Phase 2 — Coming Soon</div>
-            <h3>Place &amp; Route</h3>
-            <p>Physical implementation services — floorplanning, placement, clock tree synthesis, and routing for ASIC designs.</p>
+            <h3>FPGA, DFT, Custom IP &amp; EDA Automation</h3>
+            <p>FPGA design and prototyping, Design for Testability (scan, ATPG, MBIST), custom IP/VIP development, and EDA flow automation &amp; scripting.</p>
           </div>
         </div>
 
@@ -220,8 +432,8 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-phase">Phase 3 — Planned</div>
-            <h3>Custom Layout</h3>
-            <p>Full-custom and semi-custom layout for analog blocks, standard cells, and hard macros.</p>
+            <h3>Physical Design Support &amp; Embedded Systems</h3>
+            <p>Frontend-to-backend handoff, timing constraints, low-power coordination, STA collaboration, hardware-software co-verification, and emulation support.</p>
           </div>
         </div>
 
@@ -229,8 +441,8 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-phase">Phase 4 — Future</div>
-            <h3>Full-Flow Turnkey Services</h3>
-            <p>End-to-end ASIC development from specification to GDSII — one partner for the entire silicon journey.</p>
+            <h3>Training Programs &amp; Full-Flow Turnkey Services</h3>
+            <p>Structured RTL, UVM, and ASIC training programs alongside end-to-end turnkey ASIC services — from specification to GDSII — one partner for the entire silicon journey.</p>
           </div>
         </div>
 
@@ -348,7 +560,7 @@
           <span class="logo-icon">&#9632;<sup>2</sup></span>
           <span class="logo-text">Squared Studio</span>
         </a>
-        <p>Semiconductor Service Provider<br />Frontend RTL Design &amp; Verification</p>
+        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
