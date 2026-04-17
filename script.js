@@ -43,53 +43,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => revealObserver.observe(el));
 
-// ---------- Contact form ----------
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const name  = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const msg   = document.getElementById('message').value.trim();
-
-  if (!name || !email || !msg) {
-    showToast('Please fill in all required fields.', false);
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    showToast('Please enter a valid email address.', false);
-    return;
-  }
-
-  // Simulate form submission (replace with real endpoint / EmailJS / Formspree, etc.)
-  const btn = contactForm.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    contactForm.reset();
-    btn.textContent = 'Send Message';
-    btn.disabled = false;
-    showToast('Message sent! We\'ll be in touch within 24 hours.', true);
-  }, 1200);
-});
-
-function showToast(message, success = true) {
-  let toast = document.querySelector('.toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = message;
-  toast.style.borderColor = success ? 'var(--green)' : '#f87171';
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
-}
-
 // ---------- High-speed data transmission canvas ----------
 (function () {
   const canvas = document.getElementById('circuitCanvas');

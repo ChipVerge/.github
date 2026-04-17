@@ -828,6 +828,28 @@ ul { list-style: none; }
   margin-top: 14px;
 }
 
+.form-status {
+  min-height: 1.4em;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.form-status.is-success {
+  color: var(--green);
+}
+
+.form-status.is-error {
+  color: #f87171;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Contact info sidebar */
 .contact-info {
   display: flex;
