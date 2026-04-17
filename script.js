@@ -27,7 +27,7 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 // ---------- Scroll-reveal animations ----------
 const fadeEls = document.querySelectorAll(
-  '.service-card, .why-card, .timeline-item, .highlight-item, .about-visual, .contact-item, .person-card'
+  '.service-card, .why-card, .timeline-item, .highlight-item, .about-visual, .contact-item, .person-card, .case-card'
 );
 
 fadeEls.forEach(el => el.classList.add('fade-up'));
@@ -42,6 +42,158 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 fadeEls.forEach(el => revealObserver.observe(el));
+
+// ---------- Work slider ----------
+const casesSlider = document.getElementById('casesSlider');
+const casePrevButton = document.querySelector('[data-case-slider-prev]');
+const caseNextButton = document.querySelector('[data-case-slider-next]');
+const caseSliderShell = casesSlider ? casesSlider.closest('.cases-slider-shell') : null;
+
+if (casesSlider && casePrevButton && caseNextButton && caseSliderShell) {
+  let isCaseDragging = false;
+  let hasCaseDragged = false;
+  let caseDragPointerId = null;
+  let caseDragStartX = 0;
+  let caseDragStartScrollLeft = 0;
+
+  const getCaseStep = () => {
+    const firstCard = casesSlider.querySelector('.case-card');
+
+    if (!firstCard) {
+      return casesSlider.clientWidth * 0.85;
+    }
+
+    const sliderStyles = window.getComputedStyle(casesSlider);
+    const gap = parseFloat(sliderStyles.columnGap || sliderStyles.gap || '0');
+
+    return firstCard.getBoundingClientRect().width + gap;
+  };
+
+  const updateCaseSliderState = () => {
+    const maxScroll = Math.max(0, casesSlider.scrollWidth - casesSlider.clientWidth);
+    const scrollLeft = casesSlider.scrollLeft;
+    const atStart = scrollLeft <= 4;
+    const atEnd = scrollLeft >= maxScroll - 4;
+
+    casePrevButton.disabled = atStart;
+    caseNextButton.disabled = atEnd;
+    caseSliderShell.classList.toggle('is-at-start', atStart);
+    caseSliderShell.classList.toggle('is-at-end', atEnd);
+  };
+
+  const endCaseDrag = () => {
+    if (!isCaseDragging) {
+      return;
+    }
+
+    isCaseDragging = false;
+    caseDragPointerId = null;
+    casesSlider.classList.remove('is-dragging');
+  };
+
+  const scrollCaseSlider = (direction) => {
+    casesSlider.scrollBy({
+      left: direction * getCaseStep(),
+      behavior: 'smooth'
+    });
+  };
+
+  casePrevButton.addEventListener('click', () => scrollCaseSlider(-1));
+  caseNextButton.addEventListener('click', () => scrollCaseSlider(1));
+
+  casesSlider.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0 || event.pointerType === 'touch') {
+      return;
+    }
+
+    isCaseDragging = true;
+    hasCaseDragged = false;
+    caseDragPointerId = event.pointerId;
+    caseDragStartX = event.clientX;
+    caseDragStartScrollLeft = casesSlider.scrollLeft;
+    casesSlider.classList.add('is-dragging');
+    casesSlider.setPointerCapture(event.pointerId);
+  });
+
+  casesSlider.addEventListener('pointermove', (event) => {
+    if (!isCaseDragging || event.pointerId !== caseDragPointerId) {
+      return;
+    }
+
+    const deltaX = event.clientX - caseDragStartX;
+
+    if (Math.abs(deltaX) > 6) {
+      hasCaseDragged = true;
+    }
+
+    casesSlider.scrollLeft = caseDragStartScrollLeft - deltaX;
+    event.preventDefault();
+  });
+
+  casesSlider.addEventListener('pointerup', (event) => {
+    if (event.pointerId !== caseDragPointerId) {
+      return;
+    }
+
+    if (casesSlider.hasPointerCapture(event.pointerId)) {
+      casesSlider.releasePointerCapture(event.pointerId);
+    }
+
+    endCaseDrag();
+  });
+
+  casesSlider.addEventListener('pointercancel', endCaseDrag);
+  casesSlider.addEventListener('lostpointercapture', endCaseDrag);
+
+  casesSlider.addEventListener('click', (event) => {
+    if (!hasCaseDragged) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    hasCaseDragged = false;
+  }, true);
+
+  casesSlider.addEventListener('dragstart', (event) => {
+    event.preventDefault();
+  });
+
+  casesSlider.addEventListener('wheel', (event) => {
+    const mostlyVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+    const maxScroll = Math.max(0, casesSlider.scrollWidth - casesSlider.clientWidth);
+    const atStart = casesSlider.scrollLeft <= 1;
+    const atEnd = casesSlider.scrollLeft >= maxScroll - 1;
+
+    if (!mostlyVertical || maxScroll === 0) {
+      return;
+    }
+
+    if ((event.deltaY < 0 && atStart) || (event.deltaY > 0 && atEnd)) {
+      return;
+    }
+
+    event.preventDefault();
+    casesSlider.scrollBy({ left: event.deltaY, behavior: 'auto' });
+  }, { passive: false });
+
+  casesSlider.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      scrollCaseSlider(1);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      scrollCaseSlider(-1);
+    }
+  });
+
+  casesSlider.addEventListener('scroll', updateCaseSliderState, { passive: true });
+  window.addEventListener('resize', updateCaseSliderState);
+
+  updateCaseSliderState();
+}
 
 // ---------- High-speed data transmission canvas ----------
 (function () {
