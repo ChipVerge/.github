@@ -43,127 +43,139 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => revealObserver.observe(el));
 
-// ---------- Work slider ----------
-const casesSlider = document.getElementById('casesSlider');
-const casePrevButton = document.querySelector('[data-case-slider-prev]');
-const caseNextButton = document.querySelector('[data-case-slider-next]');
-const caseSliderShell = casesSlider ? casesSlider.closest('.cases-slider-shell') : null;
+// ---------- Horizontal sliders ----------
+function initHorizontalSlider({ slider, itemSelector, prevButton, nextButton }) {
+  const sliderShell = slider ? slider.closest('.slider-shell') : null;
 
-if (casesSlider && casePrevButton && caseNextButton && caseSliderShell) {
-  let isCaseDragging = false;
-  let hasCaseDragged = false;
-  let caseDragPointerId = null;
-  let caseDragStartX = 0;
-  let caseDragStartScrollLeft = 0;
+  if (!slider || !sliderShell) {
+    return;
+  }
 
-  const getCaseStep = () => {
-    const firstCard = casesSlider.querySelector('.case-card');
+  let isDragging = false;
+  let hasDragged = false;
+  let dragPointerId = null;
+  let dragStartX = 0;
+  let dragStartScrollLeft = 0;
+
+  const getStep = () => {
+    const firstCard = slider.querySelector(itemSelector);
 
     if (!firstCard) {
-      return casesSlider.clientWidth * 0.85;
+      return slider.clientWidth * 0.85;
     }
 
-    const sliderStyles = window.getComputedStyle(casesSlider);
+    const sliderStyles = window.getComputedStyle(slider);
     const gap = parseFloat(sliderStyles.columnGap || sliderStyles.gap || '0');
 
     return firstCard.getBoundingClientRect().width + gap;
   };
 
-  const updateCaseSliderState = () => {
-    const maxScroll = Math.max(0, casesSlider.scrollWidth - casesSlider.clientWidth);
-    const scrollLeft = casesSlider.scrollLeft;
+  const updateSliderState = () => {
+    const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+    const scrollLeft = slider.scrollLeft;
     const atStart = scrollLeft <= 4;
     const atEnd = scrollLeft >= maxScroll - 4;
 
-    casePrevButton.disabled = atStart;
-    caseNextButton.disabled = atEnd;
-    caseSliderShell.classList.toggle('is-at-start', atStart);
-    caseSliderShell.classList.toggle('is-at-end', atEnd);
+    if (prevButton) {
+      prevButton.disabled = atStart;
+    }
+
+    if (nextButton) {
+      nextButton.disabled = atEnd;
+    }
+
+    sliderShell.classList.toggle('is-at-start', atStart);
+    sliderShell.classList.toggle('is-at-end', atEnd);
   };
 
-  const endCaseDrag = () => {
-    if (!isCaseDragging) {
+  const endDrag = () => {
+    if (!isDragging) {
       return;
     }
 
-    isCaseDragging = false;
-    caseDragPointerId = null;
-    casesSlider.classList.remove('is-dragging');
+    isDragging = false;
+    dragPointerId = null;
+    slider.classList.remove('is-dragging');
   };
 
-  const scrollCaseSlider = (direction) => {
-    casesSlider.scrollBy({
-      left: direction * getCaseStep(),
+  const scrollSlider = (direction) => {
+    slider.scrollBy({
+      left: direction * getStep(),
       behavior: 'smooth'
     });
   };
 
-  casePrevButton.addEventListener('click', () => scrollCaseSlider(-1));
-  caseNextButton.addEventListener('click', () => scrollCaseSlider(1));
+  if (prevButton) {
+    prevButton.addEventListener('click', () => scrollSlider(-1));
+  }
 
-  casesSlider.addEventListener('pointerdown', (event) => {
+  if (nextButton) {
+    nextButton.addEventListener('click', () => scrollSlider(1));
+  }
+
+  slider.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || event.pointerType === 'touch') {
       return;
     }
 
-    isCaseDragging = true;
-    hasCaseDragged = false;
-    caseDragPointerId = event.pointerId;
-    caseDragStartX = event.clientX;
-    caseDragStartScrollLeft = casesSlider.scrollLeft;
-    casesSlider.classList.add('is-dragging');
-    casesSlider.setPointerCapture(event.pointerId);
+    isDragging = true;
+    hasDragged = false;
+    dragPointerId = event.pointerId;
+    dragStartX = event.clientX;
+    dragStartScrollLeft = slider.scrollLeft;
+    slider.classList.add('is-dragging');
+    slider.setPointerCapture(event.pointerId);
   });
 
-  casesSlider.addEventListener('pointermove', (event) => {
-    if (!isCaseDragging || event.pointerId !== caseDragPointerId) {
+  slider.addEventListener('pointermove', (event) => {
+    if (!isDragging || event.pointerId !== dragPointerId) {
       return;
     }
 
-    const deltaX = event.clientX - caseDragStartX;
+    const deltaX = event.clientX - dragStartX;
 
     if (Math.abs(deltaX) > 6) {
-      hasCaseDragged = true;
+      hasDragged = true;
     }
 
-    casesSlider.scrollLeft = caseDragStartScrollLeft - deltaX;
+    slider.scrollLeft = dragStartScrollLeft - deltaX;
     event.preventDefault();
   });
 
-  casesSlider.addEventListener('pointerup', (event) => {
-    if (event.pointerId !== caseDragPointerId) {
+  slider.addEventListener('pointerup', (event) => {
+    if (event.pointerId !== dragPointerId) {
       return;
     }
 
-    if (casesSlider.hasPointerCapture(event.pointerId)) {
-      casesSlider.releasePointerCapture(event.pointerId);
+    if (slider.hasPointerCapture(event.pointerId)) {
+      slider.releasePointerCapture(event.pointerId);
     }
 
-    endCaseDrag();
+    endDrag();
   });
 
-  casesSlider.addEventListener('pointercancel', endCaseDrag);
-  casesSlider.addEventListener('lostpointercapture', endCaseDrag);
+  slider.addEventListener('pointercancel', endDrag);
+  slider.addEventListener('lostpointercapture', endDrag);
 
-  casesSlider.addEventListener('click', (event) => {
-    if (!hasCaseDragged) {
+  slider.addEventListener('click', (event) => {
+    if (!hasDragged) {
       return;
     }
 
     event.preventDefault();
     event.stopPropagation();
-    hasCaseDragged = false;
+    hasDragged = false;
   }, true);
 
-  casesSlider.addEventListener('dragstart', (event) => {
+  slider.addEventListener('dragstart', (event) => {
     event.preventDefault();
   });
 
-  casesSlider.addEventListener('wheel', (event) => {
+  slider.addEventListener('wheel', (event) => {
     const mostlyVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
-    const maxScroll = Math.max(0, casesSlider.scrollWidth - casesSlider.clientWidth);
-    const atStart = casesSlider.scrollLeft <= 1;
-    const atEnd = casesSlider.scrollLeft >= maxScroll - 1;
+    const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+    const atStart = slider.scrollLeft <= 1;
+    const atEnd = slider.scrollLeft >= maxScroll - 1;
 
     if (!mostlyVertical || maxScroll === 0) {
       return;
@@ -174,26 +186,38 @@ if (casesSlider && casePrevButton && caseNextButton && caseSliderShell) {
     }
 
     event.preventDefault();
-    casesSlider.scrollBy({ left: event.deltaY, behavior: 'auto' });
+    slider.scrollBy({ left: event.deltaY, behavior: 'auto' });
   }, { passive: false });
 
-  casesSlider.addEventListener('keydown', (event) => {
+  slider.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      scrollCaseSlider(1);
+      scrollSlider(1);
     }
 
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      scrollCaseSlider(-1);
+      scrollSlider(-1);
     }
   });
 
-  casesSlider.addEventListener('scroll', updateCaseSliderState, { passive: true });
-  window.addEventListener('resize', updateCaseSliderState);
+  slider.addEventListener('scroll', updateSliderState, { passive: true });
+  window.addEventListener('resize', updateSliderState);
 
-  updateCaseSliderState();
+  updateSliderState();
 }
+
+initHorizontalSlider({
+  slider: document.getElementById('casesSlider'),
+  itemSelector: '.case-card',
+  prevButton: document.querySelector('[data-case-slider-prev]'),
+  nextButton: document.querySelector('[data-case-slider-next]')
+});
+
+initHorizontalSlider({
+  slider: document.getElementById('peopleSlider'),
+  itemSelector: '.person-card'
+});
 
 // ---------- High-speed data transmission canvas ----------
 (function () {
