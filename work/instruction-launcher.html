@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case Study — Hazard-Aware Instruction Launcher. A decoded-instruction launch queue with register lock checking, memory serialization, and fixed-priority arbitration for execution dispatch." />
+  <title>Instruction Launcher | Squared Studio</title>
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .launch-hero-visual {
+      position: relative;
+      margin-top: 34px;
+      padding: 26px;
+      background:
+        radial-gradient(circle at top right, rgba(0,255,204,0.09), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(0,204,255,0.10), transparent 30%),
+        var(--bg-3);
+      border: 1px solid rgba(0,204,255,0.18);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.36), 0 0 30px rgba(0,204,255,0.10);
+    }
+
+    .launch-hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,204,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,204,255,0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.96), transparent 96%);
+      pointer-events: none;
+    }
+
+    .launch-hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.05) 50%, transparent 80%);
+      transform: translateX(-110%);
+      animation: launchSweep 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes launchSweep {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(130%); }
+    }
+
+    @keyframes pulseFlow {
+      0% { transform: translateX(-10px); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateX(160px); opacity: 0; }
+    }
+
+    @keyframes slotGlow {
+      0%, 100% { box-shadow: inset 0 0 0 1px rgba(0,204,255,0.08); }
+      50% { box-shadow: inset 0 0 0 1px rgba(0,255,204,0.22), 0 0 20px rgba(0,255,204,0.08); }
+    }
+
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .launch-ribbon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .launch-ribbon span,
+    .launch-chip,
+    .ops-pill,
+    .queue-label {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+    }
+
+    .launch-ribbon span,
+    .launch-chip,
+    .ops-pill {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(0,204,255,0.08);
+      border: 1px solid rgba(0,204,255,0.18);
+      color: var(--text);
+    }
+
+    .launch-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 220px 1fr 260px;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .launch-card,
+    .launch-right,
+    .stat-chip,
+    .rtl-panel,
+    .note-card,
+    .verification-callout {
+      background: rgba(2,8,12,0.88);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .launch-card,
+    .launch-right {
+      padding: 20px;
+    }
+
+    .launch-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      animation: badgeFloat 6s ease-in-out infinite;
+    }
+
+    .launch-card h3,
+    .launch-right h3,
+    .note-card h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .launch-card p,
+    .launch-right p,
+    .note-card p,
+    .rtl-panel p,
+    .verification-callout p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .queue-core {
+      position: relative;
+      padding: 18px 22px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(0,204,255,0.12);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .queue-core::before,
+    .queue-core::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,204,255,0.10), rgba(0,255,204,0.55), rgba(0,204,255,0.10));
+      transform: translateY(-50%);
+    }
+
+    .queue-core::before {
+      left: -62px;
+    }
+
+    .queue-core::after {
+      right: -62px;
+    }
+
+    .queue-core .flow-dot,
+    .grant-rail .flow-dot {
+      position: absolute;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,204,1) 0%, rgba(0,255,204,0.12) 50%, rgba(0,255,204,0) 75%);
+      box-shadow: 0 0 16px rgba(0,255,204,0.45);
+    }
+
+    .queue-core .flow-dot {
+      left: -18px;
+      animation: pulseFlow 3.2s linear infinite;
+    }
+
+    .queue-core .flow-dot.delay {
+      animation-delay: 1.4s;
+    }
+
+    .queue-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .queue-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .queue-label {
+      color: var(--accent-2);
+      text-transform: uppercase;
+    }
+
+    .slot-stack {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .queue-slot {
+      position: relative;
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.22);
+      border-radius: 14px;
+      min-height: 72px;
+      animation: slotGlow 4.8s ease-in-out infinite;
+    }
+
+    .queue-slot:nth-child(2) { animation-delay: 0.4s; }
+    .queue-slot:nth-child(3) { animation-delay: 0.8s; }
+    .queue-slot:nth-child(4) { animation-delay: 1.2s; }
+    .queue-slot:nth-child(5) { animation-delay: 1.6s; }
+    .queue-slot:nth-child(6) { animation-delay: 2s; }
+    .queue-slot:nth-child(7) { animation-delay: 2.4s; }
+    .queue-slot:nth-child(8) { animation-delay: 2.8s; }
+
+    .queue-slot strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--accent-2);
+      letter-spacing: 0.05em;
+    }
+
+    .queue-slot span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .launch-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .grant-rail {
+      position: relative;
+      height: 2px;
+      margin: 8px 0;
+      background: linear-gradient(90deg, rgba(0,204,255,0.08), rgba(0,255,204,0.52), rgba(0,204,255,0.08));
+      overflow: hidden;
+    }
+
+    .grant-rail .flow-dot {
+      left: -10px;
+      animation: pulseFlow 2.6s linear infinite;
+    }
+
+    .grant-rail .flow-dot.delay {
+      animation-delay: 1.1s;
+    }
+
+    .launch-chips,
+    .ops-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stat-rack,
+    .rtl-grid,
+    .note-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .stat-rack {
+      position: relative;
+      z-index: 1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat-chip,
+    .rtl-panel,
+    .note-card,
+    .verification-callout {
+      padding: 18px;
+    }
+
+    .stat-chip strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent-2);
+      font-family: var(--mono);
+      font-size: 1.18rem;
+      font-weight: 600;
+    }
+
+    .stat-chip span {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .rtl-grid,
+    .note-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .rtl-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rtl-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,204,255,0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .rtl-panel:hover::before {
+      opacity: 1;
+    }
+
+    .rtl-label,
+    .verification-callout strong,
+    .note-card h3 {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .rtl-label,
+    .verification-callout strong {
+      color: var(--accent-2);
+    }
+
+    .rtl-panel pre {
+      margin: 12px 0 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: #c9f5ff;
+    }
+
+    .verification-callout {
+      margin-top: 18px;
+      background: rgba(0,0,0,0.26);
+    }
+
+    .verification-callout strong {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .launch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .queue-core::before,
+      .queue-core::after {
+        display: none;
+      }
+
+      .stat-rack {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .slot-stack {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+        <span class="logo-text">Squared Studio</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#services">Services</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#people">People</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location='../index.html#contact'">Get in Touch</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="../index.html#work">Work</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Instruction Launcher</span>
+      </div>
+      <div class="case-hero-num">01</div>
+      <div class="case-meta">
+        <span class="tech-tag">SystemVerilog</span>
+        <span class="tech-tag">Scheduling</span>
+        <span class="tech-tag">Hazard Control</span>
+      </div>
+      <h1 class="page-title">Hazard-Aware<br /><span class="gradient-text">Instruction Launcher</span></h1>
+      <p class="page-description">
+        A decoded-instruction launch queue that keeps execution fed while screening register hazards,
+        serializing memory traffic when required, and arbitrating eligible instructions through a clean ready-valid interface.
+      </p>
+
+      <div class="launch-hero-visual fade-up">
+        <div class="launch-ribbon">
+          <span>Decoded instruction intake</span>
+          <span>8-slot default window</span>
+          <span>Register lock aware</span>
+          <span>Memory hazard aware</span>
+        </div>
+
+        <div class="launch-grid">
+          <article class="launch-card">
+            <h3>Ingress</h3>
+            <p>
+              Incoming decoded instructions enter on a single ready-valid boundary and are immediately staged
+              into a launch buffer instead of being forced to execute in strict arrival order.
+            </p>
+            <div class="launch-chips">
+              <span class="launch-chip">instr_in_valid</span>
+              <span class="launch-chip">instr_in_ready</span>
+            </div>
+          </article>
+
+          <div class="queue-core">
+            <span class="flow-dot"></span>
+            <span class="flow-dot delay"></span>
+            <div class="queue-header">
+              <h3>Outstanding launch window</h3>
+              <span class="queue-label">NUM_OUTSTANDING + 1</span>
+            </div>
+            <div class="slot-stack">
+              <div class="queue-slot"><strong>Slot 0</strong><span>Newest staged instruction enters here.</span></div>
+              <div class="queue-slot"><strong>Slot 1</strong><span>Secondary path keeps the queue packed.</span></div>
+              <div class="queue-slot"><strong>Slot 2</strong><span>Eligibility depends on reg_req against propagated locks.</span></div>
+              <div class="queue-slot"><strong>Slot 3</strong><span>Blocking instructions can stop younger work from leaking past.</span></div>
+              <div class="queue-slot"><strong>Slot 4</strong><span>Memory ops also consult a propagated mem_busy condition.</span></div>
+              <div class="queue-slot"><strong>Slot 5</strong><span>Each resident instruction gets its own hazard check.</span></div>
+              <div class="queue-slot"><strong>Slot 6</strong><span>Requests are reduced to one arbitration vector.</span></div>
+              <div class="queue-slot"><strong>Slot 7</strong><span>The oldest resident candidate can still launch if eligible.</span></div>
+            </div>
+          </div>
+
+          <aside class="launch-right">
+            <h3>Eligibility and grant</h3>
+            <p>
+              Every slot feeds a register-grant checker. Eligible requests move into a fixed-priority arbiter,
+              an encoder selects the granted slot index, and only that instruction is presented on the launch port.
+            </p>
+            <div class="grant-rail">
+              <span class="flow-dot"></span>
+              <span class="flow-dot delay"></span>
+            </div>
+            <div class="launch-chips">
+              <span class="launch-chip">reg_gnt_ckr</span>
+              <span class="launch-chip">fixed_priority_arbiter</span>
+              <span class="launch-chip">encoder</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="stat-rack">
+          <div class="stat-chip">
+            <strong>8 slots</strong>
+            <span>The default build exposes an eight-entry launch window because NUM_OUTSTANDING is seven and the queue arrays span 0 through NOS.</span>
+          </div>
+          <div class="stat-chip">
+            <strong>64 lock bits</strong>
+            <span>Hazard checking scales across the full integer and floating-point register namespace through a propagated lock vector.</span>
+          </div>
+          <div class="stat-chip">
+            <strong>1 launch port</strong>
+            <span>All eligible slots collapse to one selected decoded instruction and one valid signal at the execution boundary.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CASE CONTENT ====== -->
+  <section class="case-section section">
+    <div class="container">
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">Design Highlights</div>
+        <div class="case-highlights">
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">Ready / Valid</div>
+            <div class="case-highlight-label">Clean backpressure at both intake and launch interfaces</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">Reg + Mem</div>
+            <div class="case-highlight-label">Hazard screening covers register lock conflicts and serialized memory behavior</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">Fixed Priority</div>
+            <div class="case-highlight-label">Eligible requests are arbitrated deterministically and encoded to a single launch index</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">The Challenge</div>
+        <h2>Keep the Execution Units Busy Without Launching the Wrong Instruction</h2>
+        <p>
+          A frontend pipeline can decode instructions faster than the backend can safely consume them. The hard part is not
+          simply buffering decoded work. The hard part is deciding when each instruction is actually safe to issue, especially
+          when destination registers are already locked, blocking instructions must fence younger work, or memory operations
+          need ordering pressure that pure register scoreboarding would miss.
+        </p>
+        <p>
+          This launcher solves that control problem as a standalone RTL block. It holds multiple decoded instructions in flight,
+          re-checks them against live lock information, derives request eligibility per slot, and only exposes one chosen launch
+          candidate when the downstream execution stage is ready.
+        </p>
+      </div>
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">Architecture</div>
+        <h2>Queue First, Check Every Slot, Then Arbitrate</h2>
+        <p>
+          The implementation uses a split-pipeline structure rather than a monolithic FIFO plus sideband scoreboard. That keeps
+          the storage, hazard evaluation, and launch arbitration all expressed in regular, synthesizable stages.
+        </p>
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-num">01</span>
+            <p><strong>Instruction staging.</strong> The incoming decoded instruction is attached to <strong>pl_ins[0]</strong> and then fanned through a chain of <strong>pipeline_split</strong> stages, creating a resident launch window instead of a single-cycle pass-through path.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">02</span>
+            <p><strong>Hazard propagation.</strong> A <strong>reg_gnt_ckr</strong> instance is attached to every resident slot. It examines <strong>reg_req</strong>, <strong>rd</strong>, <strong>blocking</strong>, and <strong>mem_op</strong> against propagated <strong>locks</strong> and <strong>mem_busy</strong> state, then emits that slot's launch request.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">03</span>
+            <p><strong>Launch arbitration.</strong> All slot requests feed a fixed-priority arbiter, gated by <strong>instr_out_ready_i</strong>. An encoder translates the one-hot grant into <strong>gnt_idx</strong>, which directly selects the outgoing decoded instruction.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">04</span>
+            <p><strong>Flush and drain behavior.</strong> A synchronous <strong>clear_i</strong> path exists to reset the resident queue state, while the clear chain also ensures launch activity removes the selected instruction instead of collapsing the whole window.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">05</span>
+            <p><strong>Downstream contract.</strong> The module emits exactly one <strong>decoded_instr_t</strong> plus a valid bit, making it easy to sit between decode and execution without forcing the backend to understand the entire queue state.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">RTL In Focus</div>
+        <h2>The Source Exposes the Scheduling Strategy Directly</h2>
+        <p>
+          The interesting part of this design is that the launch policy is not buried in opaque control logic. The queue topology,
+          the per-slot checks, and the arbitration path are all easy to point to in the RTL.
+        </p>
+
+        <div class="rtl-grid">
+          <div class="rtl-panel">
+            <div class="rtl-label">Queue Topology</div>
+            <pre>assign pl_ins[0]        = instr_in_i;
+assign pl_ins_valid[0]  = instr_in_valid_i;
+assign instr_in_ready_o = pl_ins_ready[0];
+
+for (genvar i = 0; i &lt; NOS; i++) begin : g_splits
+  pipeline_split #( .DW($bits(instr_in_i)) ) u_pipeline_split (...);
+end</pre>
+            <p>The instruction enters a staged launch window rather than an unstructured holding register.</p>
+          </div>
+
+          <div class="rtl-panel">
+            <div class="rtl-label">Hazard Checking</div>
+            <pre>reg_gnt_ckr #() u_reg_gnt_ckr (
+  .pl_valid_i(pl_outs_valid[i]),
+  .blocking_i(pl_outs[i].blocking),
+  .rd_i(pl_outs[i].rd),
+  .reg_req_i(pl_outs[i].reg_req),
+  .locks_i(locks[i]),
+  .mem_busy_i(mem_busy[i]),
+  .arb_req_o(arb_req[i])
+);</pre>
+            <p>Every resident slot gets its own eligibility decision based on the decoded dependency footprint.</p>
+          </div>
+
+          <div class="rtl-panel">
+            <div class="rtl-label">Launch Selection</div>
+            <pre>fixed_priority_arbiter #( .NUM_REQ(NOS + 1) ) u_fixed_priority_arbiter (...);
+encoder #( .NUM_WIRE(NOS + 1) ) u_encoder (
+  .wire_in(arb_gnt),
+  .index_o(gnt_idx),
+  .index_valid_o(instr_out_valid_o)
+);
+
+assign instr_out_o = pl_outs[gnt_idx];</pre>
+            <p>Grant generation and slot selection are separated cleanly, which keeps the output path explicit and debuggable.</p>
+          </div>
+        </div>
+
+        <div class="note-grid">
+          <div class="note-card">
+            <h3>Blocking Semantics</h3>
+            <p>
+              The design treats blocking instructions as more than ordinary dependency checks. Their presence can suppress younger
+              work from launching past them, which is essential for correctness around serialized operations.
+            </p>
+          </div>
+          <div class="note-card">
+            <h3>Memory Awareness</h3>
+            <p>
+              The propagated <strong>mem_busy</strong> chain means the launcher does not rely on register hazards alone. Memory operations can also influence whether younger residents are eligible to issue.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">Validation</div>
+        <h2>Stress-Tested Against a Behavioral Launch Model</h2>
+        <p>
+          The accompanying testbench does more than toggle handshakes. It builds a software-style model of the resident pipeline,
+          randomizes lock profiles, incoming decoded instructions, downstream readiness, and blocking or memory attributes, then
+          compares the expected launched instruction against the RTL output.
+        </p>
+
+        <div class="ops-strip">
+          <span class="ops-pill">random lock vectors</span>
+          <span class="ops-pill">blocking instruction cases</span>
+          <span class="ops-pill">memory busy interactions</span>
+          <span class="ops-pill">backpressure at launch</span>
+        </div>
+
+        <div class="verification-callout">
+          <strong>Testbench Detail</strong>
+          <p>
+            Reset behavior is checked explicitly, the driver randomizes valid and ready conditions at runtime, and the monitor runs
+            until either the expected launch comparisons complete cleanly or a fatal timeout trips after 150001 clock edges.
+          </p>
+        </div>
+      </div>
+
+      <div class="case-block fade-up">
+        <div class="case-block-label">The Outcome</div>
+        <h2>A Focused Dispatch Block for Real Backend Pressure</h2>
+        <p>
+          This design turns instruction launch into a well-bounded RTL problem: store several decoded operations, evaluate their
+          hazard state continuously, and dispatch exactly one correct candidate when the backend is ready. The structure stays
+          regular, the interface remains simple, and the launch policy is visible in the source instead of being hidden in a large
+          hand-written controller.
+        </p>
+        <p>
+          That makes the block useful anywhere a decode stage needs a disciplined handoff into execution without giving up throughput
+          or correctness under scoreboard pressure.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="page-cta">
+    <div class="container">
+      <div class="page-cta-box">
+        <div class="section-label" style="text-align:center">Next Steps</div>
+        <h2>Need Better <span class="gradient-text">Issue Control?</span></h2>
+        <p>If your decode-to-execute boundary is turning into a hazard patchwork, we can help restructure the launch logic before it becomes a pipeline bottleneck.</p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="../index.html#work" class="btn btn-outline">All Case Studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+          <span class="logo-text">Squared Studio</span>
+        </a>
+        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#work">Our Work</a>
+          <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="../services/asic-design.html">ASIC Design</a>
+          <a href="../services/verification.html">Verification</a>
+          <a href="../services/engineering-consulting.html">Consulting</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/squared-studio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:foez.official@gmail.com">Email Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../page-script.js"></script>
+</body>
+</html>

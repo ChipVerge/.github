@@ -484,42 +484,29 @@
       <div class="cases-grid">
 
         <div class="case-card">
+          <div class="case-num">02</div>
+          <div class="case-tech">
+            <span class="tech-tag">SystemVerilog</span>
+            <span class="tech-tag">RISC-V</span>
+            <span class="tech-tag">Microarchitecture</span>
+          </div>
+          <h3>High-Speed 64-bit Multiplier Architecture</h3>
+          <p class="case-challenge"><span class="case-role">Challenge —</span> The multiplier was the timing-sensitive arithmetic block in a 64-bit pipeline, and simpler iterative or radix-4 style options would have left too much reduction depth and routing pressure.</p>
+          <p class="case-outcome"><span class="case-role">Outcome —</span> Built a three-stage datapath with odd-multiple precomputation, nibble-wide crossbar selection, and hierarchical accumulation, while cleanly supporting MUL, MULH, MULHSU, MULHU, and MULW.</p>
+          <a href="work/high-speed-64-bit-multiplier.html" class="case-read-more">Read More →</a>
+        </div>
+
+        <div class="case-card">
           <div class="case-num">01</div>
           <div class="case-tech">
             <span class="tech-tag">SystemVerilog</span>
-            <span class="tech-tag">UVM</span>
-            <span class="tech-tag">Functional Coverage</span>
+            <span class="tech-tag">Scheduling</span>
+            <span class="tech-tag">Hazard Control</span>
           </div>
-          <h3>AXI4-Lite Protocol IP Verification</h3>
-          <p class="case-challenge"><span class="case-role">Challenge —</span> An existing directed testbench had reached only 40% functional coverage; tapeout was weeks away and silicon risk was unacceptable.</p>
-          <p class="case-outcome"><span class="case-role">Outcome —</span> Built a full UVM environment with constrained-random stimulus, protocol-aware scoreboards, and coverage-driven closure. Functional and toggle coverage exceeded 98% across all corner modes before sign-off.</p>
-          <a href="work/axi4-lite-verification.html" class="case-read-more">Read More →</a>
-        </div>
-
-        <div class="case-card">
-          <div class="case-num">02</div>
-          <div class="case-tech">
-            <span class="tech-tag">RTL Design</span>
-            <span class="tech-tag">CDC Analysis</span>
-            <span class="tech-tag">Synthesis</span>
-          </div>
-          <h3>Multi-Clock Domain FIFO Controller</h3>
-          <p class="case-challenge"><span class="case-role">Challenge —</span> Client needed a parameterized, CDC-safe asynchronous FIFO for a high-speed memory interface — production-ready with zero lint violations and formal CDC sign-off.</p>
-          <p class="case-outcome"><span class="case-role">Outcome —</span> Delivered lint-clean RTL with formal CDC closure, synthesis-validated at target frequency, and complete documentation within a two-week engagement.</p>
-          <a href="work/fifo-controller.html" class="case-read-more">Read More →</a>
-        </div>
-
-        <div class="case-card">
-          <div class="case-num">03</div>
-          <div class="case-tech">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">EDA Automation</span>
-            <span class="tech-tag">Regression</span>
-          </div>
-          <h3>Automated Regression &amp; Coverage Framework</h3>
-          <p class="case-challenge"><span class="case-role">Challenge —</span> Manual simulation regressions consumed 4+ hours per engineer daily across a 6-person team — blocking iteration speed and burying coverage reports.</p>
-          <p class="case-outcome"><span class="case-role">Outcome —</span> Designed a Python-based regression orchestrator with parallel dispatch, automatic coverage merging, and HTML dashboards — cutting daily overhead to under 20 minutes.</p>
-          <a href="work/automated-regression-framework.html" class="case-read-more">Read More →</a>
+          <h3>Hazard-Aware Instruction Launcher</h3>
+          <p class="case-challenge"><span class="case-role">Challenge —</span> A decode stage needed to keep execution supplied without launching instructions into register conflicts, blocking fences, or memory-order hazards.</p>
+          <p class="case-outcome"><span class="case-role">Outcome —</span> Built a queued launch block with per-slot hazard screening, propagated lock and memory state, and fixed-priority arbitration to emit one eligible instruction at a time.</p>
+          <a href="work/instruction-launcher.html" class="case-read-more">Read More →</a>
         </div>
 
       </div>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case Study — High-Speed 64-bit Multiplier Architecture. A three-stage datapath using odd-multiple precomputation, nibble selection, and hierarchical accumulation for RV64 multiply operations." />
+  <title>High-Speed 64-bit Multiplier | Squared Studio</title>
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .mult-hero-visual {
+      position: relative;
+      margin-top: 34px;
+      padding: 26px;
+      background:
+        radial-gradient(circle at top left, rgba(0,255,204,0.10), transparent 38%),
+        linear-gradient(180deg, rgba(0,204,255,0.08), rgba(0,0,0,0)),
+        var(--bg-3);
+      border: 1px solid rgba(0,204,255,0.18);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.34), 0 0 30px rgba(0,204,255,0.10);
+    }
+
+    .mult-hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,204,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,204,255,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.95), transparent 95%);
+      pointer-events: none;
+    }
+
+    .mult-hero-visual::after {
+      content: '';
+      position: absolute;
+      top: -120%;
+      left: -25%;
+      width: 55%;
+      height: 320%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transform: rotate(14deg);
+      animation: panelSweep 7s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes panelSweep {
+      from { transform: translateX(0) rotate(14deg); }
+      to { transform: translateX(260%) rotate(14deg); }
+    }
+
+    @keyframes stageFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes dataFlow {
+      0% { left: -12%; opacity: 0; }
+      12% { opacity: 1; }
+      100% { left: 104%; opacity: 0; }
+    }
+
+    @keyframes dataFlowVertical {
+      0% { top: -10%; opacity: 0; }
+      12% { opacity: 1; }
+      100% { top: 112%; opacity: 0; }
+    }
+
+    .pipeline-ribbon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .pipeline-ribbon span,
+    .stage-spec span,
+    .op-pill {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+    }
+
+    .pipeline-ribbon span {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(0,204,255,0.08);
+      border: 1px solid rgba(0,204,255,0.18);
+      color: var(--text);
+    }
+
+    .pipeline-visual {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 72px 1fr 72px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .pipeline-stage-card {
+      min-height: 172px;
+      padding: 22px;
+      background: rgba(2,8,12,0.90);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+      animation: stageFloat 6s ease-in-out infinite;
+    }
+
+    .pipeline-stage-card.stage-b { animation-delay: 0.6s; }
+    .pipeline-stage-card.stage-c { animation-delay: 1.2s; }
+
+    .stage-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0,255,204,0.10);
+      border: 1px solid rgba(0,255,204,0.22);
+      color: var(--accent-2);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pipeline-stage-card h3 {
+      margin: 14px 0 10px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .pipeline-stage-card p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .stage-spec {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .stage-spec span,
+    .op-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,204,255,0.06);
+      border: 1px solid rgba(0,204,255,0.16);
+      color: var(--text);
+    }
+
+    .signal-track {
+      position: relative;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,204,255,0.08), rgba(0,255,204,0.50), rgba(0,204,255,0.08));
+      overflow: hidden;
+    }
+
+    .signal-track::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -12%;
+      width: 16px;
+      height: 16px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,204,1) 0%, rgba(0,255,204,0.10) 48%, rgba(0,255,204,0) 72%);
+      box-shadow: 0 0 18px rgba(0,255,204,0.52);
+      animation: dataFlow 3.2s linear infinite;
+    }
+
+    .stat-rack {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat-chip,
+    .note-card,
+    .verification-callout,
+    .rtl-panel {
+      background: rgba(0,0,0,0.26);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .stat-chip {
+      padding: 16px 18px;
+    }
+
+    .stat-chip strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent-2);
+      font-family: var(--mono);
+      font-size: 1.18rem;
+      font-weight: 600;
+    }
+
+    .stat-chip span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .rtl-grid,
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .rtl-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .rtl-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,204,255,0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .rtl-panel:hover::before {
+      opacity: 1;
+    }
+
+    .rtl-label,
+    .verification-callout strong,
+    .note-card h3 {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .rtl-label,
+    .verification-callout strong {
+      color: var(--accent-2);
+    }
+
+    .rtl-panel pre {
+      margin: 12px 0 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: #c9f5ff;
+    }
+
+    .rtl-panel p,
+    .note-card p,
+    .verification-callout p {
+      margin: 12px 0 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .note-card {
+      padding: 18px;
+    }
+
+    .note-card h3 {
+      color: var(--text);
+    }
+
+    .ops-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .verification-callout {
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .verification-callout strong {
+      display: block;
+    }
+
+    @media (max-width: 960px) {
+      .pipeline-visual {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-track {
+        width: 2px;
+        height: 42px;
+        margin: 0 auto;
+        background: linear-gradient(180deg, rgba(0,204,255,0.08), rgba(0,255,204,0.50), rgba(0,204,255,0.08));
+      }
+
+      .signal-track::after {
+        top: -10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: dataFlowVertical 3.2s linear infinite;
+      }
+
+      .stat-rack {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+        <span class="logo-text">Squared Studio</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#services">Services</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#people">People</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location='../index.html#contact'">Get in Touch</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="../index.html#work">Work</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>High-Speed Multiplier</span>
+      </div>
+      <div class="case-hero-num">02</div>
+      <div class="case-meta">
+        <span class="tech-tag">SystemVerilog</span>
+        <span class="tech-tag">RISC-V</span>
+        <span class="tech-tag">Microarchitecture</span>
+      </div>
+      <h1 class="page-title">High-Speed 64-bit<br /><span class="gradient-text">Multiplier Architecture</span></h1>
+      <p class="page-description">
+        A three-stage integer multiplier that combines odd-multiple precomputation, nibble-wide crossbar
+        selection, and hierarchical accumulation to keep throughput high without dragging down clock speed.
+      </p>
+
+      <div class="mult-hero-visual fade-up">
+        <div class="pipeline-ribbon">
+          <span>64-bit datapath</span>
+          <span>Odd-multiple bank</span>
+          <span>Nibble crossbar</span>
+          <span>128-bit product</span>
+        </div>
+
+        <div class="pipeline-visual">
+          <article class="pipeline-stage-card stage-a">
+            <span class="stage-index">Stage 1</span>
+            <h3>Precompute the odd coefficients once</h3>
+            <p>
+              The front end normalizes signed and word operations, then builds 1x, 3x, 5x, 7x, 9x, 11x, 13x,
+              and 15x from the multiplicand using shift-add logic.
+            </p>
+            <div class="stage-spec">
+              <span>68-bit bank</span>
+              <span>sign tracked</span>
+            </div>
+          </article>
+
+          <div class="signal-track"></div>
+
+          <article class="pipeline-stage-card stage-b">
+            <span class="stage-index">Stage 2</span>
+            <h3>Select one multiple per nibble</h3>
+            <p>
+              A 16-way crossbar expands the full 0x to 15x set and routes the right value for each 4-bit slice
+              of the multiplier before folding nearby rows into local sums.
+            </p>
+            <div class="stage-spec">
+              <span>16 nibble selects</span>
+              <span>4 local sums</span>
+            </div>
+          </article>
+
+          <div class="signal-track"></div>
+
+          <article class="pipeline-stage-card stage-c">
+            <span class="stage-index">Stage 3</span>
+            <h3>Finish with a controlled final reduction</h3>
+            <p>
+              The datapath widens to 128 bits only at the end, restores sign when needed, and chooses the high
+              or low half required by the active RV64 multiply instruction.
+            </p>
+            <div class="stage-spec">
+              <span>128-bit sum</span>
+              <span>high or low result</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="stat-rack">
+          <div class="stat-chip">
+            <strong>16</strong>
+            <span>Nibble-driven multiple selections instead of a deeper bit-level partial-product field.</span>
+          </div>
+          <div class="stat-chip">
+            <strong>68b -> 80b -> 128b</strong>
+            <span>Bit growth happens only where the accumulation depth actually demands it.</span>
+          </div>
+          <div class="stat-chip">
+            <strong>5 ops</strong>
+            <span>MUL, MULH, MULHSU, MULHU, and MULW all share the same pipeline.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CASE CONTENT ====== -->
+  <section class="case-section section">
+    <div class="container">
+
+      <!-- Key Results -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">Key Results</div>
+        <div class="case-highlights">
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">16</div>
+            <div class="case-highlight-label">Nibble-selected multiples drive the partial-product generation path</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">3 stages</div>
+            <div class="case-highlight-label">Balanced pipeline from operand conditioning to final writeback result</div>
+          </div>
+          <div class="case-highlight-item">
+            <div class="case-highlight-value">RV64 M</div>
+            <div class="case-highlight-label">Signed, unsigned, high-half, and word operations handled in one datapath</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenge -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">The Challenge</div>
+        <h2>Multipliers Usually Become the Clock-Limiting Block</h2>
+        <p>
+          In a 64-bit execution pipeline, the multiplier is often the longest combinational path in the room.
+          Iterative designs protect area but cost throughput. More conventional radix-4 style approaches reduce
+          the work, but they still leave a relatively large reduction network and plenty of routing pressure.
+        </p>
+        <p>
+          The target here was different: keep the datapath regular, preserve high throughput, and support the full
+          set of RV64 multiply result formats without collapsing timing around a monolithic final adder. The design
+          therefore pushes work into deliberate stages: precompute only the hard odd coefficients, select directly
+          by nibble, then reduce locally before the final 128-bit collapse.
+        </p>
+      </div>
+
+      <!-- Approach -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">Architecture</div>
+        <h2>Odd Multiples First, Local Sums Before Global Sums</h2>
+        <p>
+          The final RTL behaves like a radix-16 multiplier, but the implementation leans on direct multiple selection
+          rather than recoding-heavy control logic. The result is a more regular structure that maps cleanly to a
+          pipelined execution stage.
+        </p>
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-num">01</span>
+            <p><strong>Operand conditioning.</strong> The front end derives <strong>negative</strong>, <strong>upper</strong>, and <strong>word</strong> control, converts signed cases into magnitude form where required, and sign-extends 32-bit inputs for <strong>MULW</strong>.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">02</span>
+            <p><strong>Odd-multiple precomputation.</strong> Stage 1 generates 1x, 3x, 5x, 7x, 9x, 11x, 13x, and 15x. Even multiples are not separately built here; they are derived later as shifts of the stored odd values.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">03</span>
+            <p><strong>Nibble-wide crossbar selection.</strong> Stage 2 expands the full 0x to 15x set and uses each 4-bit multiplier nibble as a direct select into a 16-output crossbar. One nibble, one chosen multiple, one fixed 4-bit alignment step.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">04</span>
+            <p><strong>Local accumulation.</strong> The selected rows are not thrown into one huge adder at once. Instead, four neighboring groups are collapsed into four 80-bit intermediate sums, which keeps routing more local and reduces middle-stage sprawl.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-num">05</span>
+            <p><strong>Final reduction and result shaping.</strong> Stage 3 widens to 128 bits, restores sign if needed, selects either the upper or lower half of the product, and tags the writeback as word or doubleword.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RTL Focus -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">RTL In Focus</div>
+        <h2>The Source Matches the Story</h2>
+        <p>
+          The implementation is explicit about its stage boundaries and arithmetic structure. The control bits move
+          through <strong>q0</strong>, <strong>q1</strong>, and <strong>q2</strong> alongside the datapath, and the code exposes exactly where the odd-multiple bank,
+          crossbar expansion, and final accumulation happen.
+        </p>
+
+        <div class="rtl-grid">
+          <div class="rtl-panel">
+            <div class="rtl-label">Stage 1</div>
+            <pre>always_comb res_0001 = multiplicand;
+always_comb res_0011 = {res_0001, 1'b0} + res_0001;
+always_comb res_0101 = {res_0001, 2'b0} + res_0001;
+always_comb res_0111 = {res_0001, 2'b0} + res_0011;</pre>
+            <p>The hard work starts by generating only the odd coefficients that are expensive to recover later.</p>
+          </div>
+
+          <div class="rtl-panel">
+            <div class="rtl-label">Stage 2</div>
+            <pre>always_comb ext68_res['b1010] = {res_0101_q0, 1'b0};
+xbar #(.NUM_INPUT(16), .NUM_OUTPUT(16), .DATA_WIDTH(68)) u_xbar (...);
+res80[i] = {ext80[4*i+3], 12'b0} + {ext80[4*i+2], 8'b0} +
+           {ext80[4*i+1], 4'b0} + ext80[4*i];</pre>
+            <p>The middle stage reconstructs the full 16-entry set, performs nibble-based selection, then compresses four adjacent results at a time.</p>
+          </div>
+
+          <div class="rtl-panel">
+            <div class="rtl-label">Stage 3</div>
+            <pre>always_comb final_sum =
+  {res128[3], 48'b0} + {res128[2], 32'b0} +
+  {res128[1], 16'b0} + res128[0];
+always_comb semi_final_res = negative_q1 ? ~final_sum + 1 : final_sum;
+always_comb final_res = upper_q1 ? semi_final_res[127:64] : semi_final_res[63:0];</pre>
+            <p>The final stage stays simple because most of the entropy was already squeezed out in the local accumulation step.</p>
+          </div>
+        </div>
+
+        <div class="note-grid">
+          <div class="note-card">
+            <h3>Nibble Decomposition</h3>
+            <p>
+              The 64-bit multiplier operand is consumed as sixteen 4-bit selects. That gives radix-16 style behavior
+              with direct mux selection instead of a signed Booth recoder.
+            </p>
+          </div>
+          <div class="note-card">
+            <h3>Routing Discipline</h3>
+            <p>
+              Four local sums absorb nearby nibble contributions before the last adder ever sees them, which helps
+              contain long wires and keeps the stage split physically sane.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">Integration</div>
+        <h2>Built for RV64 Multiply Semantics, Not Just a Standalone Demo</h2>
+        <p>
+          The block is wired around real execution-stage needs. Signedness handling happens before the multiply bank,
+          <strong>upper</strong> selects high-half variants, <strong>word</strong> controls 32-bit result shaping, and the writeback side emits the
+          corresponding size metadata for the downstream pipeline.
+        </p>
+
+        <div class="ops-strip">
+          <span class="op-pill">MUL</span>
+          <span class="op-pill">MULH</span>
+          <span class="op-pill">MULHSU</span>
+          <span class="op-pill">MULHU</span>
+          <span class="op-pill">MULW</span>
+        </div>
+
+        <div class="verification-callout">
+          <strong>Validation Detail</strong>
+          <p>
+            The accompanying randomized testbench checks every accepted transaction against a reference multiplication
+            model, including sign restoration, high-half selection, and word-mode truncation. It is structured to wait
+            for 100000 accepted operations of each multiply variant before concluding.
+          </p>
+        </div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="case-block fade-up">
+        <div class="case-block-label">The Outcome</div>
+        <h2>A Fast, Regular Datapath Without Recoder Sprawl</h2>
+        <p>
+          This multiplier architecture trades a little more front-end structure for a much cleaner pipeline split.
+          The odd-multiple bank is predictable, the crossbar mapping is direct, and the reduction tree is intentionally
+          staged instead of left to become one late critical path.
+        </p>
+        <p>
+          That combination makes it a practical choice when sustained throughput and timing closure matter more than
+          chasing the smallest possible control block. It is not just mathematically correct; it is organized so the RTL,
+          the pipeline boundaries, and the instruction semantics all reinforce one another.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="page-cta">
+    <div class="container">
+      <div class="page-cta-box">
+        <div class="section-label" style="text-align:center">Next Steps</div>
+        <h2>Need a <span class="gradient-text">Performance-Driven Datapath?</span></h2>
+        <p>If your arithmetic block is turning into a timing problem, we can help restructure the micro-architecture before it becomes a backend fire drill.</p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="../index.html#work" class="btn btn-outline">All Case Studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <img src="../logo.png" alt="Squared Studio" class="logo-img" />
+          <span class="logo-text">Squared Studio</span>
+        </a>
+        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#work">Our Work</a>
+          <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="../services/asic-design.html">ASIC Design</a>
+          <a href="../services/verification.html">Verification</a>
+          <a href="../services/engineering-consulting.html">Consulting</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/squared-studio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:foez.official@gmail.com">Email Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../page-script.js"></script>
+</body>
+</html>
