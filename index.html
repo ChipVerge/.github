@@ -13,26 +13,7 @@
 </head>
 <body>
 
-  <!-- ====== NAVBAR ====== -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="#" class="logo">
-        <img src="logo.png" alt="Squared Studio" class="logo-img" />
-        <span class="logo-text">Squared Studio</span>
-      </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#people">People</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <button class="nav-cta" onclick="window.location='contact.html'">Get in Touch</button>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <div data-shared-navbar></div>
 
   <!-- ====== HERO ====== -->
   <section class="hero" id="home">
@@ -600,45 +581,9 @@
     </div>
   </section>
 
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <img src="logo.png" alt="Squared Studio" class="logo-img" />
-          <span class="logo-text">Squared Studio</span>
-        </a>
-        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h5>Company</h5>
-          <a href="#about">About</a>
-          <a href="#work">Our Work</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h5>Services</h5>
-          <a href="#services">ASIC Design</a>
-          <a href="#services">Verification</a>
-          <a href="#services">Consulting</a>
-          <a href="#services">FPGA Design</a>
-        </div>
-        <div class="footer-col">
-          <h5>Connect</h5>
-          <a href="https://github.com/squared-studio" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/company/squared-studio-cc" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:info@squared-studio.com">Email Us</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
-      </div>
-    </div>
-  </footer>
+  <div data-shared-footer></div>
 
+  <script src="shared-layout.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

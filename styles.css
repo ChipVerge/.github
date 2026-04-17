@@ -202,9 +202,13 @@ ul { list-style: none; }
   transition: var(--transition);
 }
 .nav-links a:hover { color: var(--highlight-2); background: rgba(0,204,255,0.08); }
+.nav-links a[aria-current="page"] { color: var(--highlight-2); background: rgba(0,204,255,0.12); }
 
 /* Nav CTA */
 .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 9px 22px;
   background: var(--accent);
   color: #fff;

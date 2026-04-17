@@ -404,26 +404,7 @@
 </head>
 <body>
 
-  <!-- ====== NAVBAR ====== -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="../index.html" class="logo">
-        <img src="../logo.png" alt="Squared Studio" class="logo-img" />
-        <span class="logo-text">Squared Studio</span>
-      </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#services">Services</a>
-        <a href="../index.html#work">Work</a>
-        <a href="../index.html#people">People</a>
-        <a href="../contact.html">Contact</a>
-      </nav>
-      <button class="nav-cta" onclick="window.location='../contact.html'">Get in Touch</button>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <div data-shared-navbar></div>
 
   <!-- ====== PAGE HERO ====== -->
   <section class="page-hero">
@@ -716,44 +697,9 @@ assign instr_out_o = pl_outs[gnt_idx];</pre>
     </div>
   </section>
 
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="../index.html" class="logo">
-          <img src="../logo.png" alt="Squared Studio" class="logo-img" />
-          <span class="logo-text">Squared Studio</span>
-        </a>
-        <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h5>Company</h5>
-          <a href="../index.html#about">About</a>
-          <a href="../index.html#work">Our Work</a>
-          <a href="../contact.html">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h5>Services</h5>
-          <a href="../services/asic-design.html">ASIC Design</a>
-          <a href="../services/verification.html">Verification</a>
-          <a href="../services/engineering-consulting.html">Consulting</a>
-        </div>
-        <div class="footer-col">
-          <h5>Connect</h5>
-          <a href="https://github.com/squared-studio" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/company/squared-studio-cc" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:info@squared-studio.com">Email Us</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
-      </div>
-    </div>
-  </footer>
+  <div data-shared-footer></div>
 
+  <script src="../shared-layout.js"></script>
   <script src="../page-script.js"></script>
 </body>
 </html>
