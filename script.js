@@ -46,6 +46,7 @@ fadeEls.forEach(el => revealObserver.observe(el));
 // ---------- Horizontal sliders ----------
 function initHorizontalSlider({ slider, itemSelector, prevButton, nextButton }) {
   const sliderShell = slider ? slider.closest('.slider-shell') : null;
+  const interactiveSelector = 'a, button, input, textarea, select, summary, label, [role="button"], [data-slider-ignore-drag]';
 
   if (!slider || !sliderShell) {
     return;
@@ -56,6 +57,8 @@ function initHorizontalSlider({ slider, itemSelector, prevButton, nextButton }) 
   let dragPointerId = null;
   let dragStartX = 0;
   let dragStartScrollLeft = 0;
+
+  const isInteractiveTarget = (target) => target instanceof Element && Boolean(target.closest(interactiveSelector));
 
   const getStep = () => {
     const firstCard = slider.querySelector(itemSelector);
@@ -114,7 +117,7 @@ function initHorizontalSlider({ slider, itemSelector, prevButton, nextButton }) 
   }
 
   slider.addEventListener('pointerdown', (event) => {
-    if (event.button !== 0 || event.pointerType === 'touch') {
+    if (event.button !== 0 || event.pointerType === 'touch' || isInteractiveTarget(event.target)) {
       return;
     }
 
