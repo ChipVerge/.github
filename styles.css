@@ -1898,3 +1898,119 @@ ul { list-style: none; }
   .case-hero-num { font-size: 3.5rem; }
   .case-highlights { grid-template-columns: 1fr 1fr; }
 }
+
+/* Shared case-study panel components */
+.stat-chip,
+.rtl-panel,
+.note-card,
+.verification-callout {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.stat-rack {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.rtl-grid,
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.stat-chip strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--accent-2);
+  font-family: var(--mono);
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+
+.stat-chip span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.rtl-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.rtl-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,204,255,0.08), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.rtl-panel:hover::before {
+  opacity: 1;
+}
+
+.rtl-label,
+.verification-callout strong,
+.note-card h3 {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rtl-label,
+.verification-callout strong {
+  color: var(--accent-2);
+}
+
+.verification-callout {
+  margin-top: 18px;
+}
+
+.verification-callout strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.rtl-panel pre {
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: #c9f5ff;
+}
+
+.rtl-panel p,
+.note-card p,
+.verification-callout p {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.ops-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+@media (max-width: 980px) {
+  .stat-rack { grid-template-columns: 1fr; }
+}
