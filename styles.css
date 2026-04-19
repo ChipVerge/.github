@@ -1336,7 +1336,8 @@ ul { list-style: none; }
   position: relative;
 }
 
-.slider-shell .cases-controls {
+.slider-shell .cases-controls,
+.slider-shell .people-controls {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -1394,6 +1395,7 @@ ul { list-style: none; }
 
 .people-grid {
   grid-auto-columns: minmax(320px, 100%);
+  overflow-x: scroll;
 }
 
 .cases-grid:focus-visible,

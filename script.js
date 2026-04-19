@@ -223,7 +223,9 @@ initHorizontalSlider({
 
 initHorizontalSlider({
   slider: document.getElementById('peopleSlider'),
-  itemSelector: '.person-card'
+  itemSelector: '.person-card',
+  prevButton: document.querySelector('[data-people-slider-prev]'),
+  nextButton: document.querySelector('[data-people-slider-next]')
 });
 
 // ---------- Auto-scroll for cases slider ----------
