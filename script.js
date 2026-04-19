@@ -226,6 +226,68 @@ initHorizontalSlider({
   itemSelector: '.person-card'
 });
 
+// ---------- Auto-scroll for cases slider ----------
+(function () {
+  const slider = document.getElementById('casesSlider');
+  if (!slider) return;
+
+  const computeStep = () => {
+    const firstCard = slider.querySelector('.case-card');
+    if (!firstCard) return slider.clientWidth * 0.85;
+    const sliderStyles = window.getComputedStyle(slider);
+    const gap = parseFloat(sliderStyles.columnGap || sliderStyles.gap || '0');
+    return firstCard.getBoundingClientRect().width + gap;
+  };
+
+  let autoTimer = null;
+  const intervalMs = 3800;
+
+  const stopAuto = () => {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    autoTimer = setInterval(() => {
+      const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+      const step = computeStep();
+      if (slider.scrollLeft >= maxScroll - 4) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, intervalMs);
+  };
+
+  // Pause when user interacts
+  ['pointerenter', 'focusin', 'pointerdown'].forEach(ev => slider.addEventListener(ev, stopAuto, { passive: true }));
+  ['pointerleave', 'focusout'].forEach(ev => slider.addEventListener(ev, startAuto, { passive: true }));
+
+  // Pause when user uses nav buttons
+  const prevBtn = document.querySelector('[data-case-slider-prev]');
+  const nextBtn = document.querySelector('[data-case-slider-next]');
+  [prevBtn, nextBtn].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('pointerdown', stopAuto, { passive: true });
+    btn.addEventListener('click', () => setTimeout(startAuto, 2000));
+  });
+
+  // Start auto-scroll when ready
+  // delay a moment to allow layout/measurements
+  setTimeout(startAuto, 600);
+  // keep measurements updated on resize
+  window.addEventListener('resize', () => {
+    // restart to recalc step
+    if (autoTimer) {
+      stopAuto();
+      startAuto();
+    }
+  });
+})();
+
 // ---------- High-speed data transmission canvas ----------
 (function () {
   const canvas = document.getElementById('circuitCanvas');

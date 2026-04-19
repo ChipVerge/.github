@@ -1336,6 +1336,16 @@ ul { list-style: none; }
   position: relative;
 }
 
+.slider-shell .cases-controls {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6px;
+  z-index: 4;
+  display: flex;
+  gap: 10px;
+}
+
 .slider-shell::before,
 .slider-shell::after {
   content: '';
@@ -1415,6 +1425,13 @@ ul { list-style: none; }
   .cases-grid,
   .people-grid {
     cursor: grab;
+  }
+
+  /* clickable cards should indicate interactivity */
+  .cases-grid a.case-card,
+  .people-grid a.person-card,
+  .services-grid a.service-card {
+    cursor: pointer;
   }
 
   .cases-grid.is-dragging,
