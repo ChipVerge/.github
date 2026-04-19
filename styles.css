@@ -1163,7 +1163,9 @@ ul { list-style: none; }
 @media (max-width: 600px) {
   .section { padding: 70px 0; }
   .hero { padding: 100px 0 60px; }
-  .hero-stats { gap: 20px; }
+  .hero-subtitle { font-size: 0.97rem; }
+  .hero-stats { gap: 16px 20px; flex-wrap: wrap; }
+  .stat-divider { display: none; }
   .form-row { grid-template-columns: 1fr; }
   .footer-links { gap: 32px; }
   .contact-form { padding: 28px 20px; }
