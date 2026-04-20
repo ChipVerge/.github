@@ -1663,6 +1663,13 @@ ul { list-style: none; }
   margin-bottom: 16px;
 }
 
+.detail-card-client {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
 .detail-card ul {
   display: flex;
   flex-direction: column;

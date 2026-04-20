@@ -33,7 +33,7 @@
           <div class="person-role" style="margin-bottom: 12px;">Design Verification Engineer</div>
           <h1 class="profile-name">Amit Sikder</h1>
           <p class="profile-bio">
-            Design verification engineer with over three years of experience verifying complex IPs and SoC
+            Design verification engineer with 2+ years of experience verifying complex IPs and SoC
             subsystems across PCIe Gen5, AXI, APB, DMA, NoC, and RISC-V. Expert in UVM-based verification,
             protocol bring-up, and deep debug of LTSSM, reset/clock/SerDes, and transaction-level issues —
             with a proven track record of high coverage closure and first-pass verification success.
@@ -42,8 +42,9 @@
             <span class="stack-tag">SystemVerilog</span>
             <span class="stack-tag">UVM</span>
             <span class="stack-tag">PCIe Gen5</span>
-            <span class="stack-tag">AXI</span>
+            <span class="stack-tag">AXI / APB</span>
             <span class="stack-tag">RISC-V</span>
+            <span class="stack-tag">VCS / Xcelium</span>
             <span class="stack-tag">Python</span>
             <span class="stack-tag">C/C++</span>
           </div>
@@ -193,7 +194,49 @@
         <p>Early in my career I focused on building a solid foundation in UVM-based environments — learning how constrained-random stimulus, functional coverage, and layered testbench architecture come together to catch real bugs in real designs. What drew me deeper into the field was the debugging side: understanding why silicon fails, tracing anomalies through LTSSM state machines, reset sequences, and SerDes layers to find the root cause.</p>
         <p>A defining chapter was my involvement in PCIe Gen5 subsystem verification. Getting a high-speed serial link from link training through stable enumeration and transaction-level operation is one of the most technically demanding verification tasks in the industry. Working through LTSSM edge cases, SerDes sensitivity, and power management scenarios gave me a depth of protocol understanding that carries into every subsequent project.</p>
         <p>Alongside PCIe, I have worked extensively on AXI MEM-SS, DMA controllers, NoC fabrics, and peripheral IPs — building and enhancing UVM testbenches, closing coverage with IMC, and identifying corner-case RTL bugs that constrained-random alone would not reliably find. I have also developed assembly-driven verification flows for RISC-V cores using golden reference models, an approach that demands precise understanding of both the ISA and the implementation.</p>
-        <p>More than three years in, I remain motivated by the same thing that drew me to this work: the confidence that comes from thorough verification — knowing that the IP you hand off has been genuinely exercised and is ready to go into silicon. Joining Squared Studio is an opportunity to bring that rigour to a wider range of challenging projects, working alongside engineers who share the same standards.</p>
+        <p>Two-plus years in, I remain motivated by the same thing that drew me to this work: the confidence that comes from thorough verification — knowing that the IP you hand off has been genuinely exercised and is ready to go into silicon. Joining Squared Studio is an opportunity to bring that rigour to a wider range of challenging projects, working alongside engineers who share the same standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SIGNIFICANT PROJECTS ====== -->
+  <section class="detail-section section">
+    <div class="container">
+      <div class="section-label">Significant Projects</div>
+      <h2 class="section-title text-center">Project <span class="gradient-text">Highlights</span></h2>
+      <p class="detail-intro">
+        A selection of significant verification projects spanning high-speed serial protocols, processor cores, interconnect fabrics, and peripheral IPs.
+      </p>
+      <div class="detail-grid">
+
+        <div class="detail-card">
+          <h3>PCIe Gen5 Subsystem Verification</h3>
+          <ul>
+            <li>Debugged and enhanced Synopsys Core Consultant UVM testbench for PCIe Gen5 integration</li>
+            <li>Resolved reset sequencing, clock generation, reference clock frequency, and SerDes configuration issues</li>
+            <li>Analyzed LTSSM behavior and confirmed successful link training from Gen1 through Gen5</li>
+            <li>Achieved PCIe enumeration and continued debugging post-enumeration read/write transaction issues</li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h3>DMA Controller Verification</h3>
+          <ul>
+            <li>Developed AXI-Lite driver, reactive AXI-4 driver, and AXI-4 monitor for DMA operations</li>
+            <li>Developed test cases covering memory-to-memory, memory-to-peripheral, and peripheral-to-peripheral transfers</li>
+            <li>Identified and resolved a FIFO bug in the DMA; achieved full FSM, statement, and toggle coverage with IMC</li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h3>I2S Driver Verification</h3>
+          <ul>
+            <li>Developed UVM components — driver, monitor, scoreboard, and sequence — for I2S driver verification</li>
+            <li>Validated data transmission, synchronization, and error handling via AXI Streaming and WISHBONE interfaces</li>
+            <li>Achieved successful project completion with a fully verified I2S driver</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
