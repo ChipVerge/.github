@@ -1,6 +1,6 @@
 # ChipVerge — Semiconductor Engineering Services
 
-**RTL & Verification Specialists** · Lint-clean RTL · UVM-closed coverage · CDC-safe deliverables
+**RTL Design & Verification Specialists** · Lint-clean RTL · UVM-closed coverage · CDC-safe deliverables
 
 ChipVerge is a semiconductor engineering partner built for ASIC teams that cannot afford silicon escapes. We specialize in SystemVerilog RTL design and UVM-based functional verification — delivering lint-clean, CDC-safe, coverage-closed results that pass first-time review.
 
