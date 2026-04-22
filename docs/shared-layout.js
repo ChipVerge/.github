@@ -23,6 +23,7 @@
   const isServicesPage = pagePath.includes('/services/');
   const isWorkPage = pagePath.includes('/work/');
   const isPeoplePage = pagePath.includes('/people/');
+  const isCareerPage = pageName === 'career.html';
 
   const withRoot = (relativePath) => `${rootPrefix}${relativePath}`;
   const homeHref = isHomePage ? '#home' : withRoot('index.html');
@@ -34,6 +35,7 @@
     { label: 'Services', href: sectionHref('services'), current: isServicesPage },
     { label: 'Work', href: sectionHref('work'), current: isWorkPage },
     { label: 'People', href: sectionHref('people'), current: isPeoplePage },
+    { label: 'Careers', href: withRoot('career.html'), current: isCareerPage },
     { label: 'Contact', href: contactHref, current: isContactPage }
   ];
 
@@ -73,6 +75,7 @@
           <h5>Company</h5>
           <a href="${sectionHref('about')}">About</a>
           <a href="${sectionHref('work')}">Our Work</a>
+          <a href="${withRoot('career.html')}">Careers</a>
           <a href="${contactHref}">Contact</a>
         </div>
         <div class="footer-col">
