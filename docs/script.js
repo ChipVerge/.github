@@ -228,6 +228,11 @@ initHorizontalSlider({
   nextButton: document.querySelector('[data-people-slider-next]')
 });
 
+initHorizontalSlider({
+  slider: document.getElementById('heroOffersSlider'),
+  itemSelector: '.hero-offer-card'
+});
+
 // ---------- Auto-scroll for cases slider ----------
 (function () {
   const slider = document.getElementById('casesSlider');
@@ -288,6 +293,85 @@ initHorizontalSlider({
       startAuto();
     }
   });
+})();
+
+// ---------- Auto-scroll for hero offers ----------
+(function () {
+  const slider = document.getElementById('heroOffersSlider');
+  if (!slider) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  let autoTimer = null;
+  let restartTimer = null;
+  const intervalMs = 4200;
+
+  const computeStep = () => {
+    const firstCard = slider.querySelector('.hero-offer-card');
+    if (!firstCard) return slider.clientWidth * 0.82;
+    const sliderStyles = window.getComputedStyle(slider);
+    const gap = parseFloat(sliderStyles.columnGap || sliderStyles.gap || '0');
+    return firstCard.getBoundingClientRect().width + gap;
+  };
+
+  const stopAuto = () => {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+
+    if (restartTimer) {
+      clearTimeout(restartTimer);
+      restartTimer = null;
+    }
+  };
+
+  const startAuto = () => {
+    stopAuto();
+
+    if (slider.scrollWidth <= slider.clientWidth + 8) {
+      return;
+    }
+
+    autoTimer = setInterval(() => {
+      const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+      const step = computeStep();
+
+      if (slider.scrollLeft >= maxScroll - 4) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, intervalMs);
+  };
+
+  const queueRestart = () => {
+    if (slider.scrollWidth <= slider.clientWidth + 8) {
+      return;
+    }
+
+    stopAuto();
+    restartTimer = setTimeout(startAuto, 2200);
+  };
+
+  ['pointerenter', 'focusin', 'pointerdown'].forEach((eventName) => {
+    slider.addEventListener(eventName, stopAuto, { passive: true });
+  });
+
+  ['pointerleave', 'focusout'].forEach((eventName) => {
+    slider.addEventListener(eventName, queueRestart, { passive: true });
+  });
+
+  window.addEventListener('resize', () => {
+    if (autoTimer) {
+      stopAuto();
+      startAuto();
+    }
+  });
+
+  setTimeout(startAuto, 900);
 })();
 
 // ---------- High-speed data transmission canvas ----------
