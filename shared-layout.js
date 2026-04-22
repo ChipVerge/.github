@@ -84,9 +84,9 @@
         </div>
         <div class="footer-col">
           <h5>Connect</h5>
-          <a href="https://github.com/squared-studio" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/company/squared-studio-cc" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:info@squared-studio.cc">Email Us</a>
+          <a href="https://github.com/ChipVerge" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/company/ChipVerge" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:info@chipverge.com">Email Us</a>
         </div>
       </div>
     </div>

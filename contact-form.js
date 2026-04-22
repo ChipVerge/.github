@@ -17,7 +17,7 @@
   }
 
   if (nextField) {
-    nextField.value = 'https://squared-studio.cc/contact.html?sent=1';
+    nextField.value = 'https://chipverge.com/contact.html?sent=1';
   }
 
   const requestedService = new URLSearchParams(window.location.search).get('service');
