@@ -62,7 +62,6 @@
         <div class="job-card" id="job-trainee-rtl-design">
           <div class="job-header">
             <div class="job-header-left">
-              <div class="job-badge">Hiring Now</div>
               <h2 class="job-title">Trainee RTL Design Engineer</h2>
               <div class="job-meta">
                 <span class="job-tag job-tag--accent">RTL Design</span>
@@ -74,8 +73,12 @@
             <div class="job-apply-top">
               <a href="#apply" class="btn btn-primary apply-trigger" data-position="trainee-rtl-design">Apply Now</a>
             </div>
+            <div class="job-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
-
+          <div class="job-collapse">
+            <div class="job-collapse-inner">
           <div class="job-body">
 
             <div class="job-section">
@@ -131,13 +134,14 @@
           <div class="job-footer">
             <span style="font-size:0.85rem; color:var(--text-muted);">Questions? Write to <a href="mailto:info@chipverge.com" style="color:var(--accent-2);">info@chipverge.com</a></span>
           </div>
+            </div>
+          </div>
         </div>
 
         <!-- ===== ROLE 2: RTL Design Verification ===== -->
         <div class="job-card" id="job-rtl-design-verification">
           <div class="job-header">
             <div class="job-header-left">
-              <div class="job-badge">Hiring Now</div>
               <h2 class="job-title">RTL Design Verification Engineer</h2>
               <div class="job-meta">
                 <span class="job-tag job-tag--accent">Verification</span>
@@ -149,8 +153,12 @@
             <div class="job-apply-top">
               <a href="#apply" class="btn btn-primary apply-trigger" data-position="rtl-design-verification">Apply Now</a>
             </div>
+            <div class="job-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
-
+          <div class="job-collapse">
+            <div class="job-collapse-inner">
           <div class="job-body">
 
             <div class="job-section">
@@ -208,6 +216,8 @@
 
           <div class="job-footer">
             <span style="font-size:0.85rem; color:var(--text-muted);">Questions? Write to <a href="mailto:info@chipverge.com" style="color:var(--accent-2);">info@chipverge.com</a></span>
+          </div>
+            </div>
           </div>
         </div>
 
@@ -303,7 +313,6 @@
           </div>
 
           <button type="submit" class="btn btn-primary btn-full">Submit Application</button>
-          <p class="form-note">Applications are sent directly to info@chipverge.com. We review every submission personally.</p>
           <p class="form-status" id="applyStatusMsg" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -315,6 +324,18 @@
   <script src="shared-layout.js"></script>
   <script>
     (function () {
+      /* ---- Accordion for job cards ---- */
+      document.querySelectorAll('.job-card').forEach(function (card) {
+        var header = card.querySelector('.job-header');
+        if (!header) return;
+        header.addEventListener('click', function (e) {
+          if (e.target.closest('a, button')) return;
+          var isOpen = card.classList.contains('is-open');
+          document.querySelectorAll('.job-card').forEach(function (c) { c.classList.remove('is-open'); });
+          if (!isOpen) { card.classList.add('is-open'); }
+        });
+      });
+
       /* ---- Pre-select position when Apply Now is clicked ---- */
       const positionSelect = document.getElementById('applyPosition');
       const applySection   = document.getElementById('apply');
