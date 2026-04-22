@@ -1,5 +1,5 @@
 /* ============================================================
-   SQUARED STUDIO — Shared Layout
+   ChipVerge — Shared Layout
    ============================================================ */
 
 (function () {
@@ -45,8 +45,8 @@
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="${homeHref}" class="logo">
-        <img src="${withRoot('logo.png')}" alt="Squared Studio" class="logo-img" />
-        <span class="logo-text">Squared Studio</span>
+        <img src="${withRoot('logo.png')}" alt="ChipVerge" class="logo-img" />
+        <span class="logo-text">ChipVerge</span>
       </a>
       <nav class="nav-links" id="navLinks">
         ${navLinksMarkup}
@@ -63,8 +63,8 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="${homeHref}" class="logo">
-          <img src="${withRoot('logo.png')}" alt="Squared Studio" class="logo-img" />
-          <span class="logo-text">Squared Studio</span>
+          <img src="${withRoot('logo.png')}" alt="ChipVerge" class="logo-img" />
+          <span class="logo-text">ChipVerge</span>
         </a>
         <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
       </div>
@@ -92,7 +92,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <span>&copy; 2026 Squared Studio. All rights reserved.</span>
+        <span>&copy; 2026 ChipVerge. All rights reserved.</span>
       </div>
     </div>
   </footer>`;

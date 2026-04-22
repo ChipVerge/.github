@@ -1,5 +1,5 @@
 /* ============================================================
-   SQUARED STUDIO — Sub-page JavaScript
+   ChipVerge — Sub-page JavaScript
    ============================================================ */
 
 // ---------- Navbar scroll effect ----------
