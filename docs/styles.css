@@ -500,7 +500,7 @@ ul { list-style: none; }
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  animation: kickerPulse 1.8s ease-in-out infinite;
+  animation: kickerPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes kickerPulse {
