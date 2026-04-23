@@ -683,30 +683,151 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ChipVerge",
-    "url": "https://chipverge.com",
-    "logo": "https://chipverge.com/logo.png",
-    "description": "Semiconductor engineering partner specializing in SystemVerilog RTL design and UVM-based functional verification. Lint-clean, CDC-safe, coverage-closed deliverables.",
-    "sameAs": ["https://github.com/ChipVerge"],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "sales",
-      "url": "https://chipverge.com/contact.html"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Semiconductor Engineering Services",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "ASIC Design"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "FPGA Design"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Verification"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Custom IP & VIP"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "EDA Automation"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Engineering Consulting"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Training"}}
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://chipverge.com/#organization",
+        "name": "ChipVerge",
+        "url": "https://chipverge.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://chipverge.com/logo.png"
+        },
+        "description": "Semiconductor engineering partner specializing in SystemVerilog RTL design and UVM-based functional verification. Lint-clean, CDC-safe, coverage-closed deliverables.",
+        "sameAs": [
+          "https://github.com/ChipVerge",
+          "https://www.linkedin.com/company/ChipVerge"
+        ],
+        "email": "info@chipverge.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "House 523/524, Road 21, Block L, Bashundhara RA",
+          "addressLocality": "Dhaka",
+          "postalCode": "1229",
+          "addressCountry": "BD"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "info@chipverge.com",
+          "url": "https://chipverge.com/contact.html",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["English"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chipverge.com/#website",
+        "url": "https://chipverge.com/",
+        "name": "ChipVerge",
+        "description": "Semiconductor services covering RTL design, verification, FPGA, consulting, automation, and training.",
+        "publisher": {
+          "@id": "https://chipverge.com/#organization"
+        }
+      },
+      {
+        "@type": ["ProfessionalService", "LocalBusiness"],
+        "@id": "https://chipverge.com/#business",
+        "name": "ChipVerge",
+        "url": "https://chipverge.com/",
+        "image": "https://chipverge.com/logo.png",
+        "description": "Semiconductor engineering services for ASIC and FPGA teams, including RTL design, UVM verification, consulting, and flow automation.",
+        "priceRange": "$$",
+        "areaServed": "Worldwide",
+        "serviceType": [
+          "ASIC Design",
+          "FPGA Design",
+          "Verification",
+          "Custom IP and VIP",
+          "EDA Automation",
+          "Engineering Consulting",
+          "Training"
+        ],
+        "parentOrganization": {
+          "@id": "https://chipverge.com/#organization"
+        },
+        "hasOfferCatalog": {
+          "@id": "https://chipverge.com/#services"
+        }
+      },
+      {
+        "@type": "OfferCatalog",
+        "@id": "https://chipverge.com/#services",
+        "name": "Semiconductor Engineering Services",
+        "url": "https://chipverge.com/#services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "ASIC Design",
+              "url": "https://chipverge.com/services/asic-design.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "FPGA Design",
+              "url": "https://chipverge.com/services/fpga-design.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Verification",
+              "url": "https://chipverge.com/services/verification.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom IP and VIP",
+              "url": "https://chipverge.com/services/custom-ip-vip.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "EDA Automation",
+              "url": "https://chipverge.com/services/eda-automation.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Engineering Consulting",
+              "url": "https://chipverge.com/services/engineering-consulting.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Training",
+              "url": "https://chipverge.com/services/training.html"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://chipverge.com/#webpage",
+        "url": "https://chipverge.com/",
+        "name": "ChipVerge | Semiconductor Services",
+        "description": "ChipVerge homepage covering semiconductor engineering services, team profiles, and case studies.",
+        "isPartOf": {
+          "@id": "https://chipverge.com/#website"
+        },
+        "about": {
+          "@id": "https://chipverge.com/#business"
+        }
+      }
+    ]
   }
   </script>
 </body>
