@@ -7,6 +7,22 @@
   <title>ChipVerge | Semiconductor Services</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://chipverge.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chipverge.com/" />
+  <meta property="og:title" content="ChipVerge | Semiconductor Services" />
+  <meta property="og:description" content="Lint-clean RTL. UVM-closed coverage. CDC-safe deliverables. ASIC & FPGA engineering services built for teams that can't afford silicon escapes." />
+  <meta property="og:image" content="https://chipverge.com/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://chipverge.com/" />
+  <meta name="twitter:title" content="ChipVerge | Semiconductor Services" />
+  <meta name="twitter:description" content="Lint-clean RTL. UVM-closed coverage. CDC-safe deliverables. ASIC & FPGA engineering services built for teams that can't afford silicon escapes." />
+  <meta name="twitter:image" content="https://chipverge.com/logo.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -636,5 +652,35 @@
 
   <script src="shared-layout.js"></script>
   <script src="script.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ChipVerge",
+    "url": "https://chipverge.com",
+    "logo": "https://chipverge.com/logo.png",
+    "description": "Semiconductor engineering partner specializing in SystemVerilog RTL design and UVM-based functional verification. Lint-clean, CDC-safe, coverage-closed deliverables.",
+    "sameAs": ["https://github.com/ChipVerge"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "url": "https://chipverge.com/contact.html"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Semiconductor Engineering Services",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "ASIC Design"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "FPGA Design"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Verification"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Custom IP & VIP"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "EDA Automation"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Engineering Consulting"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Training"}}
+      ]
+    }
+  }
+  </script>
 </body>
 </html>
