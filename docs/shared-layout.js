@@ -30,9 +30,28 @@
   const sectionHref = (sectionId) => isHomePage ? `#${sectionId}` : `${withRoot('index.html')}#${sectionId}`;
   const contactHref = withRoot('contact.html');
 
+  const serviceLinks = [
+    { label: 'ASIC Design',              href: withRoot('services/asic-design.html') },
+    { label: 'FPGA Design',              href: withRoot('services/fpga-design.html') },
+    { label: 'Verification',             href: withRoot('services/verification.html') },
+    { label: 'Custom IP & VIP',          href: withRoot('services/custom-ip-vip.html') },
+    { label: 'EDA Automation',           href: withRoot('services/eda-automation.html') },
+    { label: 'Engineering Consulting',   href: withRoot('services/engineering-consulting.html') },
+    { label: 'Embedded & System-Level',  href: withRoot('services/embedded-system-level.html') },
+    { label: 'Training',                 href: withRoot('services/training.html') },
+    { label: 'DFT',                      href: withRoot('services/dft.html') },
+    { label: 'Custom Layout',            href: withRoot('services/custom-layout.html') },
+    { label: 'Physical Design Support',  href: withRoot('services/physical-design-support.html') },
+    { label: 'Documentation & Methodology', href: withRoot('services/documentation-methodology.html') },
+  ];
+
+  const serviceDropdownItems = serviceLinks
+    .map(({ label, href }) => `<a href="${href}">${label}</a>`)
+    .join('');
+
   const navItems = [
     { label: 'About', href: sectionHref('about'), current: false },
-    { label: 'Services', href: sectionHref('services'), current: isServicesPage },
+    { label: 'Services', href: sectionHref('services'), current: isServicesPage, dropdown: true },
     { label: 'Work', href: sectionHref('work'), current: isWorkPage },
     { label: 'People', href: sectionHref('people'), current: isPeoplePage },
     { label: 'Careers', href: withRoot('career.html'), current: isCareerPage },
@@ -40,7 +59,15 @@
   ];
 
   const navLinksMarkup = navItems
-    .map(({ label, href, current }) => `<a href="${href}"${current ? ' aria-current="page"' : ''}>${label}</a>`)
+    .map(({ label, href, current, dropdown }) => {
+      if (dropdown) {
+        return `<div class="nav-dropdown">
+          <a href="${href}"${current ? ' aria-current="page"' : ''} class="nav-dropdown-trigger">${label} <span class="nav-dropdown-arrow">&#9660;</span></a>
+          <div class="nav-dropdown-menu">${serviceDropdownItems}</div>
+        </div>`;
+      }
+      return `<a href="${href}"${current ? ' aria-current="page"' : ''}>${label}</a>`;
+    })
     .join('');
 
   const navbarMarkup = `
