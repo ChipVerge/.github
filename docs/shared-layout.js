@@ -43,6 +43,7 @@
     { label: 'Custom Layout',            href: withRoot('services/custom-layout.html') },
     { label: 'Physical Design Support',  href: withRoot('services/physical-design-support.html') },
     { label: 'Documentation & Methodology', href: withRoot('services/documentation-methodology.html') },
+    { label: 'AMS Verification',         href: withRoot('services/ams-verification.html') },
   ];
 
   const serviceDropdownItems = serviceLinks
