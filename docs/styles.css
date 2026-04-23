@@ -29,7 +29,7 @@
   --shadow-glow:   0 0 40px rgba(0,204,255,0.2);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font);
@@ -282,6 +282,7 @@ ul { list-style: none; }
   position: relative;
   z-index: 2;
   max-width: 720px;
+  width: 100%;
 }
 
 .hero-tag {
@@ -1286,10 +1287,12 @@ ul { list-style: none; }
 @media (max-width: 600px) {
   .section { padding: 70px 0; }
   .hero { padding: 100px 0 60px; }
+  .hero-tag { white-space: normal; }
+  .hero-title { font-size: clamp(1.75rem, 8vw, 2.5rem); }
   .hero-subtitle { font-size: 0.97rem; }
   .hero-offers { margin-bottom: 28px; }
   .hero-offers-grid {
-    grid-auto-columns: minmax(240px, calc(100% - 40px));
+    grid-auto-columns: minmax(min(240px, calc(100% - 32px)), calc(100% - 40px));
     gap: 14px;
     padding-bottom: 12px;
   }
