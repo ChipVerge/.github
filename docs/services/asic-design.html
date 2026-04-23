@@ -181,6 +181,40 @@
 
   <div data-shared-footer></div>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://chipverge.com/services/asic-design.html#service",
+        "name": "ASIC Design",
+        "url": "https://chipverge.com/services/asic-design.html",
+        "description": "ChipVerge ASIC Design services - specification-to-RTL implementation, micro-architecture, integration, optimization, and synthesis handoff.",
+        "serviceType": "ASIC Design",
+        "provider": {
+          "@type": "Organization",
+          "name": "ChipVerge",
+          "url": "https://chipverge.com/"
+        },
+        "areaServed": "Worldwide",
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://chipverge.com/contact.html?service=asic-design"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chipverge.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://chipverge.com/#services" },
+          { "@type": "ListItem", "position": 3, "name": "ASIC Design", "item": "https://chipverge.com/services/asic-design.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script src="../shared-layout.js"></script>
   <script src="../page-script.js"></script>
 </body>

@@ -156,6 +156,65 @@
 
   <div data-shared-footer></div>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": "https://chipverge.com/contact.html#webpage",
+        "url": "https://chipverge.com/contact.html",
+        "name": "Contact | ChipVerge",
+        "description": "Contact ChipVerge for RTL design, verification, FPGA, consulting, or training engagements.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "ChipVerge",
+          "url": "https://chipverge.com/",
+          "email": "info@chipverge.com",
+          "sameAs": [
+            "https://github.com/ChipVerge",
+            "https://www.linkedin.com/company/ChipVerge"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "House 523/524, Road 21, Block L, Bashundhara RA",
+            "addressLocality": "Dhaka",
+            "postalCode": "1229",
+            "addressCountry": "BD"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "info@chipverge.com",
+              "url": "https://chipverge.com/contact.html",
+              "availableLanguage": ["English"],
+              "areaServed": "Worldwide"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://chipverge.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact",
+            "item": "https://chipverge.com/contact.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script src="shared-layout.js"></script>
   <script src="page-script.js"></script>
   <script src="contact-form.js"></script>
