@@ -1,0 +1,9 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ahmed;Foez;;;
+FN:Foez Ahmed
+ORG:ChipVerge
+TITLE:Founder & Lead Engineer
+EMAIL;TYPE=INTERNET:foez@chipverge.com
+URL:http://chipverge.com/
+END:VCARD
