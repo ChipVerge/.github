@@ -174,7 +174,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.05rem;
   letter-spacing: -0.01em;
   flex-shrink: 0;
@@ -184,6 +184,15 @@ ul { list-style: none; }
   height: 34px;
   object-fit: contain;
   flex-shrink: 0;
+}
+.logo-text {
+  display: inline-flex;
+}
+.logo-chip {
+  font-weight: 600;
+}
+.logo-verge {
+  font-weight: 350;
 }
 
 /* Nav links */

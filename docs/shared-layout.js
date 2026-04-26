@@ -71,12 +71,14 @@
     })
     .join('');
 
+  const logoTextMarkup = '<span class="logo-text"><span class="logo-chip">Chip</span><span class="logo-verge">Verge</span></span>';
+
   const navbarMarkup = `
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="${homeHref}" class="logo">
         <img src="${withRoot('logo.png')}" alt="ChipVerge" class="logo-img" />
-        <span class="logo-text">ChipVerge</span>
+        ${logoTextMarkup}
       </a>
       <nav class="nav-links" id="navLinks">
         ${navLinksMarkup}
@@ -94,7 +96,7 @@
       <div class="footer-brand">
         <a href="${homeHref}" class="logo">
           <img src="${withRoot('logo.png')}" alt="ChipVerge" class="logo-img" />
-          <span class="logo-text">ChipVerge</span>
+          ${logoTextMarkup}
         </a>
         <p>Semiconductor Service Provider<br />Full-Spectrum Semiconductor Engineering</p>
       </div>
