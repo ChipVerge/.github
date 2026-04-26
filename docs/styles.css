@@ -157,7 +157,7 @@ ul { list-style: none; }
 }
 
 .navbar.scrolled {
-  background: rgba(1, 1, 0, 0.95);
+  background: rgba(1, 1, 0, 0.50);
   backdrop-filter: blur(16px);
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
