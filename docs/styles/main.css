@@ -125,3 +125,25 @@ h1 {
   70%  { width: 100%;  opacity: 1; }
   100% { width: 100%;  opacity: 0; }
 }
+
+/* ── Nav button ── */
+.nav-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.5rem;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 4px;
+  color: var(--accent-cyan);
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.nav-btn:hover {
+  background: var(--accent-cyan);
+  color: var(--bg);
+  box-shadow: 0 0 12px var(--accent-cyan);
+}
