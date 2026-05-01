@@ -166,6 +166,16 @@
   </div>
 </footer>`;
 
+  /* ── Favicon ─────────────────────────────────────────────── */
+  const existingFavicon = document.querySelector('link[rel~="icon"]');
+  if (!existingFavicon) {
+    const favicon = document.createElement('link');
+    favicon.rel  = 'icon';
+    favicon.type = 'image/png';
+    favicon.href = p + 'logo.png';
+    document.head.appendChild(favicon);
+  }
+
   /* ── Inject ───────────────────────────────────────────────── */
   const navEl = document.getElementById('cv-nav');
   if (navEl) navEl.outerHTML = nav;

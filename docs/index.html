@@ -20,28 +20,6 @@
     };
   </script>
   <link rel="stylesheet" href="styles/main.css" />
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e2e8f0; }
-    .fw-350 { font-weight: 350; }
-    .bg-grid {
-      background-image: linear-gradient(rgba(0,204,255,0.04) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0,204,255,0.04) 1px, transparent 1px);
-      background-size: 56px 56px;
-    }
-    .hero-canvas-bg { position: absolute; inset: 0; z-index: 0; opacity: 0.13; pointer-events: none; }
-    .slide { display: none; flex-direction: column; align-items: center; justify-content: center; }
-    .slide.active { display: flex; }
-    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker-inner {
-      display: inline-flex; gap: 4rem; white-space: nowrap;
-      animation: ticker-scroll 30s linear infinite; will-change: transform;
-    }
-    .dropdown:focus-within .dropdown-panel { display: block !important; }
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,204,255,0.3); }
-    ::selection { background: rgba(0,204,255,0.2); color: #fff; }
-  </style>
 </head>
 <body>
 

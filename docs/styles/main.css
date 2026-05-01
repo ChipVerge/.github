@@ -152,6 +152,19 @@ body {
   background-size: 56px 56px;
 }
 
+/* Form input */
+.cv-input {
+  width: 100%; background: #0d0d0d;
+  border: 1px solid rgba(0, 204, 255, 0.18);
+  color: #e2e8f0; padding: 0.625rem 0.875rem;
+  font-size: 0.875rem; outline: none;
+  transition: border-color 0.2s; font-family: inherit;
+}
+.cv-input::placeholder { color: #475569; }
+.cv-input:focus { border-color: rgba(0, 204, 255, 0.5); }
+textarea.cv-input { resize: vertical; min-height: 130px; }
+select.cv-input option { background: #0d0d0d; }
+
 /* Placeholder content box */
 .cv-placeholder {
   border: 1px solid rgba(0, 204, 255, 0.1);

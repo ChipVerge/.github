@@ -10,7 +10,6 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
   <link rel="stylesheet" href="../styles/main.css" />
-  <style>body{font-family:'Inter',sans-serif;}.dropdown:focus-within .dropdown-panel{display:block!important;}</style>
 </head>
 <body class="bg-[#0a0a0a] text-slate-200">
 <div id="cv-nav"></div>
@@ -49,8 +48,6 @@
 </main>
 
 <div id="cv-footer"></div>
-<script>
-document.getElementById('mob-toggle').addEventListener('click',()=>document.getElementById('mob-menu').classList.toggle('hidden'));document.querySelectorAll('.acc-btn').forEach(b=>{b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.acc),ic=b.querySelector('.acc-icon');p.classList.toggle('hidden');ic.style.transform=p.classList.contains('hidden')?'':'rotate(180deg)';});});</script>
 <script src="../js/components.js"></script>
 </body>
 </html>
