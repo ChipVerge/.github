@@ -7,7 +7,7 @@
   /* ── Path prefix ─────────────────────────────────────────── */
   const path = window.location.pathname;
   const segs = path.replace(/^\//, '').split('/').filter(Boolean);
-  // depth = number of directory levels (0 for root, 1 for company/about.html, etc.)
+  // depth = number of directory levels (0 for root, 1 for about.html, etc.)
   const depth = segs.length > 1 ? segs.length - 1 : 0;
   const p = '../'.repeat(depth);
 
@@ -80,9 +80,9 @@
             </div>
           </div>
         </div>
-        <a href="${p}company/about.html"  class="${nl(inAbout)}">About</a>
-        <a href="${p}company/people.html" class="${nl(inPeople)}">People</a>
-        <a href="${p}company/career.html" class="${nl(inCareer)}">Career</a>
+        <a href="${p}about.html"  class="${nl(inAbout)}">About</a>
+        <a href="${p}people.html" class="${nl(inPeople)}">People</a>
+        <a href="${p}career.html" class="${nl(inCareer)}">Career</a>
         <a href="${p}blogs/index.html"    class="${nl(inBlogs)}">Blogs</a>
         <a href="${p}contact.html"        class="${nl(inContact)}">Contact</a>
       </div>
@@ -108,9 +108,9 @@
           ${mobSvcItem('training.html',               'Training')}
         </div>
       </div>
-      <a href="${p}company/about.html"  class="${mnl(inAbout)}">About</a>
-      <a href="${p}company/people.html" class="${mnl(inPeople)}">People</a>
-      <a href="${p}company/career.html" class="${mnl(inCareer)}">Career</a>
+      <a href="${p}about.html"  class="${mnl(inAbout)}">About</a>
+      <a href="${p}people.html" class="${mnl(inPeople)}">People</a>
+      <a href="${p}career.html" class="${mnl(inCareer)}">Career</a>
       <a href="${p}blogs/index.html"    class="${mnl(inBlogs)}">Blogs</a>
       <a href="${p}contact.html"        class="${mnl(inContact)}">Contact</a>
     </div>
@@ -142,9 +142,9 @@
       <div>
         <h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Company</h4>
         <ul class="space-y-1.5">
-          <li><a href="${p}company/about.html"  class="cv-footer-link">About Us</a></li>
-          <li><a href="${p}company/people.html" class="cv-footer-link">People</a></li>
-          <li><a href="${p}company/career.html" class="cv-footer-link">Career</a></li>
+          <li><a href="${p}about.html"  class="cv-footer-link">About Us</a></li>
+          <li><a href="${p}people.html" class="cv-footer-link">People</a></li>
+          <li><a href="${p}career.html" class="cv-footer-link">Career</a></li>
           <li><a href="${p}blogs/index.html"    class="cv-footer-link">Blogs</a></li>
           <li><a href="${p}contact.html"        class="cv-footer-link">Contact</a></li>
         </ul>
