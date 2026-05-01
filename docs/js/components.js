@@ -54,7 +54,7 @@
     <div class="flex items-center justify-between h-16">
       <a href="${p}index.html" class="flex items-center gap-2.5 shrink-0">
         <img src="${p}logo.png" alt="ChipVerge" class="h-8 w-8 object-contain" />
-        <span class="text-[1.1rem] tracking-wide leading-none select-none"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span>
+        <span class="text-[1.1rem] tracking-wide leading-none select-none"><span class="text-white" style="font-weight:600">Chip</span><span class="text-white fw-350">Verge</span></span>
       </a>
       <div class="hidden lg:flex items-center">
         <div class="dropdown group relative">
@@ -125,7 +125,7 @@
       <div class="col-span-2 lg:col-span-1">
         <a href="${p}index.html" class="flex items-center gap-2 mb-4">
           <img src="${p}logo.png" alt="ChipVerge" class="h-7 w-7 object-contain" />
-          <span class="text-base tracking-wide"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span>
+          <span class="text-base tracking-wide"><span class="text-white" style="font-weight:600">Chip</span><span class="fw-350 text-white">Verge</span></span>
         </a>
         <p class="text-xs text-slate-600 leading-relaxed">Silicon-grade engineering. RTL to tape-out, delivered with precision.</p>
       </div>
