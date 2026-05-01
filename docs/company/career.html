@@ -215,11 +215,12 @@
     <h2 class="text-2xl font-semibold text-white mb-2">Submit Your Application</h2>
     <p class="text-slate-400 text-sm mb-10 max-w-xl">Fill in your details below. All applications are reviewed by our engineering leads within 5 business days.</p>
 
-    <form action="https://formsubmit.co/info@chipverge.com" method="POST" class="max-w-2xl space-y-5" novalidate>
+    <form action="https://formsubmit.co/info@chipverge.com" method="POST" id="apply-form-el" class="max-w-2xl space-y-5" enctype="multipart/form-data" novalidate>
       <!-- formsubmit config -->
       <input type="hidden" name="_subject" value="Job Application — ChipVerge" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_next" value="https://chipverge.com/company/career.html?submitted=1" />
 
       <!-- Role select -->
       <div>
@@ -280,10 +281,17 @@
         <label for="app-consent" class="text-xs text-slate-500 leading-relaxed">I confirm my details are accurate and I consent to ChipVerge processing my application data for recruitment purposes. All information is handled under strict confidentiality.</label>
       </div>
 
-      <button type="submit" class="inline-flex items-center gap-2 px-7 py-3 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">
+      <button type="submit" id="apply-submit-btn" class="inline-flex items-center gap-2 px-7 py-3 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">
         <i data-lucide="send" class="w-4 h-4"></i> Submit Application
       </button>
     </form>
+    <div id="apply-success" class="hidden mt-8 flex items-start gap-4 border border-[#00ccff]/30 bg-[#00ccff]/[0.05] p-6 max-w-2xl">
+      <i data-lucide="check-circle" class="w-6 h-6 text-[#00ccff] shrink-0 mt-0.5"></i>
+      <div>
+        <p class="text-sm font-semibold text-white mb-1">Application submitted successfully</p>
+        <p class="text-xs text-slate-400">Thank you for applying. Our engineering leads will review your application within 5 business days.</p>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -305,6 +313,21 @@
   function applyFor(role){
     document.getElementById('app-role').value = role;
     document.getElementById('apply-form').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  // Client-side consent check before allowing standard POST
+  document.getElementById('apply-form-el').addEventListener('submit', function(e) {
+    if (!document.getElementById('app-consent').checked) {
+      e.preventDefault();
+      alert('Please confirm the consent checkbox before submitting.');
+    }
+  });
+  // Show success banner when redirected back with ?submitted=1
+  if (new URLSearchParams(window.location.search).get('submitted') === '1') {
+    document.getElementById('apply-form-el').classList.add('hidden');
+    const success = document.getElementById('apply-success');
+    success.classList.remove('hidden');
+    document.getElementById('apply-form').scrollIntoView({behavior: 'smooth', block: 'start'});
+    lucide.createIcons();
   }
 </script>
 <script src="../js/components.js"></script>

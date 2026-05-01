@@ -42,14 +42,14 @@
     <!-- Contact Form -->
     <div class="lg:col-span-3">
       <p class="text-[0.65rem] tracking-[0.35em] text-slate-600 uppercase mb-6">Send a Message</p>
-      <form action="https://formsubmit.co/info@chipverge.com" method="POST" id="contact-form" class="space-y-4" novalidate>
+      <form action="https://formsubmit.co/ajax/info@chipverge.com" method="POST" id="contact-form" class="space-y-4" novalidate>
         <!-- formsubmit config -->
         <input type="hidden" name="_subject" value="ChipVerge Website Enquiry" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <div class="grid sm:grid-cols-2 gap-4">
-          <div><label class="block text-xs text-slate-500 mb-1.5" for="name">Full Name <span class="text-[#00ccff]">*</span></label><input id="name" name="name" type="text" class="cv-input" placeholder="Jane Smith" required /></div>
-          <div><label class="block text-xs text-slate-500 mb-1.5" for="email">Work Email <span class="text-[#00ccff]">*</span></label><input id="email" name="email" type="email" class="cv-input" placeholder="jane@company.com" required /></div>
+          <div><label class="block text-xs text-slate-500 mb-1.5" for="name">Full Name <span class="text-[#00ccff]">*</span></label><input id="name" name="name" type="text" class="cv-input" placeholder="Your Name" required /></div>
+          <div><label class="block text-xs text-slate-500 mb-1.5" for="email">Work Email <span class="text-[#00ccff]">*</span></label><input id="email" name="email" type="email" class="cv-input" placeholder="your@company.com" required /></div>
         </div>
         <div><label class="block text-xs text-slate-500 mb-1.5" for="company">Company / Organisation</label><input id="company" name="company" type="text" class="cv-input" placeholder="Your company name" /></div>
         <div><label class="block text-xs text-slate-500 mb-1.5" for="subject">Subject <span class="text-[#00ccff]">*</span></label>
@@ -66,9 +66,16 @@
         <div><label class="block text-xs text-slate-500 mb-1.5" for="message">Message <span class="text-[#00ccff]">*</span></label><textarea id="message" name="message" class="cv-input" placeholder="Describe your project, requirements, or question in as much detail as possible…" required></textarea></div>
         <div class="flex items-start gap-3 pt-1"><input id="consent" name="consent" type="checkbox" class="mt-0.5 w-4 h-4 accent-[#00ccff] shrink-0" required /><label for="consent" class="text-xs text-slate-500 leading-relaxed">I confirm this message contains no confidential IP. All sensitive project details should be shared only after an NDA is in place. (<a href="company/about.html#ip-policy" class="text-[#00ccff]/70 hover:text-[#00ccff] transition-colors">Legal Policy</a>)</label></div>
         <div class="pt-2">
-          <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-[#0a0a0a] bg-[#00ccff] hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Send Message</button>
+          <button type="submit" id="contact-submit-btn" class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-[#0a0a0a] bg-[#00ccff] hover:bg-[#00ccff]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"><i data-lucide="send" class="w-4 h-4"></i> Send Message</button>
         </div>
       </form>
+      <div id="contact-success" class="hidden mt-8 flex items-start gap-4 border border-[#00ccff]/30 bg-[#00ccff]/[0.05] p-6">
+        <i data-lucide="check-circle" class="w-6 h-6 text-[#00ccff] shrink-0 mt-0.5"></i>
+        <div>
+          <p class="text-sm font-semibold text-white mb-1">Message sent successfully</p>
+          <p class="text-xs text-slate-400">Thank you for reaching out. We'll respond within one business day.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Contact Info -->
@@ -98,11 +105,34 @@
 
 <div id="cv-footer"></div>
 <script>
-  // Consent validation before native POST
-  document.getElementById('contact-form').addEventListener('submit',function(e){
-    if(!document.getElementById('consent').checked){
-      e.preventDefault();
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!document.getElementById('consent').checked) {
       alert('Please confirm the consent checkbox before sending.');
+      return;
+    }
+    const form = e.target;
+    const btn = document.getElementById('contact-submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/info@chipverge.com', {
+        method: 'POST',
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        form.classList.add('hidden');
+        const success = document.getElementById('contact-success');
+        success.classList.remove('hidden');
+        lucide.createIcons();
+      } else {
+        throw new Error();
+      }
+    } catch (_) {
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i> Send Message';
+      lucide.createIcons();
+      alert('Something went wrong. Please try again or email us directly at hello@chipverge.com.');
     }
   });
 </script>
