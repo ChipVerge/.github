@@ -5,14 +5,13 @@
  */
 (function () {
   /* ── Path prefix ─────────────────────────────────────────── */
-  const path = window.location.pathname;
-  const segs = path.replace(/^\//, '').split('/').filter(Boolean);
-  // depth = number of directory levels (0 for root, 1 for about.html, etc.)
-  const depth = segs.length > 1 ? segs.length - 1 : 0;
-  const p = '../'.repeat(depth);
+  // Use pathname-based detection instead of segment counting so that
+  // file:// URLs on Windows (which include the full drive path) work correctly.
+  const loc = window.location.pathname.toLowerCase();
+  const depth = (loc.includes('/services/') || loc.includes('/blogs/')) ? 1 : 0;
+  const p = depth === 1 ? '../' : '';
 
   /* ── Active state detection ──────────────────────────────── */
-  const loc = path.toLowerCase();
   const inSvc      = loc.includes('/services/');
   const inAbout    = loc.includes('/about');
   const inPeople   = loc.includes('/people');
