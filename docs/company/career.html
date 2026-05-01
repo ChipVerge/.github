@@ -17,77 +17,11 @@
     .job-card:hover{border-color:rgba(0,204,255,0.35);}
     .job-detail{display:none;}
     .job-card.open .job-detail{display:block;}
-    .job-card.open .job-toggle-icon{transform:rotate(180deg);}
+    .job-card.open .job-toggle-icon{transform:rotate(180deg);}.cv-input{width:100%;background:#0d0d0d;border:1px solid rgba(0,204,255,0.18);color:#e2e8f0;padding:0.625rem 0.875rem;font-size:0.875rem;outline:none;transition:border-color 0.2s;font-family:inherit;}.cv-input::placeholder{color:#475569;}.cv-input:focus{border-color:rgba(0,204,255,0.5);}textarea.cv-input{resize:vertical;min-height:120px;}select.cv-input option{background:#0d0d0d;}
   </style>
 </head>
 <body class="bg-[#0a0a0a] text-slate-200">
-<nav class="sticky top-0 z-50 border-b border-[#00ccff]/15" style="backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(10,10,10,0.88);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex items-center justify-between h-16">
-    <a href="../index.html" class="flex items-center gap-2.5 shrink-0"><img src="../logo.png" alt="ChipVerge" class="h-8 w-8 object-contain" /><span class="text-[1.1rem] tracking-wide leading-none select-none"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span></a>
-    <div class="hidden lg:flex items-center">
-      <div class="dropdown group relative"><button class="flex items-center gap-1 px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Services<i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"></i></button>
-        <div class="dropdown-panel hidden group-hover:block absolute top-full left-0 w-72 border border-[#00ccff]/20 bg-[#0d0d0d] shadow-2xl z-50"><div class="p-2">
-          <p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-600 uppercase">Active Services</p>
-          <a href="../services/asic-design.html"           class="cv-dd-link"><i data-lucide="cpu"            class="w-4 h-4 text-[#00ccff] shrink-0"></i> ASIC Design</a>
-          <a href="../services/fpga-design.html"            class="cv-dd-link"><i data-lucide="circuit-board"  class="w-4 h-4 text-[#00ccff] shrink-0"></i> FPGA Design</a>
-          <a href="../services/verification.html"           class="cv-dd-link"><i data-lucide="shield-check"   class="w-4 h-4 text-[#00ccff] shrink-0"></i> Verification</a>
-          <a href="../services/custom-ip-vip.html"          class="cv-dd-link"><i data-lucide="layers"         class="w-4 h-4 text-[#00ccff] shrink-0"></i> Custom IP &amp; VIP</a>
-          <a href="../services/embedded-system.html"        class="cv-dd-link"><i data-lucide="server"         class="w-4 h-4 text-[#00ccff] shrink-0"></i> Embedded &amp; System-Level</a>
-          <a href="../services/eda-automation.html"         class="cv-dd-link"><i data-lucide="terminal"       class="w-4 h-4 text-[#00ccff] shrink-0"></i> EDA Automation</a>
-          <a href="../services/engineering-consulting.html" class="cv-dd-link"><i data-lucide="briefcase"      class="w-4 h-4 text-[#00ccff] shrink-0"></i> Engineering Consulting</a>
-          <a href="../services/training.html"               class="cv-dd-link"><i data-lucide="graduation-cap" class="w-4 h-4 text-[#00ccff] shrink-0"></i> Training</a>
-        </div>
-        <div class="border-t border-[#00ccff]/10 p-2"><p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-700 uppercase flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3"></i> Phase 2 — Planned</p>
-          <span class="cv-dd-disabled"><i data-lucide="scan-search" class="w-4 h-4 shrink-0"></i> DFT</span>
-          <span class="cv-dd-disabled"><i data-lucide="pen-tool"    class="w-4 h-4 shrink-0"></i> Custom Layout</span>
-          <span class="cv-dd-disabled"><i data-lucide="map"         class="w-4 h-4 shrink-0"></i> Physical Design Support</span>
-          <span class="cv-dd-disabled"><i data-lucide="activity"    class="w-4 h-4 shrink-0"></i> AMS Verification</span>
-        </div></div>
-      </div>
-      <div class="dropdown group relative"><button class="flex items-center gap-1 px-3.5 py-5 text-sm text-[#00ccff]">Company<i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"></i></button>
-        <div class="dropdown-panel hidden group-hover:block absolute top-full left-0 w-52 border border-[#00ccff]/20 bg-[#0d0d0d] shadow-2xl z-50"><div class="p-2">
-          <a href="../company/about.html"  class="cv-dd-link"><i data-lucide="info"      class="w-4 h-4 text-[#00ccff] shrink-0"></i> About Us</a>
-          <a href="../company/people.html" class="cv-dd-link"><i data-lucide="users"     class="w-4 h-4 text-[#00ccff] shrink-0"></i> People</a>
-          <a href="../company/career.html" class="cv-dd-link bg-[#00ccff]/5 text-[#00ccff]"><i data-lucide="briefcase" class="w-4 h-4 shrink-0"></i> Career</a>
-          <a href="../company/legal.html"  class="cv-dd-link"><i data-lucide="shield"    class="w-4 h-4 text-[#00ccff] shrink-0"></i> Legal / IP Security</a>
-        </div></div>
-      </div>
-      <a href="../blogs/index.html" class="px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Blogs</a>
-      <a href="../contact.html"     class="px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Contact</a>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="../client-portal.html" class="hidden lg:inline-flex items-center gap-1.5 px-4 py-1.5 text-sm border border-[#00ccff] text-[#00ccff] hover:bg-[#00ccff]/10 transition-colors tracking-wide"><i data-lucide="log-in" class="w-3.5 h-3.5"></i> Client Portal</a>
-      <button id="mob-toggle" class="lg:hidden p-1 text-slate-400 hover:text-[#00ccff] transition-colors"><i data-lucide="menu" class="w-6 h-6"></i></button>
-    </div>
-  </div></div>
-  <div id="mob-menu" class="hidden lg:hidden border-t border-[#00ccff]/10 bg-[#0a0a0a]">
-    <div class="px-4 py-3 space-y-0.5">
-      <div><button data-acc="mob-services" class="acc-btn w-full flex items-center justify-between py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Services<i data-lucide="chevron-down" class="w-4 h-4 acc-icon transition-transform"></i></button>
-        <div id="mob-services" class="hidden pl-4 pb-2 space-y-0.5 border-l border-[#00ccff]/15 ml-1 mt-0.5">
-          <a href="../services/asic-design.html"           class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">ASIC Design</a>
-          <a href="../services/fpga-design.html"            class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">FPGA Design</a>
-          <a href="../services/verification.html"           class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Verification</a>
-          <a href="../services/custom-ip-vip.html"          class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Custom IP &amp; VIP</a>
-          <a href="../services/embedded-system.html"        class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Embedded &amp; System-Level</a>
-          <a href="../services/eda-automation.html"         class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">EDA Automation</a>
-          <a href="../services/engineering-consulting.html" class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Engineering Consulting</a>
-          <a href="../services/training.html"               class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Training</a>
-        </div>
-      </div>
-      <div><button data-acc="mob-company" class="acc-btn w-full flex items-center justify-between py-2.5 text-sm text-[#00ccff]">Company<i data-lucide="chevron-down" class="w-4 h-4 acc-icon transition-transform"></i></button>
-        <div id="mob-company" class="hidden pl-4 pb-2 space-y-0.5 border-l border-[#00ccff]/15 ml-1 mt-0.5">
-          <a href="../company/about.html"  class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">About Us</a>
-          <a href="../company/people.html" class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">People</a>
-          <a href="../company/career.html" class="block py-1.5 text-sm text-[#00ccff]">Career</a>
-          <a href="../company/legal.html"  class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Legal / IP Security</a>
-        </div>
-      </div>
-      <a href="../blogs/index.html" class="block py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Blogs</a>
-      <a href="../contact.html"     class="block py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Contact</a>
-      <a href="../client-portal.html" class="block text-sm text-center border border-[#00ccff] text-[#00ccff] py-2 mt-2 hover:bg-[#00ccff]/10 transition-colors">Client Portal</a>
-    </div>
-  </div>
-</nav>
+<div id="cv-nav"></div>
 
 <section class="cv-page-hero">
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,7 +66,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Write clean, well-constrained SystemVerilog/VHDL RTL</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Define micro-architecture documents and RTL coding guidelines</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Drive logic synthesis and static timing analysis closure</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Collaborate with verification team on DV planning</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Support DFT and PD hand-off packages</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>3+ years RTL design experience in ASIC or FPGA</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Strong SystemVerilog coding and simulation skills</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with Synopsys DC or Cadence Genus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with low-power design (UPF/CPF) is a plus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Strong communication and documentation habits</li></ul></div>
         </div>
-        <a href="../contact.html?role=rtl-design-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;rtl-design-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -154,7 +88,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Build UVM testbenches (agents, sequences, scoreboards)</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Write verification plans and coverage models</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Develop functional and code coverage metrics</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Debug RTL failures and file detailed bug reports</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Drive regression automation and sign-off</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>3+ years UVM verification experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Strong SystemVerilog and SVA skills</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with VCS/Xcelium or Questa</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with protocol VIPs (AXI, AHB, PCIe, etc.) a plus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with formal property checking is desirable</li></ul></div>
         </div>
-        <a href="../contact.html?role=rtl-dv-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;rtl-dv-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -176,7 +110,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Develop real-number models (RNM) for analog blocks</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Set up SPICE-RTL co-simulation environments</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Define analog corner coverage and simulation plans</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Interface with circuit designers for spec extraction</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Drive mixed-signal regression and sign-off</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>3+ years AMS or mixed-signal verification experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Strong Verilog-AMS or SystemVerilog RNM skills</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with Cadence Virtuoso or Spectre</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Background in analog circuit fundamentals (ADC/DAC/PLL)</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>UVM knowledge is a plus</li></ul></div>
         </div>
-        <a href="../contact.html?role=ams-verification-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;ams-verification-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -198,7 +132,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Define DFT architecture and test strategy</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Perform scan insertion and ATPG with Synopsys DFT tools</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Implement MBIST and LBIST solutions</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Analyse fault and test coverage metrics</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Support ATE hand-off and production test development</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>3+ years ASIC DFT implementation experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Hands-on with Synopsys DFT Compiler / Tessent</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with IEEE 1149.1 (JTAG) and 1500</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with low-power test challenges</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Exposure to failure analysis flows is a plus</li></ul></div>
         </div>
-        <a href="../contact.html?role=dft-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;dft-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -220,7 +154,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Write bare-metal and RTOS-based firmware in C/C++</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Develop Linux BSPs and device drivers for custom SoCs</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Implement peripheral and interface drivers (I2C, SPI, UART, PCIe)</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>HW-SW co-design and board bring-up support</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Create system-level integration tests and debug utilities</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>3+ years embedded C/C++ development experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with ARM Cortex-M/A or RISC-V platforms</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Linux kernel module or BSP development experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with hardware debugging tools (JTAG, oscilloscope)</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Understanding of hardware interfaces and SoC register maps</li></ul></div>
         </div>
-        <a href="../contact.html?role=embedded-systems-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;embedded-systems-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -242,7 +176,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Floorplanning, power planning and pin assignment</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Placement optimisation and CTS implementation</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Signal routing and timing closure (STA with PrimeTime)</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>IR drop and electromigration analysis</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>LVS/DRC sign-off and GDSII tape-out preparation</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>4+ years physical design experience on tapeout projects</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Proficient in Cadence Innovus or Synopsys ICC2</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Strong STA skills with PrimeTime or Tempus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with advanced nodes (16nm / 7nm / below) a plus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Familiarity with low-power multi-VT optimisation</li></ul></div>
         </div>
-        <a href="../contact.html?role=physical-design-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;physical-design-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -264,7 +198,7 @@
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Responsibilities</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Full-custom layout of analog/mixed-signal blocks</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Device sizing for matching and parasitic optimisation</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>DRC and LVS verification and closure</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Parasitic extraction and post-layout simulation</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>GDSII merge and tape-out preparation support</li></ul></div>
           <div><p class="text-[0.6rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Requirements</p><ul class="space-y-1.5 text-xs text-slate-400"><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>4+ years full-custom IC layout experience</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Proficient in Cadence Virtuoso Layout Suite</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Experience with Calibre DRC/LVS and Star-RC</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Knowledge of fin/gate-all-around layout techniques is a plus</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#00ccff] mt-0.5 shrink-0"></i>Foundry experience (TSMC / Samsung / GF) preferred</li></ul></div>
         </div>
-        <a href="../contact.html?role=custom-layout-engineer" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</a>
+        <button type="button" onclick="applyFor(&apos;custom-layout-engineer&apos;)" class="inline-flex items-center gap-2 text-sm text-[#0a0a0a] font-medium bg-[#00ccff] px-5 py-2 hover:bg-[#00ccff]/90 transition-colors"><i data-lucide="send" class="w-4 h-4"></i> Apply for This Role</button>
       </div>
     </div>
 
@@ -272,29 +206,107 @@
 
   <div class="mt-16 border border-[#00ccff]/20 bg-[#00ccff]/[0.03] p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
     <div><p class="text-sm font-semibold text-white mb-1">Don't see a match? We're always looking for exceptional engineers.</p><p class="text-xs text-slate-500">Send an open application with your resume and areas of expertise.</p></div>
-    <a href="../contact.html" class="shrink-0 inline-flex items-center gap-2 text-sm text-[#00ccff] border border-[#00ccff]/40 px-5 py-2.5 hover:bg-[#00ccff]/10 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i> Open Application</a>
+    <button type="button" onclick="applyFor('open-application')" class="shrink-0 inline-flex items-center gap-2 text-sm text-[#00ccff] border border-[#00ccff]/40 px-5 py-2.5 hover:bg-[#00ccff]/10 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i> Open Application</button>
   </div>
+
+  <!-- ── Application Form ──────────────────────────────────── -->
+  <section id="apply-form" class="mt-20 border-t border-[#00ccff]/15 pt-16">
+    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Apply Now</p>
+    <h2 class="text-2xl font-semibold text-white mb-2">Submit Your Application</h2>
+    <p class="text-slate-400 text-sm mb-10 max-w-xl">Fill in your details below. All applications are reviewed by our engineering leads within 5 business days.</p>
+
+    <form action="https://formsubmit.co/info@chipverge.com" method="POST" class="max-w-2xl space-y-5" novalidate>
+      <!-- formsubmit config -->
+      <input type="hidden" name="_subject" value="Job Application — ChipVerge" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
+      <!-- Role select -->
+      <div>
+        <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Position <span class="text-[#00ccff]">*</span></label>
+        <select id="app-role" name="role" class="cv-input" required>
+          <option value="" disabled selected>Select a role…</option>
+          <option value="rtl-design-engineer">RTL Design Engineer</option>
+          <option value="rtl-dv-engineer">RTL Design Verification Engineer</option>
+          <option value="ams-verification-engineer">AMS Verification Engineer</option>
+          <option value="dft-engineer">DFT Engineer</option>
+          <option value="embedded-systems-engineer">Embedded Systems Engineer</option>
+          <option value="physical-design-engineer">Physical Design Engineer</option>
+          <option value="custom-layout-engineer">Custom Layout Engineer</option>
+          <option value="open-application">Open Application</option>
+        </select>
+      </div>
+
+      <!-- Name + Email -->
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Full Name <span class="text-[#00ccff]">*</span></label>
+          <input type="text" name="name" class="cv-input" placeholder="Your full name" required />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Email <span class="text-[#00ccff]">*</span></label>
+          <input type="email" name="email" class="cv-input" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <!-- Phone + LinkedIn -->
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Phone <span class="text-slate-700">(optional)</span></label>
+          <input type="tel" name="phone" class="cv-input" placeholder="+1 555 000 0000" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">LinkedIn / Portfolio <span class="text-slate-700">(optional)</span></label>
+          <input type="url" name="linkedin" class="cv-input" placeholder="https://linkedin.com/in/…" />
+        </div>
+      </div>
+
+      <!-- Cover Note -->
+      <div>
+        <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Cover Note <span class="text-[#00ccff]">*</span></label>
+        <textarea name="cover_note" class="cv-input" placeholder="Tell us about your experience, why ChipVerge, and what you'd bring to the team…" required></textarea>
+      </div>
+
+      <!-- Resume upload -->
+      <div>
+        <label class="block text-xs text-slate-500 mb-1.5 tracking-wide uppercase">Resume / CV <span class="text-[#00ccff]">*</span></label>
+        <input type="file" name="resume" accept=".pdf,.doc,.docx" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:border file:border-[#00ccff]/40 file:text-xs file:text-[#00ccff] file:bg-transparent file:cursor-pointer hover:file:border-[#00ccff] hover:file:bg-[#00ccff]/5 transition-colors" required />
+        <p class="text-[0.65rem] text-slate-700 mt-1.5">PDF, DOC or DOCX — max 10 MB</p>
+      </div>
+
+      <!-- Consent -->
+      <div class="flex items-start gap-3 pt-1">
+        <input id="app-consent" type="checkbox" class="mt-0.5 w-4 h-4 accent-[#00ccff] shrink-0" required />
+        <label for="app-consent" class="text-xs text-slate-500 leading-relaxed">I confirm my details are accurate and I consent to ChipVerge processing my application data for recruitment purposes. All information is handled under strict confidentiality.</label>
+      </div>
+
+      <button type="submit" class="inline-flex items-center gap-2 px-7 py-3 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">
+        <i data-lucide="send" class="w-4 h-4"></i> Submit Application
+      </button>
+    </form>
+  </section>
 </main>
 
-<footer class="border-t border-[#00ccff]/10 bg-[#060606]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-      <div class="col-span-2 lg:col-span-1"><a href="../index.html" class="flex items-center gap-2 mb-4"><img src="../logo.png" alt="ChipVerge" class="h-7 w-7 object-contain" /><span class="text-base tracking-wide"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span></a><p class="text-xs text-slate-600 leading-relaxed">Silicon-grade engineering. RTL to tape-out, delivered with precision.</p></div>
-      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Services</h4><ul class="space-y-1.5"><li><a href="../services/asic-design.html" class="cv-footer-link">ASIC Design</a></li><li><a href="../services/fpga-design.html" class="cv-footer-link">FPGA Design</a></li><li><a href="../services/verification.html" class="cv-footer-link">Verification</a></li><li><a href="../services/custom-ip-vip.html" class="cv-footer-link">Custom IP &amp; VIP</a></li><li><a href="../services/eda-automation.html" class="cv-footer-link">EDA Automation</a></li></ul></div>
-      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Company</h4><ul class="space-y-1.5"><li><a href="../company/about.html" class="cv-footer-link">About Us</a></li><li><a href="../company/career.html" class="cv-footer-link">Career</a></li><li><a href="../company/legal.html" class="cv-footer-link">Legal / IP Security</a></li><li><a href="../blogs/index.html" class="cv-footer-link">Blogs</a></li><li><a href="../contact.html" class="cv-footer-link">Contact</a></li></ul></div>
-      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Get in Touch</h4><ul class="space-y-2"><li class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-[#00ccff] shrink-0"></i><a href="mailto:hello@chipverge.com" class="text-sm text-slate-500 hover:text-[#00ccff] transition-colors">hello@chipverge.com</a></li><li class="flex items-center gap-2"><i data-lucide="globe" class="w-3.5 h-3.5 text-[#00ccff] shrink-0"></i><span class="text-sm text-slate-500">chipverge.com</span></li></ul></div>
-    </div>
-    <div class="border-t border-[#00ccff]/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-xs text-slate-700">&copy; 2026 ChipVerge. All rights reserved.</p>
-      <div class="flex items-center gap-4"><a href="../company/legal.html" class="text-xs text-slate-700 hover:text-[#00ccff] transition-colors">Legal &amp; IP Policy</a><a href="../contact.html" class="text-xs text-slate-700 hover:text-[#00ccff] transition-colors">Contact</a></div>
-    </div>
-  </div>
-</footer>
+<div id="cv-footer"></div>
 <script>
-  lucide.createIcons();
-  document.getElementById('mob-toggle').addEventListener('click',()=>document.getElementById('mob-menu').classList.toggle('hidden'));
-  document.querySelectorAll('.acc-btn').forEach(b=>{b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.acc),ic=b.querySelector('.acc-icon');p.classList.toggle('hidden');ic.style.transform=p.classList.contains('hidden')?'':'rotate(180deg)';});});
-  function toggleJob(card){card.classList.toggle('open');}
+  function toggleJob(card){
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.job-card').forEach(c => {
+      c.classList.remove('open');
+      const ic = c.querySelector('.job-toggle-icon');
+      if(ic) ic.style.transform = '';
+    });
+    if(!isOpen){
+      card.classList.add('open');
+      const ic = card.querySelector('.job-toggle-icon');
+      if(ic) ic.style.transform = 'rotate(180deg)';
+    }
+  }
+  function applyFor(role){
+    document.getElementById('app-role').value = role;
+    document.getElementById('apply-form').scrollIntoView({behavior:'smooth', block:'start'});
+  }
 </script>
+<script src="../js/components.js"></script>
 </body>
 </html>
