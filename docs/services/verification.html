@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verification services — ChipVerge. UVM testbenches, formal methods, and coverage-driven RTL verification." />
+  <title>Verification — ChipVerge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>body{font-family:'Inter',sans-serif;}.dropdown:focus-within .dropdown-panel{display:block!important;}</style>
+</head>
+<body class="bg-[#0a0a0a] text-slate-200">
+<nav class="sticky top-0 z-50 border-b border-[#00ccff]/15" style="backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(10,10,10,0.88);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="../index.html" class="flex items-center gap-2.5 shrink-0"><img src="../logo.png" alt="ChipVerge" class="h-8 w-8 object-contain" /><span class="text-[1.1rem] tracking-wide leading-none select-none"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span></a>
+      <div class="hidden lg:flex items-center">
+        <div class="dropdown group relative">
+          <button class="flex items-center gap-1 px-3.5 py-5 text-sm text-[#00ccff]">Services<i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"></i></button>
+          <div class="dropdown-panel hidden group-hover:block absolute top-full left-0 w-72 border border-[#00ccff]/20 bg-[#0d0d0d] shadow-2xl z-50">
+            <div class="p-2">
+              <p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-600 uppercase">Active Services</p>
+              <a href="../services/asic-design.html"           class="cv-dd-link"><i data-lucide="cpu"            class="w-4 h-4 text-[#00ccff] shrink-0"></i> ASIC Design</a>
+              <a href="../services/fpga-design.html"            class="cv-dd-link"><i data-lucide="circuit-board"  class="w-4 h-4 text-[#00ccff] shrink-0"></i> FPGA Design</a>
+              <a href="../services/verification.html"           class="cv-dd-link bg-[#00ccff]/5 text-[#00ccff]"><i data-lucide="shield-check"   class="w-4 h-4 shrink-0"></i> Verification</a>
+              <a href="../services/custom-ip-vip.html"          class="cv-dd-link"><i data-lucide="layers"         class="w-4 h-4 text-[#00ccff] shrink-0"></i> Custom IP &amp; VIP</a>
+              <a href="../services/embedded-system.html"        class="cv-dd-link"><i data-lucide="server"         class="w-4 h-4 text-[#00ccff] shrink-0"></i> Embedded &amp; System-Level</a>
+              <a href="../services/eda-automation.html"         class="cv-dd-link"><i data-lucide="terminal"       class="w-4 h-4 text-[#00ccff] shrink-0"></i> EDA Automation</a>
+              <a href="../services/engineering-consulting.html" class="cv-dd-link"><i data-lucide="briefcase"      class="w-4 h-4 text-[#00ccff] shrink-0"></i> Engineering Consulting</a>
+              <a href="../services/training.html"               class="cv-dd-link"><i data-lucide="graduation-cap" class="w-4 h-4 text-[#00ccff] shrink-0"></i> Training</a>
+            </div>
+            <div class="border-t border-[#00ccff]/10 p-2">
+              <p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-700 uppercase flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3"></i> Phase 2 — Planned</p>
+              <span class="cv-dd-disabled"><i data-lucide="scan-search" class="w-4 h-4 shrink-0"></i> DFT</span>
+              <span class="cv-dd-disabled"><i data-lucide="pen-tool"    class="w-4 h-4 shrink-0"></i> Custom Layout</span>
+              <span class="cv-dd-disabled"><i data-lucide="map"         class="w-4 h-4 shrink-0"></i> Physical Design Support</span>
+              <span class="cv-dd-disabled"><i data-lucide="activity"    class="w-4 h-4 shrink-0"></i> AMS Verification</span>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown group relative">
+          <button class="flex items-center gap-1 px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Company<i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"></i></button>
+          <div class="dropdown-panel hidden group-hover:block absolute top-full left-0 w-52 border border-[#00ccff]/20 bg-[#0d0d0d] shadow-2xl z-50">
+            <div class="p-2">
+              <a href="../company/about.html"  class="cv-dd-link"><i data-lucide="info"      class="w-4 h-4 text-[#00ccff] shrink-0"></i> About Us</a>
+              <a href="../company/people.html" class="cv-dd-link"><i data-lucide="users"     class="w-4 h-4 text-[#00ccff] shrink-0"></i> People</a>
+              <a href="../company/career.html" class="cv-dd-link"><i data-lucide="briefcase" class="w-4 h-4 text-[#00ccff] shrink-0"></i> Career</a>
+              <a href="../company/legal.html"  class="cv-dd-link"><i data-lucide="shield"    class="w-4 h-4 text-[#00ccff] shrink-0"></i> Legal / IP Security</a>
+            </div>
+          </div>
+        </div>
+        <a href="../blogs/index.html" class="px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Blogs</a>
+        <a href="../contact.html"     class="px-3.5 py-5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Contact</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="../client-portal.html" class="hidden lg:inline-flex items-center gap-1.5 px-4 py-1.5 text-sm border border-[#00ccff] text-[#00ccff] hover:bg-[#00ccff]/10 transition-colors tracking-wide"><i data-lucide="log-in" class="w-3.5 h-3.5"></i> Client Portal</a>
+        <button id="mob-toggle" class="lg:hidden p-1 text-slate-400 hover:text-[#00ccff] transition-colors"><i data-lucide="menu" class="w-6 h-6"></i></button>
+      </div>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden lg:hidden border-t border-[#00ccff]/10 bg-[#0a0a0a]">
+    <div class="px-4 py-3 space-y-0.5">
+      <div><button data-acc="mob-services" class="acc-btn w-full flex items-center justify-between py-2.5 text-sm text-[#00ccff]">Services<i data-lucide="chevron-down" class="w-4 h-4 acc-icon transition-transform"></i></button>
+        <div id="mob-services" class="hidden pl-4 pb-2 space-y-0.5 border-l border-[#00ccff]/15 ml-1 mt-0.5">
+          <a href="../services/asic-design.html"           class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">ASIC Design</a>
+          <a href="../services/fpga-design.html"            class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">FPGA Design</a>
+          <a href="../services/verification.html"           class="block py-1.5 text-sm text-[#00ccff]">Verification</a>
+          <a href="../services/custom-ip-vip.html"          class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Custom IP &amp; VIP</a>
+          <a href="../services/embedded-system.html"        class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Embedded &amp; System-Level</a>
+          <a href="../services/eda-automation.html"         class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">EDA Automation</a>
+          <a href="../services/engineering-consulting.html" class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Engineering Consulting</a>
+          <a href="../services/training.html"               class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Training</a>
+        </div>
+      </div>
+      <div><button data-acc="mob-company" class="acc-btn w-full flex items-center justify-between py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Company<i data-lucide="chevron-down" class="w-4 h-4 acc-icon transition-transform"></i></button>
+        <div id="mob-company" class="hidden pl-4 pb-2 space-y-0.5 border-l border-[#00ccff]/15 ml-1 mt-0.5">
+          <a href="../company/about.html"  class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">About Us</a>
+          <a href="../company/people.html" class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">People</a>
+          <a href="../company/career.html" class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Career</a>
+          <a href="../company/legal.html"  class="block py-1.5 text-sm text-slate-400 hover:text-[#00ccff] transition-colors">Legal / IP Security</a>
+        </div>
+      </div>
+      <a href="../blogs/index.html" class="block py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Blogs</a>
+      <a href="../contact.html"     class="block py-2.5 text-sm text-slate-300 hover:text-[#00ccff] transition-colors">Contact</a>
+      <a href="../client-portal.html" class="block text-sm text-center border border-[#00ccff] text-[#00ccff] py-2 mt-2 hover:bg-[#00ccff]/10 transition-colors">Client Portal</a>
+    </div>
+  </div>
+</nav>
+
+<section class="cv-page-hero">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6">
+      <a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a><span>›</span><span class="text-slate-500">Services</span><span>›</span><span class="text-[#00ccff]">Verification</span>
+    </div>
+    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Services</p>
+    <div class="flex items-start gap-4">
+      <i data-lucide="shield-check" class="w-10 h-10 text-[#00ccff] shrink-0 mt-1"></i>
+      <div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">Verification</h1>
+        <p class="text-slate-400 max-w-2xl leading-relaxed">Rigorous RTL verification using UVM methodologies, formal property checking, and coverage-closure driven flows to ensure zero-defect silicon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#00ccff]/10 mb-16">
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="layers"       class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">UVM Testbenches</h3><p class="text-xs text-slate-500 leading-relaxed">Class-based, reusable UVM environments with agents, monitors, scoreboards, and coverage models.</p></div>
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="check-square" class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Formal Verification</h3><p class="text-xs text-slate-500 leading-relaxed">Formal property checking with JasperGold and Synopsys VC Formal for unreachable corner cases.</p></div>
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="percent"      class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Coverage Closure</h3><p class="text-xs text-slate-500 leading-relaxed">Structured code, functional, and cross-coverage analysis with directed test completion strategies.</p></div>
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="zap"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Emulation</h3><p class="text-xs text-slate-500 leading-relaxed">Hardware-accelerated emulation setup on Cadence Palladium / Siemens Veloce platforms.</p></div>
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="link-2"       class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Protocol Verification</h3><p class="text-xs text-slate-500 leading-relaxed">AXI, AHB, APB, PCIe, USB, and custom protocol compliance verification with VIP integration.</p></div>
+    <div class="bg-[#0a0a0a] p-6"><i data-lucide="file-text"    class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Verification Planning</h3><p class="text-xs text-slate-500 leading-relaxed">Verification plan (VPlan) creation, feature extraction, and sign-off criteria definition.</p></div>
+  </div>
+  <div class="cv-placeholder">
+    <i data-lucide="shield-check" class="w-14 h-14 text-[#00ccff]/15 mx-auto mb-4"></i>
+    <p class="text-slate-500 text-sm mb-1">Full service documentation in progress.</p>
+    <p class="text-slate-600 text-xs mb-6">Methodology guides, tool stack details, and case studies coming soon.</p>
+    <a href="../contact.html" class="inline-flex items-center gap-2 text-sm text-[#00ccff] hover:text-[#00ffcc] transition-colors border border-[#00ccff]/30 px-5 py-2 hover:border-[#00ccff]/60"><i data-lucide="mail" class="w-4 h-4"></i> Enquire about Verification</a>
+  </div>
+</main>
+
+<footer class="border-t border-[#00ccff]/10 bg-[#060606]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 lg:col-span-1"><a href="../index.html" class="flex items-center gap-2 mb-4"><img src="../logo.png" alt="ChipVerge" class="h-7 w-7 object-contain" /><span class="text-base tracking-wide"><span class="font-semibold text-white">Chip</span><span class="fw-350 text-[#00ccff]">Verge</span></span></a><p class="text-xs text-slate-600 leading-relaxed">Silicon-grade engineering. RTL to tape-out, delivered with precision.</p></div>
+      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Services</h4><ul class="space-y-1.5"><li><a href="../services/asic-design.html" class="cv-footer-link">ASIC Design</a></li><li><a href="../services/fpga-design.html" class="cv-footer-link">FPGA Design</a></li><li><a href="../services/verification.html" class="cv-footer-link">Verification</a></li><li><a href="../services/custom-ip-vip.html" class="cv-footer-link">Custom IP &amp; VIP</a></li><li><a href="../services/eda-automation.html" class="cv-footer-link">EDA Automation</a></li></ul></div>
+      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Company</h4><ul class="space-y-1.5"><li><a href="../company/about.html" class="cv-footer-link">About Us</a></li><li><a href="../company/career.html" class="cv-footer-link">Career</a></li><li><a href="../company/legal.html" class="cv-footer-link">Legal / IP Security</a></li><li><a href="../blogs/index.html" class="cv-footer-link">Blogs</a></li><li><a href="../contact.html" class="cv-footer-link">Contact</a></li></ul></div>
+      <div><h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Get in Touch</h4><ul class="space-y-2"><li class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-[#00ccff] shrink-0"></i><a href="mailto:hello@chipverge.com" class="text-sm text-slate-500 hover:text-[#00ccff] transition-colors">hello@chipverge.com</a></li><li class="flex items-center gap-2"><i data-lucide="globe" class="w-3.5 h-3.5 text-[#00ccff] shrink-0"></i><span class="text-sm text-slate-500">chipverge.com</span></li></ul></div>
+    </div>
+    <div class="border-t border-[#00ccff]/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-slate-700">&copy; 2026 ChipVerge. All rights reserved.</p>
+      <div class="flex items-center gap-4"><a href="../company/legal.html" class="text-xs text-slate-700 hover:text-[#00ccff] transition-colors">Legal &amp; IP Policy</a><a href="../contact.html" class="text-xs text-slate-700 hover:text-[#00ccff] transition-colors">Contact</a></div>
+    </div>
+  </div>
+</footer>
+<script>lucide.createIcons();document.getElementById('mob-toggle').addEventListener('click',()=>document.getElementById('mob-menu').classList.toggle('hidden'));document.querySelectorAll('.acc-btn').forEach(b=>{b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.acc),ic=b.querySelector('.acc-icon');p.classList.toggle('hidden');ic.style.transform=p.classList.contains('hidden')?'':'rotate(180deg)';});});</script>
+</body>
+</html>

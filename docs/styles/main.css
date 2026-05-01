@@ -1,149 +1,171 @@
 /* ============================================================
-   Under-development page — styles
+   ChipVerge — Global Stylesheet
    ============================================================ */
 
 :root {
-  --accent-cyan:  #00ccff;
-  --accent-green: #00ffcc;
-  --accent-white: #ffffff;
-  --bg:           #000000;
+  --cv-primary:   #00ccff;
+  --cv-secondary: #00ffcc;
+  --cv-bg:        #0a0a0a;
+  --cv-bg-alt:    #070707;
+  --cv-border:    rgba(0, 204, 255, 0.15);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  overflow: hidden;
-  font-family: 'Inter', 'Segoe UI', 'Courier New', monospace;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  background: var(--cv-bg);
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Canvas background ── */
-.hero-bg {
-  position: fixed;
+/* font-weight: 350 */
+.fw-350 { font-weight: 350; }
+
+/* Grid background texture */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 204, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Circuit canvas hero bg */
+.hero-canvas-bg {
+  position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.1;
-}
-
-#circuitCanvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* ── Central card ── */
-.card {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: 3rem 4rem;
-  border: 1px solid rgba(0, 204, 255, 0.25);
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(18px);
-  box-shadow:
-    0 0 40px rgba(0, 204, 255, 0.10),
-    0 0 120px rgba(0, 255, 204, 0.06);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 13px;
-  background: linear-gradient(135deg, rgba(0, 204, 255, 0.30), transparent 50%, rgba(0, 255, 204, 0.20));
-  z-index: -1;
+  opacity: 0.13;
   pointer-events: none;
 }
+#circuitCanvas { width: 100%; height: 100%; display: block; }
 
-.icon {
-  font-size: 3rem;
+/* Ticker scroll */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-inner {
+  display: inline-flex;
+  gap: 4rem;
+  white-space: nowrap;
+  animation: ticker-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+/* Carousel */
+.slide { display: none; flex-direction: column; align-items: center; justify-content: center; }
+.slide.active { display: flex; }
+
+/* Dropdown keyboard accessibility */
+.dropdown:focus-within .dropdown-panel { display: block !important; }
+
+/* ── Shared component classes ─────────────────────────────── */
+
+/* Dropdown link */
+.cv-dd-link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s;
+}
+.cv-dd-link:hover { color: var(--cv-primary); background: rgba(0, 204, 255, 0.04); }
+
+/* Dropdown disabled item */
+.cv-dd-disabled {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: default;
+  user-select: none;
+}
+
+/* Service card */
+.cv-svc-card {
+  display: block;
+  background: #0a0a0a;
+  padding: 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+.cv-svc-card:hover { background: rgba(0, 204, 255, 0.03); }
+.cv-svc-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--cv-primary);
   margin-bottom: 1rem;
-  animation: pulse 2.4s ease-in-out infinite;
+  transition: transform 0.2s;
 }
-
-h1 {
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
-  color: var(--accent-white);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-shadow: 0 0 18px rgba(0, 204, 255, 0.6);
+.cv-svc-card:hover .cv-svc-icon { transform: scale(1.1); }
+.cv-svc-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  transition: color 0.15s;
 }
+.cv-svc-card:hover .cv-svc-title { color: var(--cv-primary); }
+.cv-svc-body { font-size: 0.8125rem; color: #64748b; line-height: 1.6; }
 
-.subtitle {
-  margin-top: 0.75rem;
-  font-size: clamp(0.8rem, 1.8vw, 1rem);
-  color: rgba(0, 255, 204, 0.75);
-  letter-spacing: 0.12em;
+/* Trust card */
+.cv-trust-card {
+  border: 1px solid rgba(0, 204, 255, 0.15);
+  padding: 1rem;
+  background: #0a0a0a;
+  transition: border-color 0.15s;
 }
+.cv-trust-card:hover { border-color: rgba(0, 204, 255, 0.3); }
 
-/* ── Blinking cursor bar ── */
-.cursor {
-  display: inline-block;
-  width: 10px;
-  height: 1em;
-  background: var(--accent-cyan);
-  vertical-align: text-bottom;
-  margin-left: 4px;
-  animation: blink 1s step-end infinite;
+/* Footer link */
+.cv-footer-link {
+  font-size: 0.875rem;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s;
 }
+.cv-footer-link:hover { color: var(--cv-primary); }
 
-/* ── Progress bar ── */
-.progress-wrap {
-  margin-top: 2rem;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 2px;
+/* Page hero section */
+.cv-page-hero {
+  padding: 5rem 0 3.5rem;
+  background: var(--cv-bg);
+  border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+  position: relative;
   overflow: hidden;
 }
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
-  border-radius: 2px;
-  box-shadow: 0 0 10px var(--accent-cyan);
-  animation: load 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.cv-page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 204, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-/* ── Keyframes ── */
-@keyframes blink {
-  50% { opacity: 0; }
+/* Placeholder content box */
+.cv-placeholder {
+  border: 1px solid rgba(0, 204, 255, 0.1);
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #070707;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%       { transform: scale(1.1); opacity: 0.8; }
-}
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: var(--cv-bg); }
+::-webkit-scrollbar-thumb { background: rgba(0, 204, 255, 0.25); }
+::-webkit-scrollbar-thumb:hover { background: var(--cv-primary); }
 
-@keyframes load {
-  0%   { width: 0%;    opacity: 1; }
-  70%  { width: 100%;  opacity: 1; }
-  100% { width: 100%;  opacity: 0; }
-}
+/* Selection highlight */
+::selection { background: rgba(0, 204, 255, 0.2); color: #fff; }
 
-/* ── Nav button ── */
-.nav-btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.55rem 1.5rem;
-  border: 1px solid var(--accent-cyan);
-  border-radius: 4px;
-  color: var(--accent-cyan);
-  font-family: inherit;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-.nav-btn:hover {
-  background: var(--accent-cyan);
-  color: var(--bg);
-  box-shadow: 0 0 12px var(--accent-cyan);
-}
