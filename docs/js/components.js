@@ -14,9 +14,9 @@
   /* ── Active state detection ──────────────────────────────── */
   const loc = path.toLowerCase();
   const inSvc      = loc.includes('/services/');
-  const inAbout    = loc.includes('/company/about');
-  const inPeople   = loc.includes('/company/people');
-  const inCareer   = loc.includes('/company/career');
+  const inAbout    = loc.includes('/about');
+  const inPeople   = loc.includes('/people');
+  const inCareer   = loc.includes('/career');
   const inBlogs    = loc.includes('/blogs/');
   const inContact  = loc.includes('/contact');
 
