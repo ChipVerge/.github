@@ -1,0 +1,35 @@
+{
+  "title": "People",
+  "eyebrow": "Company",
+  "description": "The engineers, architects, and specialists who make ChipVerge's silicon-grade outcomes possible.",
+  "profiles": [
+    {
+      "title": "Team Profile",
+      "discipline": "ASIC Design",
+      "summary": "Details coming soon.",
+      "icon": "cpu"
+    },
+    {
+      "title": "Team Profile",
+      "discipline": "Verification",
+      "summary": "Details coming soon.",
+      "icon": "shield-check"
+    },
+    {
+      "title": "Team Profile",
+      "discipline": "Embedded Systems",
+      "summary": "Details coming soon.",
+      "icon": "server"
+    },
+    {
+      "title": "Team Profile",
+      "discipline": "EDA & Automation",
+      "summary": "Details coming soon.",
+      "icon": "terminal"
+    }
+  ],
+  "placeholderTitle": "Full team profiles in preparation.",
+  "placeholderDescription": "Individual bios and LinkedIn profiles coming soon.",
+  "ctaLabel": "View Open Roles",
+  "ctaHref": "career.html"
+}

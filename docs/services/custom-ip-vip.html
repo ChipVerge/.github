@@ -11,43 +11,13 @@
   <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
   <link rel="stylesheet" href="../styles/main.css" />
 </head>
-<body class="bg-[#0a0a0a] text-slate-200">
+<body class="bg-[#0a0a0a] text-slate-200" data-page="service" data-service-slug="custom-ip-vip">
 <div id="cv-nav"></div>
 
-<section class="cv-page-hero">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6">
-      <a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a><span>›</span><span class="text-slate-500">Services</span><span>›</span><span class="text-[#00ccff]">Custom IP &amp; VIP</span>
-    </div>
-    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Services</p>
-    <div class="flex items-start gap-4">
-      <i data-lucide="layers" class="w-10 h-10 text-[#00ccff] shrink-0 mt-1"></i>
-      <div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">Custom IP &amp; VIP</h1>
-        <p class="text-slate-400 max-w-2xl leading-relaxed">Silicon-proven, reusable IP blocks and Verification IPs designed for maximum integration efficiency and long-term maintainability across projects.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#00ccff]/10 mb-16">
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="box"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Interface IP</h3><p class="text-xs text-slate-500 leading-relaxed">AXI4, AHB5, APB, I2C, SPI, UART, and custom bus protocol IP blocks.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="cpu"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Memory Controllers</h3><p class="text-xs text-slate-500 leading-relaxed">DDR4/LPDDR5 controllers, SRAM wrappers, and multi-port memory subsystems.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="shield-check" class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">VIP Development</h3><p class="text-xs text-slate-500 leading-relaxed">UVM-compliant VIPs for proprietary and standard interfaces with full coverage models.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="key"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Security IP</h3><p class="text-xs text-slate-500 leading-relaxed">AES, SHA, RSA, TRNG, and secure key management hardware accelerators.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="refresh-cw"  class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">IP Integration Support</h3><p class="text-xs text-slate-500 leading-relaxed">Integration guidelines, synthesis scripts, and bring-up support for delivered IP.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="file-lock-2" class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">IP Licensing</h3><p class="text-xs text-slate-500 leading-relaxed">Flexible licensing models with NDA-covered source or encrypted netlist delivery.</p></div>
-  </div>
-  <div class="cv-placeholder">
-    <i data-lucide="layers" class="w-14 h-14 text-[#00ccff]/15 mx-auto mb-4"></i>
-    <p class="text-slate-500 text-sm mb-1">Full IP catalogue and documentation in progress.</p>
-    <p class="text-slate-600 text-xs mb-6">IP datasheets and integration guides coming soon.</p>
-    <a href="../contact.html" class="inline-flex items-center gap-2 text-sm text-[#00ccff] hover:text-[#00ffcc] transition-colors border border-[#00ccff]/30 px-5 py-2 hover:border-[#00ccff]/60"><i data-lucide="mail" class="w-4 h-4"></i> Enquire about Custom IP &amp; VIP</a>
-  </div>
-</main>
+<div id="service-page"></div>
 
 <div id="cv-footer"></div>
+<script src="../js/content.js"></script>
 <script src="../js/components.js"></script>
 </body>
 </html>

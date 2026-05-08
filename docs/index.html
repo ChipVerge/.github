@@ -122,16 +122,7 @@
       <h2 class="text-3xl sm:text-4xl font-semibold text-white">Core Services</h2>
       <div class="w-10 h-px bg-[#00ccff] mt-4"></div>
     </header>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#00ccff]/10">
-      <a href="services/asic-design.html"           class="cv-svc-card"><i data-lucide="cpu"            class="cv-svc-icon"></i><h3 class="cv-svc-title">ASIC Design</h3><p class="cv-svc-body">RTL coding, synthesis, STA, and full custom ASIC tape-out flows.</p></a>
-      <a href="services/fpga-design.html"            class="cv-svc-card"><i data-lucide="circuit-board"  class="cv-svc-icon"></i><h3 class="cv-svc-title">FPGA Design</h3><p class="cv-svc-body">Rapid prototyping to production-grade FPGA implementations.</p></a>
-      <a href="services/verification.html"           class="cv-svc-card"><i data-lucide="shield-check"   class="cv-svc-icon"></i><h3 class="cv-svc-title">Verification</h3><p class="cv-svc-body">UVM, formal, emulation, and full coverage-closure methodologies.</p></a>
-      <a href="services/custom-ip-vip.html"          class="cv-svc-card"><i data-lucide="layers"         class="cv-svc-icon"></i><h3 class="cv-svc-title">Custom IP &amp; VIP</h3><p class="cv-svc-body">Silicon-proven reusable IP blocks and verification IPs.</p></a>
-      <a href="services/embedded-system.html"        class="cv-svc-card"><i data-lucide="server"         class="cv-svc-icon"></i><h3 class="cv-svc-title">Embedded &amp; System-Level</h3><p class="cv-svc-body">Firmware, RTOS integration, and system-level design services.</p></a>
-      <a href="services/eda-automation.html"         class="cv-svc-card"><i data-lucide="terminal"       class="cv-svc-icon"></i><h3 class="cv-svc-title">EDA Automation</h3><p class="cv-svc-body">Scripted design flows and CI/CD pipelines for hardware teams.</p></a>
-      <a href="services/engineering-consulting.html" class="cv-svc-card"><i data-lucide="briefcase"      class="cv-svc-icon"></i><h3 class="cv-svc-title">Engineering Consulting</h3><p class="cv-svc-body">Expert augmentation, architectural review, and design guidance.</p></a>
-      <a href="services/training.html"               class="cv-svc-card"><i data-lucide="graduation-cap" class="cv-svc-icon"></i><h3 class="cv-svc-title">Training</h3><p class="cv-svc-body">RTL, verification, and EDA workshops for engineering teams.</p></a>
-    </div>
+    <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#00ccff]/10" aria-live="polite"></div>
   </div>
 </section>
 
@@ -259,6 +250,7 @@
     });
   });
 </script>
+<script src="js/content.js"></script>
 <script src="js/components.js"></script>
 </body>
 </html>

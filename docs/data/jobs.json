@@ -1,0 +1,176 @@
+{
+  "title": "Career",
+  "eyebrow": "Company",
+  "description": "Join a team of specialist engineers delivering silicon-grade results. We are growing and looking for outstanding people across the IC design and verification flow.",
+  "settings": {
+    "workModel": "Remote",
+    "contractType": "Full-time",
+    "reviewWindow": "5 business days"
+  },
+  "jobs": [
+    {
+      "slug": "rtl-design-engineer",
+      "title": "RTL Design Engineer",
+      "team": "Design & Architecture",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "cpu",
+      "summary": "Design and implement synthesisable RTL for complex ASIC/FPGA SoC blocks. You will own block-level architecture through to handoff to the physical design team, including synthesis constraints and timing closure.",
+      "responsibilities": [
+        "Write clean, well-constrained SystemVerilog/VHDL RTL",
+        "Define micro-architecture documents and RTL coding guidelines",
+        "Drive logic synthesis and static timing analysis closure",
+        "Collaborate with verification team on DV planning",
+        "Support DFT and PD hand-off packages"
+      ],
+      "requirements": [
+        "3+ years RTL design experience in ASIC or FPGA",
+        "Strong SystemVerilog coding and simulation skills",
+        "Familiarity with Synopsys DC or Cadence Genus",
+        "Experience with low-power design (UPF/CPF) is a plus",
+        "Strong communication and documentation habits"
+      ]
+    },
+    {
+      "slug": "rtl-dv-engineer",
+      "title": "RTL Design Verification Engineer",
+      "team": "Verification",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "shield-check",
+      "summary": "Develop and execute comprehensive verification plans for RTL blocks and sub-systems using UVM and industry-standard methodologies to achieve coverage closure.",
+      "responsibilities": [
+        "Build UVM testbenches (agents, sequences, scoreboards)",
+        "Write verification plans and coverage models",
+        "Develop functional and code coverage metrics",
+        "Debug RTL failures and file detailed bug reports",
+        "Drive regression automation and sign-off"
+      ],
+      "requirements": [
+        "3+ years UVM verification experience",
+        "Strong SystemVerilog and SVA skills",
+        "Familiarity with VCS/Xcelium or Questa",
+        "Experience with protocol VIPs (AXI, AHB, PCIe, etc.) a plus",
+        "Familiarity with formal property checking is desirable"
+      ]
+    },
+    {
+      "slug": "ams-verification-engineer",
+      "title": "AMS Verification Engineer",
+      "team": "Verification",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "activity",
+      "summary": "Verify mixed-signal IP and SoCs using AMS simulation flows - Spice-to-RTL co-simulation, real-number modelling, and targeted stimulus generation for analog behavioural blocks.",
+      "responsibilities": [
+        "Develop real-number models (RNM) for analog blocks",
+        "Set up SPICE-RTL co-simulation environments",
+        "Define analog corner coverage and simulation plans",
+        "Interface with circuit designers for spec extraction",
+        "Drive mixed-signal regression and sign-off"
+      ],
+      "requirements": [
+        "3+ years AMS or mixed-signal verification experience",
+        "Strong Verilog-AMS or SystemVerilog RNM skills",
+        "Experience with Cadence Virtuoso or Spectre",
+        "Background in analog circuit fundamentals (ADC/DAC/PLL)",
+        "UVM knowledge is a plus"
+      ]
+    },
+    {
+      "slug": "dft-engineer",
+      "title": "DFT Engineer",
+      "team": "Design-for-Test",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "scan-search",
+      "summary": "Implement and optimise Design-for-Test architectures - scan insertion, BIST, ATPG pattern generation, and test coverage analysis - across complex ASIC designs from RTL to GDSII.",
+      "responsibilities": [
+        "Define DFT architecture and test strategy",
+        "Perform scan insertion and ATPG with Synopsys DFT tools",
+        "Implement MBIST and LBIST solutions",
+        "Analyse fault and test coverage metrics",
+        "Support ATE hand-off and production test development"
+      ],
+      "requirements": [
+        "3+ years ASIC DFT implementation experience",
+        "Hands-on with Synopsys DFT Compiler / Tessent",
+        "Experience with IEEE 1149.1 (JTAG) and 1500",
+        "Familiarity with low-power test challenges",
+        "Exposure to failure analysis flows is a plus"
+      ]
+    },
+    {
+      "slug": "embedded-systems-engineer",
+      "title": "Embedded Systems Engineer",
+      "team": "Embedded & Systems",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "server",
+      "summary": "Develop firmware and low-level software for custom silicon and FPGA-based systems - bare-metal, RTOS, and Linux BSP development with a focus on hardware-software co-design.",
+      "responsibilities": [
+        "Write bare-metal and RTOS-based firmware in C/C++",
+        "Develop Linux BSPs and device drivers for custom SoCs",
+        "Implement peripheral and interface drivers (I2C, SPI, UART, PCIe)",
+        "HW-SW co-design and board bring-up support",
+        "Create system-level integration tests and debug utilities"
+      ],
+      "requirements": [
+        "3+ years embedded C/C++ development experience",
+        "Experience with ARM Cortex-M/A or RISC-V platforms",
+        "Linux kernel module or BSP development experience",
+        "Familiarity with hardware debugging tools (JTAG, oscilloscope)",
+        "Understanding of hardware interfaces and SoC register maps"
+      ]
+    },
+    {
+      "slug": "physical-design-engineer",
+      "title": "Physical Design Engineer",
+      "team": "Physical Design",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "map",
+      "summary": "Implement block-level and chip-level physical design from floorplanning to GDSII - placement, CTS, routing, timing and power sign-off - using leading Cadence/Synopsys P&R tools.",
+      "responsibilities": [
+        "Floorplanning, power planning and pin assignment",
+        "Placement optimisation and CTS implementation",
+        "Signal routing and timing closure (STA with PrimeTime)",
+        "IR drop and electromigration analysis",
+        "LVS/DRC sign-off and GDSII tape-out preparation"
+      ],
+      "requirements": [
+        "4+ years physical design experience on tapeout projects",
+        "Proficient in Cadence Innovus or Synopsys ICC2",
+        "Strong STA skills with PrimeTime or Tempus",
+        "Experience with advanced nodes (16nm / 7nm / below) a plus",
+        "Familiarity with low-power multi-VT optimisation"
+      ]
+    },
+    {
+      "slug": "custom-layout-engineer",
+      "title": "Custom Layout Engineer",
+      "team": "Custom IC / Layout",
+      "location": "Remote",
+      "employmentType": "Full-time",
+      "icon": "pen-tool",
+      "summary": "Create high-performance custom analog and mixed-signal full-custom layout - standard cells, memory macros, and sensitive analog blocks - with a focus on matching, parasitics, and DRC/LVS cleanliness.",
+      "responsibilities": [
+        "Full-custom layout of analog/mixed-signal blocks",
+        "Device sizing for matching and parasitic optimisation",
+        "DRC and LVS verification and closure",
+        "Parasitic extraction and post-layout simulation",
+        "GDSII merge and tape-out preparation support"
+      ],
+      "requirements": [
+        "4+ years full-custom IC layout experience",
+        "Proficient in Cadence Virtuoso Layout Suite",
+        "Experience with Calibre DRC/LVS and Star-RC",
+        "Knowledge of fin/gate-all-around layout techniques is a plus",
+        "Foundry experience (TSMC / Samsung / GF) preferred"
+      ]
+    }
+  ],
+  "openApplicationTitle": "Don't see a match? We're always looking for exceptional engineers.",
+  "openApplicationDescription": "Send an open application with your resume and areas of expertise.",
+  "openApplicationLabel": "Open Application"
+}

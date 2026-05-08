@@ -11,54 +11,13 @@
   <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
   <link rel="stylesheet" href="../styles/main.css" />
 </head>
-<body class="bg-[#0a0a0a] text-slate-200">
+<body class="bg-[#0a0a0a] text-slate-200" data-page="blogs">
 <div id="cv-nav"></div>
 
-<section class="cv-page-hero">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6"><a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a><span>›</span><span class="text-[#00ccff]">Blogs</span></div>
-    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Technical Insights</p>
-    <div class="flex items-start gap-4">
-      <i data-lucide="newspaper" class="w-10 h-10 text-[#00ccff] shrink-0 mt-1"></i>
-      <div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">Blogs</h1>
-        <p class="text-slate-400 max-w-2xl leading-relaxed">Deep dives on RTL design patterns, verification methodology, EDA automation, and silicon-engineering best practices — written by practising engineers.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <!-- Category filter tags -->
-  <div class="flex flex-wrap gap-2 mb-12">
-    <span class="text-[0.65rem] tracking-[0.2em] text-slate-600 uppercase self-center mr-2">Topics:</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/30 text-[#00ccff] cursor-default">All</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/10 text-slate-500 cursor-default hover:border-[#00ccff]/30 hover:text-slate-400 transition-colors">ASIC Design</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/10 text-slate-500 cursor-default hover:border-[#00ccff]/30 hover:text-slate-400 transition-colors">Verification</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/10 text-slate-500 cursor-default hover:border-[#00ccff]/30 hover:text-slate-400 transition-colors">EDA &amp; Automation</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/10 text-slate-500 cursor-default hover:border-[#00ccff]/30 hover:text-slate-400 transition-colors">Embedded</span>
-    <span class="px-3 py-1 text-xs border border-[#00ccff]/10 text-slate-500 cursor-default hover:border-[#00ccff]/30 hover:text-slate-400 transition-colors">Physical Design</span>
-  </div>
-
-  <!-- Placeholder cards -->
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#00ccff]/10 mb-16">
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">ASIC Design</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">RTL Coding Guidelines for Synthesis-Ready Designs</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">Common pitfalls in SystemVerilog coding that silently degrade synthesis QoR — and how to avoid them with disciplined register-infer and always-block patterns.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">Verification</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">Coverage Closure Strategies in Large UVM Environments</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">Structuring functional coverage models and using constraint-solving to close coverage holes without inflating runtime.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">EDA &amp; Automation</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">Building a Hardware CI/CD Pipeline with GitHub Actions</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">Automating lint, simulation, and formal checks on every commit — reducing integration bugs and shortening verification cycles.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">Embedded</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">RISC-V Custom Extensions: Architecture to Software Workflow</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">A practical walkthrough of adding custom instructions to a RISC-V core and exposing them through a GCC compiler intrinsic.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">Physical Design</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">Multi-Corner Timing Closure: Pitfalls and Practical Fixes</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">Why OCV / AOCV settings cause post-route timing explosions and proven SDC constraint strategies that don't over-constrain.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col"><span class="text-[0.6rem] tracking-[0.2em] text-[#00ccff] uppercase mb-3">Verification</span><h3 class="text-sm font-semibold text-white mb-2 leading-snug">Formal Property Verification: From Assertions to Sign-off</h3><p class="text-xs text-slate-500 leading-relaxed flex-1">Writing effective SVA properties for JasperGold and interpreting vacuity and unreachability results to achieve robust formal sign-off.</p><div class="flex items-center gap-3 mt-4 pt-4 border-t border-[#00ccff]/10"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-700"></i><span class="text-[0.65rem] text-slate-700">Coming soon</span></div></div>
-  </div>
-
-  <div class="cv-placeholder">
-    <i data-lucide="rss" class="w-14 h-14 text-[#00ccff]/15 mx-auto mb-4"></i>
-    <p class="text-slate-500 text-sm mb-1">Articles are in preparation.</p>
-    <p class="text-slate-600 text-xs mb-6">Subscribe to be notified when the first posts go live.</p>
-    <a href="../contact.html" class="inline-flex items-center gap-2 text-sm text-[#00ccff] hover:text-[#00ffcc] transition-colors border border-[#00ccff]/30 px-5 py-2 hover:border-[#00ccff]/60"><i data-lucide="mail" class="w-4 h-4"></i> Notify Me</a>
-  </div>
-</main>
+<div id="blogs-page"></div>
 
 <div id="cv-footer"></div>
+<script src="../js/content.js"></script>
 <script src="../js/components.js"></script>
 </body>
 </html>

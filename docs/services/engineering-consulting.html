@@ -11,41 +11,13 @@
   <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
   <link rel="stylesheet" href="../styles/main.css" />
 </head>
-<body class="bg-[#0a0a0a] text-slate-200">
+<body class="bg-[#0a0a0a] text-slate-200" data-page="service" data-service-slug="engineering-consulting">
 <div id="cv-nav"></div>
 
-<section class="cv-page-hero">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6"><a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a><span>›</span><span class="text-slate-500">Services</span><span>›</span><span class="text-[#00ccff]">Engineering Consulting</span></div>
-    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Services</p>
-    <div class="flex items-start gap-4">
-      <i data-lucide="briefcase" class="w-10 h-10 text-[#00ccff] shrink-0 mt-1"></i>
-      <div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">Engineering Consulting</h1>
-        <p class="text-slate-400 max-w-2xl leading-relaxed">Embedded expert augmentation, architectural review, and silicon strategy advisory — deployed on short or extended engagements to accelerate your programme.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#00ccff]/10 mb-16">
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="users"        class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Staff Augmentation</h3><p class="text-xs text-slate-500 leading-relaxed">On-demand senior engineers embedded in your team for specific skills gaps or crunch periods.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="compass"      class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Architecture Review</h3><p class="text-xs text-slate-500 leading-relaxed">Independent micro-architecture assessment with risk analysis and optimisation recommendations.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="map"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Technology Roadmapping</h3><p class="text-xs text-slate-500 leading-relaxed">Silicon strategy, process node selection, and IP sourcing advisory for product roadmaps.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="search"       class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Design Review</h3><p class="text-xs text-slate-500 leading-relaxed">Formal RTL and micro-architecture design reviews with documented findings and sign-off.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="zap"          class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Crisis Recovery</h3><p class="text-xs text-slate-500 leading-relaxed">Rapid response engineering support for stuck tape-out schedules and silicon debug.</p></div>
-    <div class="bg-[#0a0a0a] p-6"><i data-lucide="file-text"    class="w-6 h-6 text-[#00ccff] mb-3"></i><h3 class="text-sm font-semibold text-white mb-1.5">Technical Documentation</h3><p class="text-xs text-slate-500 leading-relaxed">Specification writing, design documentation, and verification plan development services.</p></div>
-  </div>
-  <div class="cv-placeholder">
-    <i data-lucide="briefcase" class="w-14 h-14 text-[#00ccff]/15 mx-auto mb-4"></i>
-    <p class="text-slate-500 text-sm mb-1">Engagement models and case studies in preparation.</p>
-    <p class="text-slate-600 text-xs mb-6">Detailed engagement models and success stories coming soon.</p>
-    <a href="../contact.html" class="inline-flex items-center gap-2 text-sm text-[#00ccff] hover:text-[#00ffcc] transition-colors border border-[#00ccff]/30 px-5 py-2 hover:border-[#00ccff]/60"><i data-lucide="mail" class="w-4 h-4"></i> Discuss a consulting engagement</a>
-  </div>
-</main>
+<div id="service-page"></div>
 
 <div id="cv-footer"></div>
+<script src="../js/content.js"></script>
 <script src="../js/components.js"></script>
 </body>
 </html>

@@ -1,0 +1,356 @@
+{
+  "services": [
+    {
+      "slug": "asic-design",
+      "file": "asic-design.html",
+      "title": "ASIC Design",
+      "icon": "cpu",
+      "shortDescription": "RTL coding, synthesis, STA, and full custom ASIC tape-out flows.",
+      "heroDescription": "Full-cycle ASIC design services from micro-architecture definition and RTL coding through synthesis, static timing analysis, and tape-out sign-off.",
+      "highlights": [
+        {
+          "icon": "file-code-2",
+          "title": "RTL Coding",
+          "description": "Synthesisable SystemVerilog/VHDL with coding guidelines and lint-clean delivery."
+        },
+        {
+          "icon": "zap",
+          "title": "Logic Synthesis",
+          "description": "Synopsys DC / Cadence Genus flows targeting area, power, and timing closure."
+        },
+        {
+          "icon": "clock",
+          "title": "Static Timing Analysis",
+          "description": "Full-chip STA with multi-corner multi-mode (MCMM) sign-off methodology."
+        },
+        {
+          "icon": "battery",
+          "title": "Low-Power Design",
+          "description": "Clock gating, power domains, UPF/CPF-based power intent implementation."
+        },
+        {
+          "icon": "git-merge",
+          "title": "CDC / RDC Analysis",
+          "description": "Clock-domain crossing and reset-domain crossing analysis and sign-off."
+        },
+        {
+          "icon": "check-circle-2",
+          "title": "Tape-Out Support",
+          "description": "Netlisting, final LVS/DRC coordination, and tape-out package delivery."
+        }
+      ],
+      "placeholderTitle": "Full service documentation in progress.",
+      "placeholderDescription": "Detailed case studies, process flows, and tool stack information coming soon.",
+      "ctaLabel": "Enquire about ASIC Design",
+      "footerFeatured": true
+    },
+    {
+      "slug": "fpga-design",
+      "file": "fpga-design.html",
+      "title": "FPGA Design",
+      "icon": "circuit-board",
+      "shortDescription": "Rapid prototyping to production-grade FPGA implementations.",
+      "heroDescription": "Rapid FPGA prototyping through production-grade implementations on Xilinx, Intel/Altera, and Lattice platforms — from architecture to bitstream.",
+      "highlights": [
+        {
+          "icon": "cpu",
+          "title": "Architecture & Partitioning",
+          "description": "Resource-aware micro-architecture and logic partitioning for optimal FPGA utilisation."
+        },
+        {
+          "icon": "code-2",
+          "title": "HDL Implementation",
+          "description": "Vendor-agnostic RTL targeting Xilinx Vivado, Intel Quartus, and Lattice Diamond flows."
+        },
+        {
+          "icon": "timer",
+          "title": "Timing Closure",
+          "description": "Constraint-driven implementation with register pipelining and critical path optimisation."
+        },
+        {
+          "icon": "hard-drive",
+          "title": "IP Core Integration",
+          "description": "PCIe, DDR4, Ethernet, and custom AXI IP integration and validation."
+        },
+        {
+          "icon": "box",
+          "title": "Prototype Bring-Up",
+          "description": "Board bring-up, signal probing, and hardware debug via ILA/ChipScope."
+        },
+        {
+          "icon": "refresh-cw",
+          "title": "ASIC Prototyping",
+          "description": "Multi-FPGA prototyping platforms for pre-silicon software and system validation."
+        }
+      ],
+      "placeholderTitle": "Full service documentation in progress.",
+      "placeholderDescription": "Platform-specific guides and case studies coming soon.",
+      "ctaLabel": "Enquire about FPGA Design",
+      "footerFeatured": true
+    },
+    {
+      "slug": "verification",
+      "file": "verification.html",
+      "title": "Verification",
+      "icon": "shield-check",
+      "shortDescription": "UVM, formal, emulation, and full coverage-closure methodologies.",
+      "heroDescription": "Rigorous RTL verification using UVM methodologies, formal property checking, and coverage-closure driven flows to ensure zero-defect silicon.",
+      "highlights": [
+        {
+          "icon": "layers",
+          "title": "UVM Testbenches",
+          "description": "Class-based, reusable UVM environments with agents, monitors, scoreboards, and coverage models."
+        },
+        {
+          "icon": "check-square",
+          "title": "Formal Verification",
+          "description": "Formal property checking with JasperGold and Synopsys VC Formal for unreachable corner cases."
+        },
+        {
+          "icon": "percent",
+          "title": "Coverage Closure",
+          "description": "Structured code, functional, and cross-coverage analysis with directed test completion strategies."
+        },
+        {
+          "icon": "zap",
+          "title": "Emulation",
+          "description": "Hardware-accelerated emulation setup on Cadence Palladium / Siemens Veloce platforms."
+        },
+        {
+          "icon": "link-2",
+          "title": "Protocol Verification",
+          "description": "AXI, AHB, APB, PCIe, USB, and custom protocol compliance verification with VIP integration."
+        },
+        {
+          "icon": "file-text",
+          "title": "Verification Planning",
+          "description": "Verification plan (VPlan) creation, feature extraction, and sign-off criteria definition."
+        }
+      ],
+      "placeholderTitle": "Full service documentation in progress.",
+      "placeholderDescription": "Methodology guides, tool stack details, and case studies coming soon.",
+      "ctaLabel": "Enquire about Verification",
+      "footerFeatured": true
+    },
+    {
+      "slug": "custom-ip-vip",
+      "file": "custom-ip-vip.html",
+      "title": "Custom IP & VIP",
+      "icon": "layers",
+      "shortDescription": "Silicon-proven reusable IP blocks and verification IPs.",
+      "heroDescription": "Silicon-proven, reusable IP blocks and Verification IPs designed for maximum integration efficiency and long-term maintainability across projects.",
+      "highlights": [
+        {
+          "icon": "box",
+          "title": "Interface IP",
+          "description": "AXI4, AHB5, APB, I2C, SPI, UART, and custom bus protocol IP blocks."
+        },
+        {
+          "icon": "cpu",
+          "title": "Memory Controllers",
+          "description": "DDR4/LPDDR5 controllers, SRAM wrappers, and multi-port memory subsystems."
+        },
+        {
+          "icon": "shield-check",
+          "title": "VIP Development",
+          "description": "UVM-compliant VIPs for proprietary and standard interfaces with full coverage models."
+        },
+        {
+          "icon": "key",
+          "title": "Security IP",
+          "description": "AES, SHA, RSA, TRNG, and secure key management hardware accelerators."
+        },
+        {
+          "icon": "refresh-cw",
+          "title": "IP Integration Support",
+          "description": "Integration guidelines, synthesis scripts, and bring-up support for delivered IP."
+        },
+        {
+          "icon": "file-lock-2",
+          "title": "IP Licensing",
+          "description": "Flexible licensing models with NDA-covered source or encrypted netlist delivery."
+        }
+      ],
+      "placeholderTitle": "Full IP catalogue and documentation in progress.",
+      "placeholderDescription": "IP datasheets and integration guides coming soon.",
+      "ctaLabel": "Enquire about Custom IP & VIP",
+      "footerFeatured": true
+    },
+    {
+      "slug": "embedded-system",
+      "file": "embedded-system.html",
+      "title": "Embedded & System-Level",
+      "icon": "server",
+      "shortDescription": "Firmware, RTOS integration, and system-level design services.",
+      "heroDescription": "Firmware development, RTOS integration, and hardware-software co-design for SoC-based and embedded systems — from bare-metal to Linux BSP.",
+      "highlights": [
+        {
+          "icon": "code-2",
+          "title": "Bare-Metal Firmware",
+          "description": "C/C++ firmware for ARM Cortex-M/R/A, RISC-V, and custom processor cores."
+        },
+        {
+          "icon": "layers",
+          "title": "RTOS Integration",
+          "description": "FreeRTOS, Zephyr, and ThreadX integration with task scheduling and resource management."
+        },
+        {
+          "icon": "hard-drive",
+          "title": "Linux BSP Development",
+          "description": "Device driver development, kernel porting, and Yocto-based BSP customisation."
+        },
+        {
+          "icon": "git-merge",
+          "title": "HW-SW Co-Design",
+          "description": "Iterative partitioning of functions between hardware and software for performance-power balance."
+        },
+        {
+          "icon": "link-2",
+          "title": "Peripheral Drivers",
+          "description": "HAL and low-level drivers for GPIO, I2C, SPI, UART, CAN, Ethernet, and USB."
+        },
+        {
+          "icon": "activity",
+          "title": "System Integration Testing",
+          "description": "Full system-level test environments and hardware-in-the-loop (HIL) validation."
+        }
+      ],
+      "placeholderTitle": "Full service documentation in progress.",
+      "placeholderDescription": "Platform support list and case studies coming soon.",
+      "ctaLabel": "Enquire about Embedded & System-Level",
+      "footerFeatured": false
+    },
+    {
+      "slug": "eda-automation",
+      "file": "eda-automation.html",
+      "title": "EDA Automation",
+      "icon": "terminal",
+      "shortDescription": "Scripted design flows and CI/CD pipelines for hardware teams.",
+      "heroDescription": "Scripted design flows, Makefile/CMake build systems, and hardware CI/CD pipelines that eliminate manual steps and accelerate regression cycles.",
+      "highlights": [
+        {
+          "icon": "git-branch",
+          "title": "CI/CD for Hardware",
+          "description": "GitHub Actions / GitLab CI pipelines for automated simulation, linting, and formal checks."
+        },
+        {
+          "icon": "terminal",
+          "title": "Flow Scripting",
+          "description": "TCL/Python automation for Synopsys, Cadence, and Siemens EDA tool chains."
+        },
+        {
+          "icon": "package",
+          "title": "Regression Frameworks",
+          "description": "Simulation regression frameworks with pass/fail analysis and coverage merge utilities."
+        },
+        {
+          "icon": "search",
+          "title": "Lint Automation",
+          "description": "Automated RTL quality checks with SpyGlass, Questa Lint, and custom rule sets."
+        },
+        {
+          "icon": "bar-chart-2",
+          "title": "Coverage Dashboards",
+          "description": "Automated coverage collection, merge, and HTML reporting for sign-off tracking."
+        },
+        {
+          "icon": "archive",
+          "title": "IP Packaging",
+          "description": "Automated IP packaging with manifest generation and release management scripts."
+        }
+      ],
+      "placeholderTitle": "Full service documentation in progress.",
+      "placeholderDescription": "Tool integrations and automation examples coming soon.",
+      "ctaLabel": "Enquire about EDA Automation",
+      "footerFeatured": true
+    },
+    {
+      "slug": "engineering-consulting",
+      "file": "engineering-consulting.html",
+      "title": "Engineering Consulting",
+      "icon": "briefcase",
+      "shortDescription": "Expert augmentation, architectural review, and design guidance.",
+      "heroDescription": "Embedded expert augmentation, architectural review, and silicon strategy advisory — deployed on short or extended engagements to accelerate your programme.",
+      "highlights": [
+        {
+          "icon": "users",
+          "title": "Staff Augmentation",
+          "description": "On-demand senior engineers embedded in your team for specific skills gaps or crunch periods."
+        },
+        {
+          "icon": "compass",
+          "title": "Architecture Review",
+          "description": "Independent micro-architecture assessment with risk analysis and optimisation recommendations."
+        },
+        {
+          "icon": "map",
+          "title": "Technology Roadmapping",
+          "description": "Silicon strategy, process node selection, and IP sourcing advisory for product roadmaps."
+        },
+        {
+          "icon": "search",
+          "title": "Design Review",
+          "description": "Formal RTL and micro-architecture design reviews with documented findings and sign-off."
+        },
+        {
+          "icon": "zap",
+          "title": "Crisis Recovery",
+          "description": "Rapid response engineering support for stuck tape-out schedules and silicon debug."
+        },
+        {
+          "icon": "file-text",
+          "title": "Technical Documentation",
+          "description": "Specification writing, design documentation, and verification plan development services."
+        }
+      ],
+      "placeholderTitle": "Engagement models and case studies in preparation.",
+      "placeholderDescription": "Detailed engagement models and success stories coming soon.",
+      "ctaLabel": "Discuss a consulting engagement",
+      "footerFeatured": false
+    },
+    {
+      "slug": "training",
+      "file": "training.html",
+      "title": "Training",
+      "icon": "graduation-cap",
+      "shortDescription": "RTL, verification, and EDA workshops for engineering teams.",
+      "heroDescription": "Industry-focused RTL design, verification methodology, and EDA tool workshops — delivered on-site or remotely by practising silicon engineers.",
+      "highlights": [
+        {
+          "icon": "code-2",
+          "title": "RTL Design Fundamentals",
+          "description": "SystemVerilog coding style, synthesis constraints, and timing closure essentials."
+        },
+        {
+          "icon": "shield-check",
+          "title": "UVM Verification",
+          "description": "Practical UVM — agents, drivers, monitors, scoreboards, sequences, and coverage."
+        },
+        {
+          "icon": "check-square",
+          "title": "Formal Verification",
+          "description": "Property writing in SVA and applying JasperGold / VC Formal for design sign-off."
+        },
+        {
+          "icon": "terminal",
+          "title": "EDA Tool Workshops",
+          "description": "Hands-on Synopsys DC, Cadence Genus/Innovus, and Questa Sim flow training."
+        },
+        {
+          "icon": "git-branch",
+          "title": "Git & CI for HDL",
+          "description": "Version control best practices and automation workflows for hardware design teams."
+        },
+        {
+          "icon": "users",
+          "title": "Custom Curricula",
+          "description": "Tailored training programmes scoped to your team's existing skill level and project context."
+        }
+      ],
+      "placeholderTitle": "Course catalogue and schedule in preparation.",
+      "placeholderDescription": "Full curriculum outlines and booking options coming soon.",
+      "ctaLabel": "Enquire about Training",
+      "footerFeatured": false
+    }
+  ]
+}

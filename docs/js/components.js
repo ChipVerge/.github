@@ -3,13 +3,54 @@
  * Dynamically injects nav and footer based on the current URL depth.
  * Place <div id="cv-nav"></div> and <div id="cv-footer"></div> in each page.
  */
-(function () {
+(async function () {
   /* ── Path prefix ─────────────────────────────────────────── */
   // Use pathname-based detection instead of segment counting so that
   // file:// URLs on Windows (which include the full drive path) work correctly.
   const loc = window.location.pathname.toLowerCase();
   const depth = (loc.includes('/services/') || loc.includes('/blogs/')) ? 1 : 0;
   const p = depth === 1 ? '../' : '';
+
+  const defaultServices = [
+    { slug: 'asic-design', file: 'asic-design.html', title: 'ASIC Design', icon: 'cpu', footerFeatured: true },
+    { slug: 'fpga-design', file: 'fpga-design.html', title: 'FPGA Design', icon: 'circuit-board', footerFeatured: true },
+    { slug: 'verification', file: 'verification.html', title: 'Verification', icon: 'shield-check', footerFeatured: true },
+    { slug: 'custom-ip-vip', file: 'custom-ip-vip.html', title: 'Custom IP & VIP', icon: 'layers', footerFeatured: true },
+    { slug: 'embedded-system', file: 'embedded-system.html', title: 'Embedded & System-Level', icon: 'server', footerFeatured: false },
+    { slug: 'eda-automation', file: 'eda-automation.html', title: 'EDA Automation', icon: 'terminal', footerFeatured: true },
+    { slug: 'engineering-consulting', file: 'engineering-consulting.html', title: 'Engineering Consulting', icon: 'briefcase', footerFeatured: false },
+    { slug: 'training', file: 'training.html', title: 'Training', icon: 'graduation-cap', footerFeatured: false }
+  ];
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  async function loadServices() {
+    try {
+      const response = await fetch(p + 'data/services.json');
+      if (!response.ok) {
+        throw new Error('Failed to load services.json');
+      }
+      const data = await response.json();
+      if (!Array.isArray(data.services) || !data.services.length) {
+        throw new Error('services.json did not include any services');
+      }
+      return data.services;
+    } catch (error) {
+      console.warn('Falling back to built-in service navigation.', error);
+      return defaultServices;
+    }
+  }
+
+  const services = await loadServices();
+  const footerServices = services.filter(service => service.footerFeatured);
+  const footerLinks = footerServices.length ? footerServices : services.slice(0, 5);
 
   /* ── Active state detection ──────────────────────────────── */
   const inSvc      = loc.includes('/services/');
@@ -47,6 +88,30 @@
     ? 'text-[#00ccff]'
     : 'text-slate-300 hover:text-[#00ccff] transition-colors');
 
+  function serviceHref(service) {
+    return p + 'services/' + service.file;
+  }
+
+  function serviceIsActive(service) {
+    return loc.includes('/services/' + service.slug);
+  }
+
+  function svcItem(service) {
+    const active = serviceIsActive(service);
+    return '<a href="' + serviceHref(service) + '" class="cv-dd-link' + (active ? ' bg-[#00ccff]/5 text-[#00ccff]' : '') + '">'
+      + '<i data-lucide="' + service.icon + '" class="w-4 h-4 ' + (active ? '' : 'text-[#00ccff] ') + 'shrink-0"></i> ' + escapeHtml(service.title) + '</a>';
+  }
+
+  function mobSvcItem(service) {
+    const active = serviceIsActive(service);
+    return '<a href="' + serviceHref(service) + '" class="block py-1.5 text-sm '
+      + (active ? 'text-[#00ccff]' : 'text-slate-400 hover:text-[#00ccff] transition-colors') + '">' + escapeHtml(service.title) + '</a>';
+  }
+
+  function footerSvcItem(service) {
+    return '<li><a href="' + serviceHref(service) + '" class="cv-footer-link">' + escapeHtml(service.title) + '</a></li>';
+  }
+
   /* ── NAV HTML ────────────────────────────────────────────── */
   const nav = `<nav class="sticky top-0 z-50 border-b border-[#00ccff]/15" style="backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(10,10,10,0.88);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,14 +126,7 @@
           <div class="dropdown-panel hidden group-hover:block absolute top-full left-0 w-72 border border-[#00ccff]/20 bg-[#0d0d0d] shadow-2xl z-50">
             <div class="p-2">
               <p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-600 uppercase">Active Services</p>
-              ${svcItem('asic-design.html',           'cpu',            'ASIC Design')}
-              ${svcItem('fpga-design.html',            'circuit-board',  'FPGA Design')}
-              ${svcItem('verification.html',           'shield-check',   'Verification')}
-              ${svcItem('custom-ip-vip.html',          'layers',         'Custom IP &amp; VIP')}
-              ${svcItem('embedded-system.html',        'server',         'Embedded &amp; System-Level')}
-              ${svcItem('eda-automation.html',         'terminal',       'EDA Automation')}
-              ${svcItem('engineering-consulting.html', 'briefcase',      'Engineering Consulting')}
-              ${svcItem('training.html',               'graduation-cap', 'Training')}
+              ${services.map(svcItem).join('')}
             </div>
             <div class="border-t border-[#00ccff]/10 p-2">
               <p class="px-3 pt-2 pb-1.5 text-[9px] tracking-[0.25em] text-slate-700 uppercase flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3"></i> Phase 2 — Planned</p>
@@ -97,14 +155,7 @@
       <div>
         <button data-acc="mob-services" class="${mobSvcBtn}">Services <i data-lucide="chevron-down" class="w-4 h-4 acc-icon transition-transform"></i></button>
         <div id="mob-services" class="hidden pl-4 pb-2 space-y-0.5 border-l border-[#00ccff]/15 ml-1 mt-0.5">
-          ${mobSvcItem('asic-design.html',           'ASIC Design')}
-          ${mobSvcItem('fpga-design.html',            'FPGA Design')}
-          ${mobSvcItem('verification.html',           'Verification')}
-          ${mobSvcItem('custom-ip-vip.html',          'Custom IP &amp; VIP')}
-          ${mobSvcItem('embedded-system.html',        'Embedded &amp; System-Level')}
-          ${mobSvcItem('eda-automation.html',         'EDA Automation')}
-          ${mobSvcItem('engineering-consulting.html', 'Engineering Consulting')}
-          ${mobSvcItem('training.html',               'Training')}
+          ${services.map(mobSvcItem).join('')}
         </div>
       </div>
       <a href="${p}about.html"  class="${mnl(inAbout)}">About</a>
@@ -131,11 +182,7 @@
       <div>
         <h4 class="text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase mb-3">Services</h4>
         <ul class="space-y-1.5">
-          <li><a href="${p}services/asic-design.html"           class="cv-footer-link">ASIC Design</a></li>
-          <li><a href="${p}services/fpga-design.html"            class="cv-footer-link">FPGA Design</a></li>
-          <li><a href="${p}services/verification.html"           class="cv-footer-link">Verification</a></li>
-          <li><a href="${p}services/custom-ip-vip.html"          class="cv-footer-link">Custom IP &amp; VIP</a></li>
-          <li><a href="${p}services/eda-automation.html"         class="cv-footer-link">EDA Automation</a></li>
+          ${footerLinks.map(footerSvcItem).join('')}
         </ul>
       </div>
       <div>

@@ -11,39 +11,13 @@
   <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
   <link rel="stylesheet" href="styles/main.css" />
 </head>
-<body class="bg-[#0a0a0a] text-slate-200">
+<body class="bg-[#0a0a0a] text-slate-200" data-page="people">
 <div id="cv-nav"></div>
 
-<section class="cv-page-hero">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6"><a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a><span>›</span><span class="text-slate-500">Company</span><span>›</span><span class="text-[#00ccff]">People</span></div>
-    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Company</p>
-    <div class="flex items-start gap-4">
-      <i data-lucide="users" class="w-10 h-10 text-[#00ccff] shrink-0 mt-1"></i>
-      <div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">People</h1>
-        <p class="text-slate-400 max-w-2xl leading-relaxed">The engineers, architects, and specialists who make ChipVerge's silicon-grade outcomes possible.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#00ccff]/10 mb-16">
-    <div class="bg-[#0a0a0a] p-6 flex flex-col items-start"><div class="w-12 h-12 bg-[#00ccff]/5 border border-[#00ccff]/20 flex items-center justify-center mb-4"><i data-lucide="user" class="w-6 h-6 text-[#00ccff]/40"></i></div><p class="text-sm font-semibold text-white mb-0.5">Team Profile</p><p class="text-[0.65rem] tracking-[0.15em] text-[#00ccff] uppercase mb-2">ASIC Design</p><p class="text-xs text-slate-600">Details coming soon</p></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col items-start"><div class="w-12 h-12 bg-[#00ccff]/5 border border-[#00ccff]/20 flex items-center justify-center mb-4"><i data-lucide="user" class="w-6 h-6 text-[#00ccff]/40"></i></div><p class="text-sm font-semibold text-white mb-0.5">Team Profile</p><p class="text-[0.65rem] tracking-[0.15em] text-[#00ccff] uppercase mb-2">Verification</p><p class="text-xs text-slate-600">Details coming soon</p></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col items-start"><div class="w-12 h-12 bg-[#00ccff]/5 border border-[#00ccff]/20 flex items-center justify-center mb-4"><i data-lucide="user" class="w-6 h-6 text-[#00ccff]/40"></i></div><p class="text-sm font-semibold text-white mb-0.5">Team Profile</p><p class="text-[0.65rem] tracking-[0.15em] text-[#00ccff] uppercase mb-2">Embedded Systems</p><p class="text-xs text-slate-600">Details coming soon</p></div>
-    <div class="bg-[#0a0a0a] p-6 flex flex-col items-start"><div class="w-12 h-12 bg-[#00ccff]/5 border border-[#00ccff]/20 flex items-center justify-center mb-4"><i data-lucide="user" class="w-6 h-6 text-[#00ccff]/40"></i></div><p class="text-sm font-semibold text-white mb-0.5">Team Profile</p><p class="text-[0.65rem] tracking-[0.15em] text-[#00ccff] uppercase mb-2">EDA &amp; Automation</p><p class="text-xs text-slate-600">Details coming soon</p></div>
-  </div>
-  <div class="cv-placeholder">
-    <i data-lucide="users" class="w-14 h-14 text-[#00ccff]/15 mx-auto mb-4"></i>
-    <p class="text-slate-500 text-sm mb-1">Full team profiles in preparation.</p>
-    <p class="text-slate-600 text-xs mb-6">Individual bios and LinkedIn profiles coming soon.</p>
-    <a href="career.html" class="inline-flex items-center gap-2 text-sm text-[#00ccff] hover:text-[#00ffcc] transition-colors border border-[#00ccff]/30 px-5 py-2 hover:border-[#00ccff]/60"><i data-lucide="briefcase" class="w-4 h-4"></i> View Open Roles</a>
-  </div>
-</main>
+<div id="people-page"></div>
 
 <div id="cv-footer"></div>
+<script src="js/content.js"></script>
 <script src="js/components.js"></script>
 </body>
 </html>
