@@ -481,9 +481,19 @@
     initIcons();
   }
 
+  function renderContactCareerSnapshot(data) {
+    const summary = document.getElementById('contact-open-roles');
+    if (!summary) {
+      return;
+    }
+
+    summary.textContent = 'We currently have ' + data.jobs.length + ' open roles across design, verification, and physical design.';
+  }
+
   async function init() {
     try {
       const needsServices = page === 'service' || !!document.getElementById('services-grid');
+      const needsJobs = page === 'career' || page === 'contact' || !!document.getElementById('contact-open-roles');
       const requests = [];
 
       if (needsServices) {
@@ -496,7 +506,7 @@
           return { key: 'people', data: data };
         }));
       }
-      if (page === 'career') {
+      if (needsJobs) {
         requests.push(readJson('jobs.json').then(function (data) {
           return { key: 'jobs', data: data };
         }));
@@ -524,6 +534,9 @@
       }
       if (page === 'career' && content.jobs) {
         renderCareerPage(content.jobs);
+      }
+      if (page === 'contact' && content.jobs) {
+        renderContactCareerSnapshot(content.jobs);
       }
       if (page === 'blogs' && content.blogs) {
         renderBlogsPage(content.blogs);
