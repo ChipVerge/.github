@@ -4,24 +4,35 @@
   "description": "The engineers, architects, and specialists who make ChipVerge's silicon-grade outcomes possible.",
   "profiles": [
     {
+      "slug": "samia-alam",
+      "title": "Samia Alam",
+      "discipline": "Founder & CEO",
+      "summary": "Leadership profile in preparation.",
+      "icon": "briefcase"
+    },
+    {
+      "slug": "asic-design",
       "title": "Team Profile",
       "discipline": "ASIC Design",
       "summary": "Details coming soon.",
       "icon": "cpu"
     },
     {
+      "slug": "verification",
       "title": "Team Profile",
       "discipline": "Verification",
       "summary": "Details coming soon.",
       "icon": "shield-check"
     },
     {
+      "slug": "embedded-systems",
       "title": "Team Profile",
       "discipline": "Embedded Systems",
       "summary": "Details coming soon.",
       "icon": "server"
     },
     {
+      "slug": "eda-automation",
       "title": "Team Profile",
       "discipline": "EDA & Automation",
       "summary": "Details coming soon.",

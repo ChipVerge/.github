@@ -18,6 +18,31 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://chipverge.com/people/samia-alam.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://chipverge.com/people/asic-design.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chipverge.com/people/verification.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chipverge.com/people/embedded-systems.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chipverge.com/people/eda-automation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://chipverge.com/career.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

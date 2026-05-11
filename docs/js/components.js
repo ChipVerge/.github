@@ -8,7 +8,7 @@
   // Use pathname-based detection instead of segment counting so that
   // file:// URLs on Windows (which include the full drive path) work correctly.
   const loc = window.location.pathname.toLowerCase();
-  const depth = (loc.includes('/services/') || loc.includes('/blogs/')) ? 1 : 0;
+  const depth = (loc.includes('/services/') || loc.includes('/blogs/') || loc.includes('/people/')) ? 1 : 0;
   const p = depth === 1 ? '../' : '';
 
   const defaultServices = [

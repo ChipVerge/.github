@@ -4,7 +4,7 @@
 
   function getPathPrefix() {
     const path = window.location.pathname.toLowerCase();
-    return path.includes('/services/') || path.includes('/blogs/') ? '../' : '';
+    return path.includes('/services/') || path.includes('/blogs/') || path.includes('/people/') ? '../' : '';
   }
 
   function escapeHtml(value) {
@@ -151,15 +151,35 @@
     initIcons();
   }
 
+  function resolvePersonLink(profile) {
+    if (!profile || !profile.slug) {
+      return '';
+    }
+
+    return resolveLink('people/' + profile.slug + '.html');
+  }
+
   function renderPeopleCard(profile) {
-    return '<article class="bg-[#0a0a0a] p-6 flex flex-col items-start">'
+    const href = resolvePersonLink(profile);
+    const tag = href ? 'a' : 'article';
+    const hrefAttribute = href ? ' href="' + href + '"' : '';
+    const cardClass = 'border border-[#00ccff]/10 bg-[#0a0a0a] p-6 flex flex-col items-start min-h-[220px] text-left no-underline transition-colors'
+      + (href ? ' group hover:bg-[#00ccff]/[0.03] hover:border-[#00ccff]/20' : '');
+
+    return '<' + tag + hrefAttribute + ' class="' + cardClass + '">'
       + '<div class="w-12 h-12 bg-[#00ccff]/5 border border-[#00ccff]/20 flex items-center justify-center mb-4">'
       + createIcon(profile.icon, 'w-6 h-6 text-[#00ccff]/40')
       + '</div>'
       + '<p class="text-sm font-semibold text-white mb-0.5">' + escapeHtml(profile.title) + '</p>'
       + '<p class="text-[0.65rem] tracking-[0.15em] text-[#00ccff] uppercase mb-2">' + escapeHtml(profile.discipline) + '</p>'
-      + '<p class="text-xs text-slate-600">' + escapeHtml(profile.summary) + '</p>'
-      + '</article>';
+      + '<p class="text-xs text-slate-600 flex-1">' + escapeHtml(profile.summary) + '</p>'
+      + (href
+        ? '<span class="mt-5 inline-flex items-center gap-1.5 text-[0.7rem] tracking-[0.18em] uppercase text-slate-500 group-hover:text-[#00ccff] transition-colors">'
+          + 'View Profile'
+          + createIcon('arrow-right', 'w-3.5 h-3.5 text-current')
+          + '</span>'
+        : '')
+      + '</' + tag + '>';
   }
 
   function renderPeoplePage(data) {
@@ -186,7 +206,7 @@
       + '</div>'
       + '</section>'
       + '<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
-      + '<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#00ccff]/10 mb-16">'
+      + '<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16">'
       + data.profiles.map(renderPeopleCard).join('')
       + '</div>'
       + '<div class="cv-placeholder">'
@@ -197,6 +217,79 @@
       + createIcon('briefcase', 'w-4 h-4')
       + escapeHtml(data.ctaLabel)
       + '</a>'
+      + '</div>'
+      + '</main>';
+    initIcons();
+  }
+
+  function renderPersonPage(data) {
+    const mount = document.getElementById('person-page');
+    if (!mount) {
+      return;
+    }
+
+    const slug = body.dataset.personSlug;
+    const profiles = Array.isArray(data.profiles) ? data.profiles : [];
+    const profile = profiles.find(function (item) {
+      return item.slug === slug;
+    });
+
+    if (!profile) {
+      renderMountError('person-page', 'Profile not found', 'The requested profile could not be loaded.');
+      return;
+    }
+
+    const intro = profile.pageIntro || profile.summary || 'Full profile details are in preparation.';
+    const detail = profile.pageDescription || 'A fuller biography, project highlights, and direct profile links are being prepared for this page.';
+    const ctaHref = resolveLink(profile.ctaHref || 'contact.html');
+    const ctaLabel = profile.ctaLabel || 'Contact ChipVerge';
+
+    mount.innerHTML = '<section class="cv-page-hero">'
+      + '<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
+      + '<div class="flex items-center gap-2 text-xs text-slate-600 mb-6">'
+      + '<a href="' + resolveLink('index.html') + '" class="hover:text-[#00ccff] transition-colors">Home</a>'
+      + '<span>&rsaquo;</span><a href="' + resolveLink('people.html') + '" class="hover:text-[#00ccff] transition-colors text-slate-500">People</a><span>&rsaquo;</span>'
+      + '<span class="text-[#00ccff]">' + escapeHtml(profile.title) + '</span>'
+      + '</div>'
+      + '<p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">People</p>'
+      + '<div class="flex items-start gap-4">'
+      + createIcon(profile.icon || 'user-round', 'w-10 h-10 text-[#00ccff] shrink-0 mt-1')
+      + '<div>'
+      + '<h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">' + escapeHtml(profile.title) + '</h1>'
+      + '<p class="text-[0.7rem] tracking-[0.25em] text-[#00ccff] uppercase mb-4">' + escapeHtml(profile.discipline) + '</p>'
+      + '<p class="text-slate-400 max-w-2xl leading-relaxed">' + escapeHtml(intro) + '</p>'
+      + '</div>'
+      + '</div>'
+      + '</div>'
+      + '</section>'
+      + '<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
+      + '<div class="grid lg:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)] gap-8 items-start">'
+      + '<section class="border border-[#00ccff]/15 bg-[#070707] p-8">'
+      + '<p class="text-[0.65rem] tracking-[0.28em] text-slate-600 uppercase mb-4">Profile Overview</p>'
+      + '<p class="text-slate-400 leading-relaxed mb-4">' + escapeHtml(intro) + '</p>'
+      + '<p class="text-sm text-slate-500 leading-relaxed">' + escapeHtml(detail) + '</p>'
+      + '<div class="mt-8 flex flex-wrap gap-3">'
+      + '<a href="' + ctaHref + '" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">'
+      + createIcon('mail', 'w-4 h-4')
+      + escapeHtml(ctaLabel)
+      + '</a>'
+      + '<a href="' + resolveLink('people.html') + '" class="inline-flex items-center gap-2 px-5 py-2.5 border border-[#00ccff]/30 text-[#00ccff] text-sm hover:border-[#00ccff]/60 hover:bg-[#00ccff]/5 transition-colors">'
+      + createIcon('arrow-left', 'w-4 h-4')
+      + 'Back to People'
+      + '</a>'
+      + '</div>'
+      + '</section>'
+      + '<aside class="space-y-4">'
+      + '<div class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
+      + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Role</p>'
+      + '<p class="text-base font-semibold text-white">' + escapeHtml(profile.discipline) + '</p>'
+      + '<p class="text-xs text-slate-500 mt-2 leading-relaxed">Detailed biography content, selected project experience, and external profile links can be added here at any time.</p>'
+      + '</div>'
+      + '<div class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
+      + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Profile Status</p>'
+      + '<p class="text-sm text-slate-400 leading-relaxed">This page is now live and ready for fuller bio content whenever you want to publish it.</p>'
+      + '</div>'
+      + '</aside>'
       + '</div>'
       + '</main>';
     initIcons();
@@ -501,7 +594,7 @@
           return { key: 'services', data: data };
         }));
       }
-      if (page === 'people') {
+      if (page === 'people' || page === 'person') {
         requests.push(readJson('people.json').then(function (data) {
           return { key: 'people', data: data };
         }));
@@ -532,6 +625,9 @@
       if (page === 'people' && content.people) {
         renderPeoplePage(content.people);
       }
+      if (page === 'person' && content.people) {
+        renderPersonPage(content.people);
+      }
       if (page === 'career' && content.jobs) {
         renderCareerPage(content.jobs);
       }
@@ -551,6 +647,9 @@
       }
       if (page === 'people') {
         renderMountError('people-page', 'People data unavailable', 'Refresh the page or try again shortly.');
+      }
+      if (page === 'person') {
+        renderMountError('person-page', 'Profile data unavailable', 'Refresh the page or try again shortly.');
       }
       if (page === 'career') {
         renderMountError('career-page', 'Career data unavailable', 'Refresh the page or try again shortly.');
