@@ -101,6 +101,27 @@
       + '</div>';
   }
 
+  function getServiceHeroImage(service) {
+    if (service.heroImage) {
+      return service.heroImage;
+    }
+    if (!service.file) {
+      return '';
+    }
+
+    return 'services/' + service.file.replace(/\.html$/i, '.png');
+  }
+
+  function renderServiceHeroArtwork(heroImage) {
+    if (!heroImage) {
+      return '';
+    }
+
+    return '<div class="cv-page-hero-artwork" aria-hidden="true">'
+      + '<img src="' + escapeHtml(resolveLink(heroImage)) + '" alt="" class="cv-page-hero-artwork-image" loading="eager" decoding="async">'
+      + '</div>';
+  }
+
   function renderServicePage(services) {
     const mount = document.getElementById('service-page');
     if (!mount) {
@@ -117,8 +138,11 @@
       return;
     }
 
-    mount.innerHTML = '<section class="cv-page-hero">'
-      + '<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
+    const heroImage = getServiceHeroImage(service);
+
+    mount.innerHTML = '<section class="cv-page-hero' + (heroImage ? ' cv-page-hero--with-artwork' : '') + '">'
+      + renderServiceHeroArtwork(heroImage)
+      + '<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 cv-page-hero-shell">'
       + '<div class="flex items-center gap-2 text-xs text-slate-600 mb-6">'
       + '<a href="' + resolveLink('index.html') + '" class="hover:text-[#00ccff] transition-colors">Home</a>'
       + '<span>&rsaquo;</span><span class="text-slate-500">Services</span><span>&rsaquo;</span>'
