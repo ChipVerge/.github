@@ -203,6 +203,13 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .cv-page-hero-artwork {
+    left: 50%;
+    right: auto;
+    width: min(100%, 88rem);
+    transform: translateX(-55%);
+  }
+
   .cv-page-hero--with-artwork .cv-page-hero-shell {
     padding-right: min(30rem, 38vw);
   }
