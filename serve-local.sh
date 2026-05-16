@@ -4,7 +4,7 @@ set -euo pipefail
 
 port=8080
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/docs"
-open_browser=1
+open_browser=0
 python_cmd=()
 
 while [[ $# -gt 0 ]]; do
