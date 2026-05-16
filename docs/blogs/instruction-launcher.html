@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hazard-Aware Instruction Launcher - a decoded-instruction launch queue with register lock checking, memory serialization, and fixed-priority arbitration for execution dispatch." />
+  <title>Hazard-Aware Instruction Launcher | ChipVerge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body class="bg-[#0a0a0a] text-slate-200">
+<div id="cv-nav"></div>
+
+<section class="cv-page-hero">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 cv-page-hero-shell">
+    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6">
+      <a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a>
+      <span>&rsaquo;</span>
+      <a href="index.html" class="hover:text-[#00ccff] transition-colors">Blogs</a>
+      <span>&rsaquo;</span>
+      <span class="text-[#00ccff]">Hazard-Aware Instruction Launcher</span>
+    </div>
+    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Architecture Brief</p>
+    <div class="max-w-4xl">
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">SystemVerilog</span>
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">Scheduling</span>
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">Hazard Control</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">Hazard-Aware Instruction Launcher</h1>
+      <p class="text-slate-400 max-w-3xl leading-relaxed text-base sm:text-lg">
+        A decoded-instruction launch queue that keeps execution fed while screening register hazards,
+        serializing memory traffic when required, and arbitrating eligible instructions through a clean ready-valid interface.
+      </p>
+    </div>
+  </div>
+</section>
+
+<main class="cv-article-main">
+  <div class="cv-article-shell">
+    <div class="cv-article-kpis">
+      <div class="cv-article-kpi">
+        <strong>8 slots</strong>
+        <span>The default build exposes an eight-entry launch window because NUM_OUTSTANDING is seven and the queue arrays span 0 through NOS.</span>
+      </div>
+      <div class="cv-article-kpi">
+        <strong>64 lock bits</strong>
+        <span>Hazard checking scales across the full integer and floating-point register namespace through a propagated lock vector.</span>
+      </div>
+      <div class="cv-article-kpi">
+        <strong>1 launch port</strong>
+        <span>All eligible slots collapse to one selected decoded instruction and one valid signal at the execution boundary.</span>
+      </div>
+    </div>
+
+    <div class="cv-article-grid">
+      <article class="cv-article-panel cv-article-panel--soft">
+        <div class="cv-article-prose">
+          <section id="challenge">
+            <h2>Keep the Execution Units Busy Without Launching the Wrong Instruction</h2>
+            <p>
+              A frontend pipeline can decode instructions faster than the backend can safely consume them. The hard part is not
+              simply buffering decoded work. The hard part is deciding when each instruction is actually safe to issue, especially
+              when destination registers are already locked, blocking instructions must fence younger work, or memory operations
+              need ordering pressure that pure register scoreboarding would miss.
+            </p>
+            <p>
+              This launcher solves that control problem as a standalone RTL block. It holds multiple decoded instructions in flight,
+              re-checks them against live lock information, derives request eligibility per slot, and only exposes one chosen launch
+              candidate when the downstream execution stage is ready.
+            </p>
+          </section>
+
+          <section id="architecture">
+            <h2>Queue First, Check Every Slot, Then Arbitrate</h2>
+            <p>
+              The implementation uses a split-pipeline structure rather than a monolithic FIFO plus sideband scoreboard. That keeps
+              the storage, hazard evaluation, and launch arbitration all expressed in regular, synthesizable stages.
+            </p>
+            <div class="cv-article-step-list">
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">01</div>
+                <p><strong class="text-white">Instruction staging.</strong> The incoming decoded instruction is attached to <strong class="text-white">pl_ins[0]</strong> and then fanned through a chain of <strong class="text-white">pipeline_split</strong> stages, creating a resident launch window instead of a single-cycle pass-through path.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">02</div>
+                <p><strong class="text-white">Hazard propagation.</strong> A <strong class="text-white">reg_gnt_ckr</strong> instance is attached to every resident slot. It examines <strong class="text-white">reg_req</strong>, <strong class="text-white">rd</strong>, <strong class="text-white">blocking</strong>, and <strong class="text-white">mem_op</strong> against propagated <strong class="text-white">locks</strong> and <strong class="text-white">mem_busy</strong> state, then emits that slot's launch request.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">03</div>
+                <p><strong class="text-white">Launch arbitration.</strong> All slot requests feed a fixed-priority arbiter, gated by <strong class="text-white">instr_out_ready_i</strong>. An encoder translates the one-hot grant into <strong class="text-white">gnt_idx</strong>, which directly selects the outgoing decoded instruction.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">04</div>
+                <p><strong class="text-white">Flush and drain behavior.</strong> A synchronous <strong class="text-white">clear_i</strong> path exists to reset the resident queue state, while the clear chain also ensures launch activity removes the selected instruction instead of collapsing the whole window.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">05</div>
+                <p><strong class="text-white">Downstream contract.</strong> The module emits exactly one <strong class="text-white">decoded_instr_t</strong> plus a valid bit, making it easy to sit between decode and execution without forcing the backend to understand the entire queue state.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="rtl-focus">
+            <h2>The Source Exposes the Scheduling Strategy Directly</h2>
+            <p>
+              The interesting part of this design is that the launch policy is not buried in opaque control logic. The queue topology,
+              the per-slot checks, and the arbitration path are all easy to point to in the RTL.
+            </p>
+            <div class="cv-article-snippet-grid">
+              <div class="cv-article-snippet">
+                <h3>Queue Topology</h3>
+                <pre>assign pl_ins[0]        = instr_in_i;
+assign pl_ins_valid[0]  = instr_in_valid_i;
+assign instr_in_ready_o = pl_ins_ready[0];
+
+for (genvar i = 0; i &lt; NOS; i++) begin : g_splits
+  pipeline_split #( .DW($bits(instr_in_i)) ) u_pipeline_split (...);
+end</pre>
+                <p>The instruction enters a staged launch window rather than an unstructured holding register.</p>
+              </div>
+              <div class="cv-article-snippet">
+                <h3>Hazard Checking</h3>
+                <pre>reg_gnt_ckr #() u_reg_gnt_ckr (
+  .pl_valid_i(pl_outs_valid[i]),
+  .blocking_i(pl_outs[i].blocking),
+  .rd_i(pl_outs[i].rd),
+  .reg_req_i(pl_outs[i].reg_req),
+  .locks_i(locks[i]),
+  .mem_busy_i(mem_busy[i]),
+  .arb_req_o(arb_req[i])
+);</pre>
+                <p>Every resident slot gets its own eligibility decision based on the decoded dependency footprint.</p>
+              </div>
+              <div class="cv-article-snippet">
+                <h3>Launch Selection</h3>
+                <pre>fixed_priority_arbiter #( .NUM_REQ(NOS + 1) ) u_fixed_priority_arbiter (...);
+encoder #( .NUM_WIRE(NOS + 1) ) u_encoder (
+  .wire_in(arb_gnt),
+  .index_o(gnt_idx),
+  .index_valid_o(instr_out_valid_o)
+);
+
+assign instr_out_o = pl_outs[gnt_idx];</pre>
+                <p>Grant generation and slot selection are separated cleanly, which keeps the output path explicit and debuggable.</p>
+              </div>
+            </div>
+            <div class="cv-article-card-grid">
+              <div class="cv-article-card">
+                <h3>Blocking Semantics</h3>
+                <p>
+                  The design treats blocking instructions as more than ordinary dependency checks. Their presence can suppress younger
+                  work from launching past them, which is essential for correctness around serialized operations.
+                </p>
+              </div>
+              <div class="cv-article-card">
+                <h3>Memory Awareness</h3>
+                <p>
+                  The propagated <strong class="text-white">mem_busy</strong> chain means the launcher does not rely on register hazards alone. Memory operations can also influence whether younger residents are eligible to issue.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="validation">
+            <h2>Stress-Tested Against a Behavioral Launch Model</h2>
+            <p>
+              The accompanying testbench does more than toggle handshakes. It builds a software-style model of the resident pipeline,
+              randomizes lock profiles, incoming decoded instructions, downstream readiness, and blocking or memory attributes, then
+              compares the expected launched instruction against the RTL output.
+            </p>
+            <div class="cv-article-callout">
+              <strong>Testbench Detail</strong>
+              <p>
+                Reset behavior is checked explicitly, the driver randomizes valid and ready conditions at runtime, and the monitor runs
+                until either the expected launch comparisons complete cleanly or a fatal timeout trips after 150001 clock edges.
+              </p>
+            </div>
+          </section>
+
+          <section id="outcome">
+            <h2>A Focused Dispatch Block for Real Backend Pressure</h2>
+            <p>
+              This design turns instruction launch into a well-bounded RTL problem: store several decoded operations, evaluate their
+              hazard state continuously, and dispatch exactly one correct candidate when the backend is ready. The structure stays
+              regular, the interface remains simple, and the launch policy is visible in the source instead of being hidden in a large
+              hand-written controller.
+            </p>
+            <p>
+              That makes the block useful anywhere a decode stage needs a disciplined handoff into execution without giving up throughput
+              or correctness under scoreboard pressure.
+            </p>
+          </section>
+        </div>
+      </article>
+
+      <aside class="cv-article-sidebar-stack">
+        <div class="cv-article-sidebar">
+          <strong>At A Glance</strong>
+          <ul>
+            <li><span>Category</span>Microarchitecture</li>
+            <li><span>Focus</span>Ready-valid launch control with slot-by-slot hazard screening</li>
+            <li><span>Core traits</span>Register lock aware, memory aware, deterministic arbitration</li>
+          </ul>
+        </div>
+        <div class="cv-article-sidebar">
+          <strong>Article Map</strong>
+          <ul>
+            <li><a href="#challenge" class="text-slate-300 hover:text-[#00ccff] transition-colors">Challenge</a></li>
+            <li><a href="#architecture" class="text-slate-300 hover:text-[#00ccff] transition-colors">Architecture</a></li>
+            <li><a href="#rtl-focus" class="text-slate-300 hover:text-[#00ccff] transition-colors">RTL In Focus</a></li>
+            <li><a href="#validation" class="text-slate-300 hover:text-[#00ccff] transition-colors">Validation</a></li>
+            <li><a href="#outcome" class="text-slate-300 hover:text-[#00ccff] transition-colors">Outcome</a></li>
+          </ul>
+        </div>
+        <div class="cv-article-sidebar">
+          <strong>Archive Note</strong>
+          <p>This article imports and adapts a legacy ChipVerge case-study page into the current live blogs section.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="mt-12 border border-[#00ccff]/20 bg-[#00ccff]/[0.03] p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div>
+        <p class="text-[0.65rem] tracking-[0.3em] uppercase text-[#00ccff] mb-2">Next Step</p>
+        <h2 class="text-2xl font-semibold text-white mb-2">Need a cleaner decode-to-execute handoff?</h2>
+        <p class="text-sm text-slate-400 max-w-2xl">If your issue logic is turning into hazard patchwork, we can help restructure the launch boundary before it becomes a pipeline bottleneck.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="../contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold hover:bg-[#00ffcc] transition-colors">Get in Touch</a>
+        <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 border border-[#00ccff]/30 text-[#00ccff] text-sm hover:border-[#00ccff]/60 hover:bg-[#00ccff]/5 transition-colors">All Blogs</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="cv-footer"></div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Hazard-Aware Instruction Launcher",
+  "url": "https://chipverge.com/blogs/instruction-launcher.html",
+  "description": "Hazard-Aware Instruction Launcher - a decoded-instruction launch queue with register lock checking, memory serialization, and fixed-priority arbitration for execution dispatch.",
+  "articleSection": "Microarchitecture",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "ChipVerge",
+    "url": "https://chipverge.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ChipVerge",
+    "url": "https://chipverge.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://chipverge.com/logo.png"
+    }
+  },
+  "keywords": ["SystemVerilog", "Scheduling", "Hazard Control", "Microarchitecture"]
+}
+</script>
+
+<script src="../js/components.js"></script>
+</body>
+</html>

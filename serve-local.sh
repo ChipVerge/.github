@@ -48,6 +48,13 @@ EOF
   esac
 done
 
+# --- CLEAR PREVIOUS BUILDS ---
+if [[ -d "$root" ]]; then
+  echo "Clearing previous build files from $root..."
+  rm -rf "${root:?}"/*
+fi
+# -----------------------------
+
 if [[ ! -d "$root" ]]; then
   echo "Static site root not found: $root" >&2
   exit 1

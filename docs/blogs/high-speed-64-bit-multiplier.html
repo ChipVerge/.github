@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="High-Speed 64-bit Multiplier Architecture - a three-stage datapath using odd-multiple precomputation, nibble selection, and hierarchical accumulation for RV64 multiply operations." />
+  <title>High-Speed 64-bit Multiplier Architecture | ChipVerge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#00ccff',secondary:'#00ffcc'}}}};</script>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body class="bg-[#0a0a0a] text-slate-200">
+<div id="cv-nav"></div>
+
+<section class="cv-page-hero">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 cv-page-hero-shell">
+    <div class="flex items-center gap-2 text-xs text-slate-600 mb-6">
+      <a href="../index.html" class="hover:text-[#00ccff] transition-colors">Home</a>
+      <span>&rsaquo;</span>
+      <a href="index.html" class="hover:text-[#00ccff] transition-colors">Blogs</a>
+      <span>&rsaquo;</span>
+      <span class="text-[#00ccff]">High-Speed 64-bit Multiplier Architecture</span>
+    </div>
+    <p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">Architecture Brief</p>
+    <div class="max-w-4xl">
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">SystemVerilog</span>
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">RISC-V</span>
+        <span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">Microarchitecture</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">High-Speed 64-bit Multiplier Architecture</h1>
+      <p class="text-slate-400 max-w-3xl leading-relaxed text-base sm:text-lg">
+        A three-stage integer multiplier that combines odd-multiple precomputation, nibble-wide crossbar selection,
+        and hierarchical accumulation to keep throughput high without dragging down clock speed.
+      </p>
+    </div>
+  </div>
+</section>
+
+<main class="cv-article-main">
+  <div class="cv-article-shell">
+    <div class="cv-article-kpis">
+      <div class="cv-article-kpi">
+        <strong>16</strong>
+        <span>Nibble-selected multiples drive the partial-product generation path instead of a deeper bit-level field.</span>
+      </div>
+      <div class="cv-article-kpi">
+        <strong>3 stages</strong>
+        <span>Balanced pipeline from operand conditioning to final writeback result.</span>
+      </div>
+      <div class="cv-article-kpi">
+        <strong>5 ops</strong>
+        <span>MUL, MULH, MULHSU, MULHU, and MULW all share the same datapath.</span>
+      </div>
+    </div>
+
+    <div class="cv-article-grid">
+      <article class="cv-article-panel cv-article-panel--soft">
+        <div class="cv-article-prose">
+          <section id="challenge">
+            <h2>Multipliers Usually Become the Clock-Limiting Block</h2>
+            <p>
+              In a 64-bit execution pipeline, the multiplier is often the longest combinational path in the room.
+              Iterative designs protect area but cost throughput. More conventional radix-4 style approaches reduce
+              the work, but they still leave a relatively large reduction network and plenty of routing pressure.
+            </p>
+            <p>
+              The target here was different: keep the datapath regular, preserve high throughput, and support the full
+              set of RV64 multiply result formats without collapsing timing around a monolithic final adder. The design
+              therefore pushes work into deliberate stages: precompute only the hard odd coefficients, select directly
+              by nibble, then reduce locally before the final 128-bit collapse.
+            </p>
+          </section>
+
+          <section id="architecture">
+            <h2>Odd Multiples First, Local Sums Before Global Sums</h2>
+            <p>
+              The final RTL behaves like a radix-16 multiplier, but the implementation leans on direct multiple selection
+              rather than recoding-heavy control logic. The result is a more regular structure that maps cleanly to a
+              pipelined execution stage.
+            </p>
+            <div class="cv-article-step-list">
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">01</div>
+                <p><strong class="text-white">Operand conditioning.</strong> The front end derives <strong class="text-white">negative</strong>, <strong class="text-white">upper</strong>, and <strong class="text-white">word</strong> control, converts signed cases into magnitude form where required, and sign-extends 32-bit inputs for <strong class="text-white">MULW</strong>.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">02</div>
+                <p><strong class="text-white">Odd-multiple precomputation.</strong> Stage 1 generates 1x, 3x, 5x, 7x, 9x, 11x, 13x, and 15x. Even multiples are not separately built here; they are derived later as shifts of the stored odd values.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">03</div>
+                <p><strong class="text-white">Nibble-wide crossbar selection.</strong> Stage 2 expands the full 0x to 15x set and uses each 4-bit multiplier nibble as a direct select into a 16-output crossbar. One nibble, one chosen multiple, one fixed 4-bit alignment step.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">04</div>
+                <p><strong class="text-white">Local accumulation.</strong> The selected rows are not thrown into one huge adder at once. Instead, four neighboring groups are collapsed into four 80-bit intermediate sums, which keeps routing more local and reduces middle-stage sprawl.</p>
+              </div>
+              <div class="cv-article-step">
+                <div class="cv-article-step-index">05</div>
+                <p><strong class="text-white">Final reduction and result shaping.</strong> Stage 3 widens to 128 bits, restores sign if needed, selects either the upper or lower half of the product, and tags the writeback as word or doubleword.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="rtl-focus">
+            <h2>The Source Matches the Story</h2>
+            <p>
+              The implementation is explicit about its stage boundaries and arithmetic structure. The control bits move
+              through <strong class="text-white">q0</strong>, <strong class="text-white">q1</strong>, and <strong class="text-white">q2</strong> alongside the datapath, and the code exposes exactly where the odd-multiple bank,
+              crossbar expansion, and final accumulation happen.
+            </p>
+            <div class="cv-article-snippet-grid">
+              <div class="cv-article-snippet">
+                <h3>Stage 1</h3>
+                <pre>always_comb res_0001 = multiplicand;
+always_comb res_0011 = {res_0001, 1'b0} + res_0001;
+always_comb res_0101 = {res_0001, 2'b0} + res_0001;
+always_comb res_0111 = {res_0001, 2'b0} + res_0011;</pre>
+                <p>The hard work starts by generating only the odd coefficients that are expensive to recover later.</p>
+              </div>
+              <div class="cv-article-snippet">
+                <h3>Stage 2</h3>
+                <pre>always_comb ext68_res['b1010] = {res_0101_q0, 1'b0};
+xbar #(.NUM_INPUT(16), .NUM_OUTPUT(16), .DATA_WIDTH(68)) u_xbar (...);
+res80[i] = {ext80[4*i+3], 12'b0} + {ext80[4*i+2], 8'b0} +
+           {ext80[4*i+1], 4'b0} + ext80[4*i];</pre>
+                <p>The middle stage reconstructs the full 16-entry set, performs nibble-based selection, then compresses four adjacent results at a time.</p>
+              </div>
+              <div class="cv-article-snippet">
+                <h3>Stage 3</h3>
+                <pre>always_comb final_sum =
+  {res128[3], 48'b0} + {res128[2], 32'b0} +
+  {res128[1], 16'b0} + res128[0];
+always_comb semi_final_res = negative_q1 ? ~final_sum + 1 : final_sum;
+always_comb final_res = upper_q1 ? semi_final_res[127:64] : semi_final_res[63:0];</pre>
+                <p>The final stage stays simple because most of the entropy was already squeezed out in the local accumulation step.</p>
+              </div>
+            </div>
+            <div class="cv-article-card-grid">
+              <div class="cv-article-card">
+                <h3>Nibble Decomposition</h3>
+                <p>
+                  The 64-bit multiplier operand is consumed as sixteen 4-bit selects. That gives radix-16 style behavior
+                  with direct mux selection instead of a signed Booth recoder.
+                </p>
+              </div>
+              <div class="cv-article-card">
+                <h3>Routing Discipline</h3>
+                <p>
+                  Four local sums absorb nearby nibble contributions before the last adder ever sees them, which helps
+                  contain long wires and keeps the stage split physically sane.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="integration">
+            <h2>Built for RV64 Multiply Semantics, Not Just a Standalone Demo</h2>
+            <p>
+              The block is wired around real execution-stage needs. Signedness handling happens before the multiply bank,
+              <strong class="text-white">upper</strong> selects high-half variants, <strong class="text-white">word</strong> controls 32-bit result shaping, and the writeback side emits the corresponding size metadata for the downstream pipeline.
+            </p>
+            <div class="cv-article-callout">
+              <strong>Validation Detail</strong>
+              <p>
+                The accompanying randomized testbench checks every accepted transaction against a reference multiplication
+                model, including sign restoration, high-half selection, and word-mode truncation. It is structured to wait
+                for 100000 accepted operations of each multiply variant before concluding.
+              </p>
+            </div>
+          </section>
+
+          <section id="outcome">
+            <h2>A Fast, Regular Datapath Without Recoder Sprawl</h2>
+            <p>
+              This multiplier architecture trades a little more front-end structure for a much cleaner pipeline split.
+              The odd-multiple bank is predictable, the crossbar mapping is direct, and the reduction tree is intentionally
+              staged instead of left to become one late critical path.
+            </p>
+            <p>
+              That combination makes it a practical choice when sustained throughput and timing closure matter more than
+              chasing the smallest possible control block. It is not just mathematically correct; it is organized so the RTL,
+              the pipeline boundaries, and the instruction semantics all reinforce one another.
+            </p>
+          </section>
+        </div>
+      </article>
+
+      <aside class="cv-article-sidebar-stack">
+        <div class="cv-article-sidebar">
+          <strong>At A Glance</strong>
+          <ul>
+            <li><span>Category</span>Microarchitecture</li>
+            <li><span>Focus</span>Three-stage RV64 multiplier with radix-16 style multiple selection</li>
+            <li><span>Core traits</span>Odd-multiple bank, nibble crossbar, hierarchical accumulation</li>
+          </ul>
+        </div>
+        <div class="cv-article-sidebar">
+          <strong>Article Map</strong>
+          <ul>
+            <li><a href="#challenge" class="text-slate-300 hover:text-[#00ccff] transition-colors">Challenge</a></li>
+            <li><a href="#architecture" class="text-slate-300 hover:text-[#00ccff] transition-colors">Architecture</a></li>
+            <li><a href="#rtl-focus" class="text-slate-300 hover:text-[#00ccff] transition-colors">RTL In Focus</a></li>
+            <li><a href="#integration" class="text-slate-300 hover:text-[#00ccff] transition-colors">Integration</a></li>
+            <li><a href="#outcome" class="text-slate-300 hover:text-[#00ccff] transition-colors">Outcome</a></li>
+          </ul>
+        </div>
+        <div class="cv-article-sidebar">
+          <strong>Archive Note</strong>
+          <p>This article imports and adapts a legacy ChipVerge case-study page into the current live blogs section.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="mt-12 border border-[#00ccff]/20 bg-[#00ccff]/[0.03] p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div>
+        <p class="text-[0.65rem] tracking-[0.3em] uppercase text-[#00ccff] mb-2">Next Step</p>
+        <h2 class="text-2xl font-semibold text-white mb-2">Need a performance-driven arithmetic datapath?</h2>
+        <p class="text-sm text-slate-400 max-w-2xl">If your multiplier is turning into a timing problem, we can help restructure the microarchitecture before it becomes a backend fire drill.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="../contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold hover:bg-[#00ffcc] transition-colors">Get in Touch</a>
+        <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 border border-[#00ccff]/30 text-[#00ccff] text-sm hover:border-[#00ccff]/60 hover:bg-[#00ccff]/5 transition-colors">All Blogs</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="cv-footer"></div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "High-Speed 64-bit Multiplier Architecture",
+  "url": "https://chipverge.com/blogs/high-speed-64-bit-multiplier.html",
+  "description": "High-Speed 64-bit Multiplier Architecture - a three-stage datapath using odd-multiple precomputation, nibble selection, and hierarchical accumulation for RV64 multiply operations.",
+  "articleSection": "Microarchitecture",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "ChipVerge",
+    "url": "https://chipverge.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ChipVerge",
+    "url": "https://chipverge.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://chipverge.com/logo.png"
+    }
+  },
+  "keywords": ["SystemVerilog", "RISC-V", "Microarchitecture", "Multiplier"]
+}
+</script>
+
+<script src="../js/components.js"></script>
+</body>
+</html>

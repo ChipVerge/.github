@@ -246,6 +246,37 @@
     initIcons();
   }
 
+  function renderProfileTag(tag) {
+    return '<span class="px-3 py-1 border border-[#00ccff]/20 bg-[#00ccff]/[0.04] text-[0.65rem] tracking-[0.15em] uppercase text-slate-300">'
+      + escapeHtml(tag)
+      + '</span>';
+  }
+
+  function renderProfileList(items) {
+    return '<ul class="space-y-2.5">'
+      + items.map(function (item) {
+        return '<li class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed">'
+          + createIcon('check', 'w-4 h-4 text-[#00ccff] shrink-0 mt-0.5')
+          + '<span>' + escapeHtml(item) + '</span>'
+          + '</li>';
+      }).join('')
+      + '</ul>';
+  }
+
+  function renderProfileSectionCard(section) {
+    return '<article class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
+      + '<h3 class="text-base font-semibold text-white mb-4">' + escapeHtml(section.title) + '</h3>'
+      + renderProfileList(Array.isArray(section.items) ? section.items : [])
+      + '</article>';
+  }
+
+  function renderProfileFact(fact) {
+    return '<li class="border border-[#00ccff]/10 bg-[#070707] px-4 py-3">'
+      + '<span class="block text-[0.65rem] tracking-[0.2em] text-slate-600 uppercase mb-1">' + escapeHtml(fact.label) + '</span>'
+      + '<span class="block text-sm text-slate-300 leading-relaxed">' + escapeHtml(fact.value) + '</span>'
+      + '</li>';
+  }
+
   function renderPersonPage(data) {
     const mount = document.getElementById('person-page');
     if (!mount) {
@@ -264,9 +295,21 @@
     }
 
     const intro = profile.pageIntro || profile.summary || 'Full profile details are in preparation.';
-    const detail = profile.pageDescription || 'A fuller biography, project highlights, and direct profile links are being prepared for this page.';
+    const detailParagraphs = Array.isArray(profile.pageDetails) && profile.pageDetails.length
+      ? profile.pageDetails
+      : [profile.pageDescription || 'A fuller biography, project highlights, and direct profile links are being prepared for this page.'];
+    const expertiseSections = Array.isArray(profile.expertiseSections) ? profile.expertiseSections : [];
+    const workingStyleSections = Array.isArray(profile.workingStyleSections) ? profile.workingStyleSections : [];
+    const tags = Array.isArray(profile.tags) ? profile.tags : [];
+    const quickFacts = Array.isArray(profile.quickFacts) ? profile.quickFacts : [];
     const ctaHref = resolveLink(profile.ctaHref || 'contact.html');
     const ctaLabel = profile.ctaLabel || 'Contact ChipVerge';
+    const footerCtaTitle = profile.footerCtaTitle || '';
+    const footerCtaDescription = profile.footerCtaDescription || '';
+    const footerCtaLabel = profile.footerCtaLabel || ctaLabel;
+    const sidebarRoleNote = profile.sidebarRoleNote || 'Detailed biography content, selected project experience, and external profile links can be added here at any time.';
+    const sidebarStatusTitle = profile.sidebarStatusTitle || 'Profile Status';
+    const sidebarStatusText = profile.sidebarStatusText || 'This page is now live and ready for fuller bio content whenever you want to publish it.';
 
     mount.innerHTML = '<section class="cv-page-hero">'
       + '<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
@@ -282,16 +325,22 @@
       + '<h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3">' + escapeHtml(profile.title) + '</h1>'
       + '<p class="text-[0.7rem] tracking-[0.25em] text-[#00ccff] uppercase mb-4">' + escapeHtml(profile.discipline) + '</p>'
       + '<p class="text-slate-400 max-w-2xl leading-relaxed">' + escapeHtml(intro) + '</p>'
+      + (tags.length
+        ? '<div class="flex flex-wrap gap-2 mt-6">' + tags.map(renderProfileTag).join('') + '</div>'
+        : '')
       + '</div>'
       + '</div>'
       + '</div>'
       + '</section>'
       + '<main class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">'
       + '<div class="grid lg:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)] gap-8 items-start">'
+      + '<div class="space-y-8">'
       + '<section class="border border-[#00ccff]/15 bg-[#070707] p-8">'
       + '<p class="text-[0.65rem] tracking-[0.28em] text-slate-600 uppercase mb-4">Profile Overview</p>'
       + '<p class="text-slate-400 leading-relaxed mb-4">' + escapeHtml(intro) + '</p>'
-      + '<p class="text-sm text-slate-500 leading-relaxed">' + escapeHtml(detail) + '</p>'
+      + detailParagraphs.map(function (paragraph) {
+        return '<p class="text-sm text-slate-500 leading-relaxed' + (paragraph === detailParagraphs[0] ? '' : ' mt-4') + '">' + escapeHtml(paragraph) + '</p>';
+      }).join('')
       + '<div class="mt-8 flex flex-wrap gap-3">'
       + '<a href="' + ctaHref + '" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">'
       + createIcon('mail', 'w-4 h-4')
@@ -303,15 +352,57 @@
       + '</a>'
       + '</div>'
       + '</section>'
+      + (expertiseSections.length
+        ? '<section>'
+          + '<p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">' + escapeHtml(profile.expertiseEyebrow || 'Areas of Expertise') + '</p>'
+          + '<h2 class="text-2xl sm:text-3xl font-semibold text-white mb-3">' + escapeHtml(profile.expertiseTitle || 'Technical Depth') + '</h2>'
+          + (profile.expertiseIntro
+            ? '<p class="text-slate-400 leading-relaxed max-w-3xl mb-8">' + escapeHtml(profile.expertiseIntro) + '</p>'
+            : '')
+          + '<div class="grid md:grid-cols-2 gap-4">' + expertiseSections.map(renderProfileSectionCard).join('') + '</div>'
+          + '</section>'
+        : '')
+      + (workingStyleSections.length
+        ? '<section>'
+          + '<p class="text-[#00ccff] text-[0.65rem] tracking-[0.35em] uppercase mb-3 font-medium">' + escapeHtml(profile.workingStyleEyebrow || 'Working Style') + '</p>'
+          + '<h2 class="text-2xl sm:text-3xl font-semibold text-white mb-3">' + escapeHtml(profile.workingStyleTitle || 'How We Engage') + '</h2>'
+          + (profile.workingStyleIntro
+            ? '<p class="text-slate-400 leading-relaxed max-w-3xl mb-8">' + escapeHtml(profile.workingStyleIntro) + '</p>'
+            : '')
+          + '<div class="grid md:grid-cols-3 gap-4">' + workingStyleSections.map(renderProfileSectionCard).join('') + '</div>'
+          + '</section>'
+        : '')
+      + (footerCtaTitle
+        ? '<section class="border border-[#00ccff]/20 bg-[#00ccff]/[0.03] p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">'
+          + '<div>'
+          + '<p class="text-[0.65rem] tracking-[0.28em] text-[#00ccff] uppercase mb-2">Work Together</p>'
+          + '<h2 class="text-2xl font-semibold text-white mb-2">' + escapeHtml(footerCtaTitle) + '</h2>'
+          + (footerCtaDescription
+            ? '<p class="text-sm text-slate-400 max-w-2xl">' + escapeHtml(footerCtaDescription) + '</p>'
+            : '')
+          + '</div>'
+          + '<a href="' + ctaHref + '" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00ccff] text-[#0a0a0a] text-sm font-semibold tracking-wide hover:bg-[#00ffcc] transition-colors">'
+          + createIcon('mail', 'w-4 h-4')
+          + escapeHtml(footerCtaLabel)
+          + '</a>'
+          + '</section>'
+        : '')
+      + '</div>'
       + '<aside class="space-y-4">'
       + '<div class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
       + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Role</p>'
       + '<p class="text-base font-semibold text-white">' + escapeHtml(profile.discipline) + '</p>'
-      + '<p class="text-xs text-slate-500 mt-2 leading-relaxed">Detailed biography content, selected project experience, and external profile links can be added here at any time.</p>'
+      + '<p class="text-xs text-slate-500 mt-2 leading-relaxed">' + escapeHtml(sidebarRoleNote) + '</p>'
       + '</div>'
+      + (quickFacts.length
+        ? '<div class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
+          + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-3">Quick Facts</p>'
+          + '<ul class="space-y-3">' + quickFacts.map(renderProfileFact).join('') + '</ul>'
+          + '</div>'
+        : '')
       + '<div class="border border-[#00ccff]/15 bg-[#0a0a0a] p-6">'
-      + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-2">Profile Status</p>'
-      + '<p class="text-sm text-slate-400 leading-relaxed">This page is now live and ready for fuller bio content whenever you want to publish it.</p>'
+      + '<p class="text-[0.65rem] tracking-[0.25em] text-slate-600 uppercase mb-2">' + escapeHtml(sidebarStatusTitle) + '</p>'
+      + '<p class="text-sm text-slate-400 leading-relaxed">' + escapeHtml(sidebarStatusText) + '</p>'
       + '</div>'
       + '</aside>'
       + '</div>'

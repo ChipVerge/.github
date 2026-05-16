@@ -1,44 +1,23 @@
 {
   "title": "Blogs",
   "eyebrow": "Technical Insights",
-  "description": "Deep dives on RTL design patterns, verification methodology, EDA automation, and silicon-engineering best practices - written by practising engineers.",
+  "description": "Deep dives on RTL design patterns, execution microarchitecture, verification methodology, EDA automation, and silicon-engineering best practices - written by practising engineers.",
   "topics": [
-    "ASIC Design",
-    "Verification",
-    "EDA & Automation",
-    "Embedded",
-    "Physical Design"
+    "Microarchitecture",
+    "Verification"
   ],
   "posts": [
     {
-      "category": "ASIC Design",
-      "title": "RTL Coding Guidelines for Synthesis-Ready Designs",
-      "excerpt": "Common pitfalls in SystemVerilog coding that silently degrade synthesis QoR - and how to avoid them with disciplined register-infer and always-block patterns.",
-      "statusLabel": "Coming soon"
+      "category": "Microarchitecture",
+      "title": "Hazard-Aware Instruction Launcher",
+      "excerpt": "A decoded-instruction launch queue that keeps execution fed while screening register hazards, serializing memory traffic when required, and arbitrating eligible instructions through a clean ready-valid interface.",
+      "url": "blogs/instruction-launcher.html"
     },
     {
-      "category": "Verification",
-      "title": "Coverage Closure Strategies in Large UVM Environments",
-      "excerpt": "Structuring functional coverage models and using constraint-solving to close coverage holes without inflating runtime.",
-      "statusLabel": "Coming soon"
-    },
-    {
-      "category": "EDA & Automation",
-      "title": "Building a Hardware CI/CD Pipeline with GitHub Actions",
-      "excerpt": "Automating lint, simulation, and formal checks on every commit - reducing integration bugs and shortening verification cycles.",
-      "statusLabel": "Coming soon"
-    },
-    {
-      "category": "Embedded",
-      "title": "RISC-V Custom Extensions: Architecture to Software Workflow",
-      "excerpt": "A practical walkthrough of adding custom instructions to a RISC-V core and exposing them through a GCC compiler intrinsic.",
-      "statusLabel": "Coming soon"
-    },
-    {
-      "category": "Physical Design",
-      "title": "Multi-Corner Timing Closure: Pitfalls and Practical Fixes",
-      "excerpt": "Why OCV / AOCV settings cause post-route timing explosions and proven SDC constraint strategies that do not over-constrain.",
-      "statusLabel": "Coming soon"
+      "category": "Microarchitecture",
+      "title": "High-Speed 64-bit Multiplier Architecture",
+      "excerpt": "A three-stage integer multiplier that combines odd-multiple precomputation, nibble-wide crossbar selection, and hierarchical accumulation to keep throughput high without dragging down clock speed.",
+      "url": "blogs/high-speed-64-bit-multiplier.html"
     },
     {
       "category": "Verification",
@@ -47,8 +26,8 @@
       "statusLabel": "Coming soon"
     }
   ],
-  "placeholderTitle": "Articles are in preparation.",
-  "placeholderDescription": "Subscribe to be notified when the first posts go live.",
-  "ctaLabel": "Notify Me",
+  "placeholderTitle": "More articles are in preparation.",
+  "placeholderDescription": "Additional posts on verification, automation, and embedded design are on the way.",
+  "ctaLabel": "Start a Conversation",
   "ctaHref": "contact.html"
 }

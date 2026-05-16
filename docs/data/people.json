@@ -6,8 +6,147 @@
     {
       "slug": "samia-alam",
       "title": "Samia Alam",
-      "discipline": "Founder & CEO",
-      "summary": "Leadership profile in preparation.",
+      "discipline": "Founder & Lead Engineer",
+      "summary": "Senior RTL and verification engineer focused on ASIC design, SoC integration, and synthesis-ready delivery.",
+      "pageIntro": "Senior RTL and verification engineer with 4+ years of hands-on experience across high-speed ASIC design, cache controllers, complex bus fabric, and SoC integration.",
+      "pageDetails": [
+        "Samia works end-to-end, from initial microarchitecture definition through lint-clean, CDC-safe synthesis handoff, embedding directly into client teams with zero ramp-up overhead.",
+        "Her work spans the complete ASIC and FPGA front-end flow, with deep specialization in UVM-based functional verification, protocol design, and CDC/RDC-safe signoff."
+      ],
+      "tags": [
+        "ASIC/FPGA",
+        "RISC-V",
+        "SoC",
+        "NoC",
+        "CDC/RDC",
+        "UVM",
+        "SVA",
+        "STA"
+      ],
+      "quickFacts": [
+        {
+          "label": "Experience",
+          "value": "4+ years across ASIC RTL, verification, and SoC integration"
+        },
+        {
+          "label": "Delivery style",
+          "value": "Lint-clean, CDC-safe handoff with direct client-team integration"
+        },
+        {
+          "label": "Core stack",
+          "value": "SystemVerilog, UVM, SVA, RISC-V, STA, Python automation"
+        }
+      ],
+      "expertiseEyebrow": "Areas of Expertise",
+      "expertiseTitle": "Technical Depth",
+      "expertiseIntro": "Spanning the complete ASIC and FPGA front-end flow, from computer architecture and SoC integration through synthesis handoff, with deep specialization in UVM-based functional verification, protocol design, and CDC/RDC-safe signoff.",
+      "expertiseSections": [
+        {
+          "title": "RTL Design",
+          "items": [
+            "Microarchitecture definition and refinement",
+            "SystemVerilog and Verilog RTL development",
+            "FSM, datapath, and control logic design",
+            "Low-power aware RTL implementation",
+            "Clock and reset generator design",
+            "Parameterized and reusable IP development",
+            "ASIC and FPGA implementation with Xilinx Vivado"
+          ]
+        },
+        {
+          "title": "Computer Architecture & SoC",
+          "items": [
+            "RISC-V processor pipeline design",
+            "SoC architecture, integration, and bring-up",
+            "Memory subsystem design and optimization",
+            "Cache subsystem design and coherence protocols",
+            "Hardware-software co-design and bare-metal firmware",
+            "RISC-V GNU Toolchain-based test development"
+          ]
+        },
+        {
+          "title": "Functional Verification",
+          "items": [
+            "UVM testbench architecture from scratch",
+            "Constrained-random and coverage-driven verification",
+            "Assertion-based verification with SVA",
+            "Formal property checking and equivalence",
+            "Coverage closure and regression management",
+            "95%+ functional coverage as a standard target"
+          ]
+        },
+        {
+          "title": "Protocols & Interfaces",
+          "items": [
+            "AMBA AXI, AHB, and APB compliance and VIP development",
+            "Wishbone interconnect design and verification",
+            "UART, I2C, and SPI peripheral design and verification",
+            "Bus fabric, crossbar, and NoC integration"
+          ]
+        },
+        {
+          "title": "Design Quality & Signoff",
+          "items": [
+            "RTL linting to zero violations",
+            "CDC analysis and closure",
+            "RDC analysis and closure",
+            "Static timing analysis collaboration",
+            "Low-power signoff and UPF coordination",
+            "Synthesis-ready handoff preparation"
+          ]
+        },
+        {
+          "title": "Automation & Tooling",
+          "items": [
+            "Synopsys VCS simulation and regression flows",
+            "Xilinx Vivado synthesis and implementation scripting",
+            "Python and Bash-based flow automation",
+            "Makefile-driven build and regression orchestration",
+            "Automated coverage merging and KPI dashboards",
+            "CI/CD integration for simulation flows"
+          ]
+        }
+      ],
+      "workingStyleEyebrow": "Working Style",
+      "workingStyleTitle": "How We Engage",
+      "workingStyleIntro": "Every engagement is built on directness, transparency, and a relentless focus on first-time-right quality.",
+      "workingStyleSections": [
+        {
+          "title": "Embedded in Your Flow",
+          "items": [
+            "Works within your EDA toolchain and licensing",
+            "Uses your SCM, review, and communication tools",
+            "Productive from day one with no ramp-up lag",
+            "Adapts to your process standards"
+          ]
+        },
+        {
+          "title": "Zero-Defect RTL Philosophy",
+          "items": [
+            "Lint-clean deliverables as a non-negotiable baseline",
+            "CDC and RDC analysis on every design",
+            "Review-ready documentation every time",
+            "No escapes through first-pass review"
+          ]
+        },
+        {
+          "title": "Transparent Communication",
+          "items": [
+            "Daily status updates on active engagements",
+            "Early warning on schedule risks",
+            "Clear milestone tracking and reporting",
+            "Full NDA coverage on all project communications"
+          ]
+        }
+      ],
+      "ctaLabel": "Work With Samia",
+      "ctaHref": "contact.html",
+      "footerCtaTitle": "Start Your Next Project",
+      "footerCtaDescription": "Currently accepting new engagements. Describe your silicon challenge and expect a concrete response within 24 hours.",
+      "footerCtaLabel": "Get in Touch",
+      "sidebarRoleNote": "Senior RTL and verification engineer specializing in synthesis-ready RTL, protocol-centric verification, and CDC/RDC-safe delivery.",
+      "sidebarStatusTitle": "Availability",
+      "sidebarStatusText": "Currently accepting new engagements and able to embed directly into client flows, tools, and review processes.",
       "icon": "briefcase"
     },
     {
